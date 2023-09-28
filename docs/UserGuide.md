@@ -26,14 +26,14 @@ your operations. Within these pages, you'll find detailed coverage of the follow
         * Delete delivery
 * Troubleshooting / FAQ
 
-#           
+#                  
 
 # Getting Started
 
 To get started, you will need to create an account and download the software. Once you have done that, you can follow
 the instructions in the Getting Started Guide to start using the software.
 
-#           
+#                  
 
 # Features
 
@@ -96,7 +96,7 @@ the instructions in the Getting Started Guide to start using the software.
 
 **Command fails (password does not match):_ Passwords do not match. Try again. _**
 
-##           
+##                  
 
 ## <span style="text-decoration:underline;">Customer</span>
 
@@ -147,7 +147,7 @@ Lists all the customers added in the address book.
 
 **Command succeeds (0 customer):** _There are no customers added yet!_
 
-###           
+###                  
 
 ### Update customer details
 
@@ -315,7 +315,7 @@ _DELIVERY_ID_: Integer
 
 **Command failed (delivery already complete): _This delivery is already marked as complete._**
 
-####           
+####                  
 
 #### Mark delivery as pending
 
