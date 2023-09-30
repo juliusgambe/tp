@@ -10,7 +10,7 @@
         "benjamin-koh-zhao-hui": "Benjamin Koh Zhao Hui",
         "lim-jian-yang": "Lim Jian Yang",
         "lim-zhong-han": "Lim Zhong Han",
-        "jean-doe": "Jean Doe",
+        "julius-gambe": "Julius Gambe",
         "james-doe": "James Doe"
       },
       "headingKeywords": {}
@@ -159,6 +159,14 @@
       "title": "John Doe's Project Portfolio Page",
       "headings": {
         "project-addressbook-level-3": "Project: AddressBook Level 3"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/juliusgambe.md",
+      "title": "Julius Gambe's Project Portfolio Page",
+      "headings": {
+        "project-homeboss": "Project: HomeBoss"
       },
       "headingKeywords": {}
     },
