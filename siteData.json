@@ -118,15 +118,19 @@
         "customer": "Customer",
         "add-a-customer": "Add a customer",
         "list-customers": "List customers",
-        "-4": "",
         "update-customer-details": "Update customer details",
         "delete-customer": "Delete customer",
         "delivery": "Delivery",
         "create-delivery": "Create delivery",
         "view-all-deliveries": "View all deliveries",
         "view-details-of-deliveries": "View details of deliveries",
-        "update-details-of-deliveries": "Update details of deliveries",
-        "delete-delivery": "Delete delivery"
+        "update-delivery-status-and-date": "Update delivery status and date",
+        "delete-delivery": "Delete delivery",
+        "create-a-note-for-a-delivery-coming-soon-in-v1-3": "Create a note for a delivery [coming soon in v1.3]",
+        "view-deliveries-for-the-day-coming-soon-in-v1-3": "View deliveries for the day [coming soon in v1.3]",
+        "add-customer-data-to-delivery-coming-soon-in-v1-3": "Add customer data to delivery [coming soon in v1.3]",
+        "remove-customer-from-delivery-coming-soon-in-v1-3": "Remove customer from delivery [coming soon in v1.3]",
+        "look-up-delivery-details-coming-soon-in-v1-3": "Look up delivery details [coming soon in v1.3]"
       },
       "headingKeywords": {}
     },
