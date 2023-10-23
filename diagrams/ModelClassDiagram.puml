@@ -5,83 +5,50 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyBook" as ReadOnlyBook
+Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
 Class AddressBook
-Class DeliveryBook
 Class ModelManager
 Class UserPrefs
 
-Class UniqueCustomerList
-Class Customer
+Class UniquePersonList
+Class Person
 Class Address
 Class Email
 Class Name
 Class Phone
 Class Tag
 
-Class UniqueDeliveryList
-Class Delivery
-Class DeliveryName
-Class Customer
-Class OrderDate
-Class DeliveryDate
-Class DeliveryStatus
-Class Note
-
-Class User
-Class Username
-Class Password
-
-Class ListItem
-
 Class I #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside .down.> Model
+HiddenOutside ..> Model
+
+AddressBook .up.|> ReadOnlyAddressBook
+
 ModelManager .up.|> Model
+Model .right.> ReadOnlyUserPrefs
+Model .left.> ReadOnlyAddressBook
+ModelManager -left-> "1" AddressBook
+ModelManager -right-> "1" UserPrefs
+UserPrefs .up.|> ReadOnlyUserPrefs
 
-Model .left.> ReadOnlyUserPrefs
-UserPrefs .down.|> ReadOnlyUserPrefs
-Model .right.> ReadOnlyBook
-AddressBook .up.|> ReadOnlyBook
-DeliveryBook .up.|> ReadOnlyBook
-ModelManager --> "~* uiList" ListItem
-ModelManager --> "1" AddressBook
-ModelManager --> "1" DeliveryBook
-ModelManager --> "1" UserPrefs
-ModelManager --> "1" User
-User --> Username
-User --> Password
+AddressBook *--> "1" UniquePersonList
+UniquePersonList --> "~* all" Person
+Person *--> Name
+Person *--> Phone
+Person *--> Email
+Person *--> Address
+Person *--> "*" Tag
 
-AddressBook *--> "1" UniqueCustomerList
-UniqueCustomerList --> "~* all" Customer
-Customer *--> Name
-Customer *--> Phone
-Customer *--> Email
-Customer *--> Address
-Customer *--> "*" Tag
-
-
-DeliveryBook *--> "1" UniqueDeliveryList
-UniqueDeliveryList -down-> "~* all" Delivery
-Delivery *--> DeliveryName
-Delivery --> Customer
-Delivery *--> OrderDate
-Delivery *--> DeliveryDate
-Delivery *--> DeliveryStatus
-Delivery *--> Note
-
-Customer -[hidden]up--> I
-UniqueCustomerList -[hidden]right-> I
+Person -[hidden]up--> I
+UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> "~* filteredCustomers" Customer
-ModelManager --> "~* filteredDeliveries" Delivery
-ModelManager --> "~* sortedDeliveries" Delivery
+ModelManager --> "~* filtered" Person
 @enduml
