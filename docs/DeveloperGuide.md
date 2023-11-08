@@ -447,6 +447,8 @@ The default delivery sort is `asc`.
 
 The following sequence diagram illustrates the `delivery list` command sequence:
 
+<puml src="diagrams/implementation/delivery/DeliveryListSequenceDiagram.puml" />
+
 ### View Delivery Feature
 
 #### Overview
@@ -468,7 +470,7 @@ The format of the `delivery view` command can be found
 
 The following activity diagram illustrates the logic of viewing a `Delivery`.
 
-<puml src="diagrams/implementations/DeliveryViewActivityDiagram.puml" width="450" />
+<puml src="diagrams/implementation/delivery/DeliveryViewActivityDiagram.puml" width="450" />
 
 The sequence of the `delivery view` command is as follows:
 
@@ -487,7 +489,7 @@ The sequence of the `delivery view` command is as follows:
 
 The following sequence diagram illustrates the `delivery view` command sequence:
 
-<puml src="diagrams/implementations/DeliveryViewCommandSequenceDiagram.puml" width="450" />
+<puml src="diagrams/implementation/delivery/DeliveryViewSequenceDiagram.puml" width="450" />
 
 ### User Login Command
 
@@ -634,7 +636,7 @@ The format for the `customer edit` command can be found [here](UserGuide.md#upda
 
 The following activity diagram shows the logic of a user editing a customer's information:
 
-<puml src="diagrams/CustomerEditActivityDiagram.puml" alt="CustomerEditActivityDiagram" />
+<puml src="diagrams/Gabriels Diagrams/CustomerEditActivityDiagram.puml" alt="CustomerEditActivityDiagram" />
 
 The sequence of the `customer edit` command is as follows:
 
@@ -653,7 +655,7 @@ The sequence of the `customer edit` command is as follows:
 
 The following sequence diagram shows how the `customer edit` command works:
 
-<puml src="diagrams/CustomerEditSequenceDiagram.puml" alt="CustomerEditSequenceDiagram" />
+<puml src="diagrams/Gabriels Diagrams/CustomerEditDiagram.puml" alt="CustomerEditSequenceDiagram" />
 
 ### Delivery Add Command
 
@@ -680,7 +682,7 @@ The format for the `delivery add` command can be found [here](UserGuide.md#creat
 
 The following activity diagram shows the logic of a user adding a delivery:
 
-<puml src="diagrams/DeliveryAddActivityDiagram.puml" alt="DeliveryAddActivityDiagram" />
+<puml src="diagrams/Gabriels Diagrams/DeliveryAddActivityDiagram.puml" alt="DeliveryAddActivityDiagram" />
 
 The sequence of the `delivery add` command is as follows:
 
@@ -700,7 +702,7 @@ The sequence of the `delivery add` command is as follows:
 
 The following sequence diagram shows how the `delivery add` command works:
 
-<puml src="diagrams/DeliveryAddSequenceDiagram.puml" alt="DeliveryAddSequenceDiagram" />
+<puml src="diagrams/Gabriels Diagrams/DeliveryAddDiagram.puml" alt="DeliveryAddSequenceDiagram" />
 
 ### \[Proposed\] Undo/redo feature
 
