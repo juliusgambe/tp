@@ -105,7 +105,8 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**
+API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -146,7 +147,8 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
+**
+API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
@@ -182,7 +184,8 @@ The `User` model,
 
 The `Delivery` model,
 
-* stores the delivery data i.e, the delivery name, customer, delivery status, order date, expected delivery date and note for the
+* stores the delivery data i.e, the delivery name, customer, delivery status, order date, expected delivery date and
+  note for the
   delivery.
 
 #### Customer Model
@@ -195,7 +198,8 @@ The `Customer` model,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**
+API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -372,13 +376,13 @@ The sequence of the `register` command is as follows:
    pass1234 --secretQn First Pet? --answer Koko).
 2. Logic Manager calls the `AddressBookParser#parseCommand` with the `INPUT`.
 3. The `AddressBookParser` parses the command word, creating an instance of `UserRegisterCommandParser` to parse the
-rest of the command.
+   rest of the command.
 4. If all fields are present, it checks if password and confirm password match.
 5. If password and confirm password match, it creates an instance of `UserRegisterCommand`.
 6. `Logic Manager` executes `UserRegisterCommand` by calling `UserRegisterCommand#execute()`.
 7. `UserRegisterCommand` checks if a user is already registered by calling `Model#getStoredUser`.
 8. If no user is registered, `UserRegisterCommand` calls `Model#registerUser` to store the user. Login status is set to
-true.
+   true.
 9. `UserRegisterCommand` calls `Model#updateFilteredPersonList` to display the list of customers.
 10. `UserRegisterCommand` returns a `CommandResult` with a success message.
 
@@ -407,7 +411,7 @@ The format of the `delivery list` command can be found
 7. If the status was provided, the status is used to filter the current delivery list with the specified status.
 8. If the customer id was provided, the customer id is used to filter the current delivery list with the specified
    customer id.
-9. If the expected delivery date was provided, the expected delivery date is used to filter the current delivery list 
+9. If the expected delivery date was provided, the expected delivery date is used to filter the current delivery list
    with the specified expected delivery date.
 10. If the sort was provided, the sort is used to sort the current delivery list. By default, the deliveries will be
     sorted in descending order of their expected delivery date.
@@ -433,13 +437,13 @@ The sequence of the `delivery list` command is as follows:
 6. If status is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus(Predicate)` to
    filter the
    delivery list by the specified status.
-7. If expected delivery date is not null, `DeliveryListCommand` will call 
+7. If expected delivery date is not null, `DeliveryListCommand` will call
    `Model#updateFilteredDeliveryListByStatus(Predicate)` to filter the delivery list by the specified date.
 8. If customer id is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus(Predicate)`
    to filter the delivery list by the specified customer id.
 9. If the sort is `asc`, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList(Comparator)` to sort the
    delivery list by expected delivery date in descending order.
-10. Else, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList()` to sort the delivery list by the 
+10. Else, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList()` to sort the delivery list by the
     expected delivery date in descending order.
 11. It creates a new "CommandResult" with the result of the execution.
 
@@ -507,9 +511,9 @@ The format for the `login` command can be found [here](UserGuide.md#login).
 3. If invalid command parameters are provided, an error message with the correct parameter format will be shown.
 4. If the user is currently logged in, an error message will be shown.
 5. The `User` is then cross-referenced with the stored user in `Model` to check if the credentials match.
-If incorrect credentials are provided, an error message regarding wrong credentials will be shown.
+   If incorrect credentials are provided, an error message regarding wrong credentials will be shown.
 6. If all the previous steps are completed without exceptions, the user will be logged in and the
-`isLoggedIn` status in `Model` will be updated to `true`.
+   `isLoggedIn` status in `Model` will be updated to `true`.
 
 The following activity diagram shows the logic of a user logging in:
 
@@ -518,14 +522,14 @@ The following activity diagram shows the logic of a user logging in:
 The sequence of the `login` command is as follows:
 
 1. Upon launching the application, the `ModelManager` will be initialized with
-the `User` constructed with details from the authentication.json file.
+   the `User` constructed with details from the authentication.json file.
 2. The user inputs the `login` command with the username and password.
 3. The `userLoginCommandParser` checks whether all the required fields are present.
-If all fields are present, it creates a new `userLoginCommand`.
+   If all fields are present, it creates a new `userLoginCommand`.
 4. The `userLoginCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`.
 5. The `userLoginCommand` then checks if the user credentials match the stored user by calling `Model#userMatches()`.
 6. If the user is not logged in and the credentials match, the `userLoginCommand` calls `Model#setLoginSuccess()`,
-changing the login status to true and enabling the user access to all commands.
+   changing the login status to true and enabling the user access to all commands.
 7. The `userLoginCommand` also calls `Model#updateFilteredPersonList()` to display the list of customers.
 
 The following sequence diagram shows how the `login` command works:
@@ -548,7 +552,7 @@ The format for the `logout` command can be found [here](UserGuide.md#logout).
 2. If extra command parameters are provided after specifying `logout`, the logout command will still be executed.
 3. If the user is currently logged out, an error message will be shown.
 4. If all the previous steps are completed without exceptions, the user will be logged out and the
-`isLoggedIn` status in `Model` will be updated to `false`.
+   `isLoggedIn` status in `Model` will be updated to `false`.
 
 The following activity diagram shows the logic of a user logging out:
 
@@ -558,9 +562,9 @@ The sequence of the `logout` command is as follows:
 
 1. The user inputs the `logout` command.
 2. A new `userLogoutCommand` is created and checks whether the user is currently logged out
-by calling `Model#getUserLoginStatus()`.
+   by calling `Model#getUserLoginStatus()`.
 3. If the user is currently logged in, the `userLogoutCommand` calls `Model#setLogoutSuccess()`,
-changing the login status to false and restricting the user access to most commands.
+   changing the login status to false and restricting the user access to most commands.
 4. The `userLoginCommand` also calls `Model#updateFilteredPersonList()` to hide the list of customers.
 
 The following sequence diagram shows how the `login` command works:
@@ -672,7 +676,7 @@ The format for the `delivery add` command can be found [here](UserGuide.md#creat
 1. The user inputs `delivery add`, followed by the `DeliveryName`, customer id of a `Customer` and `DeliveryDate`.
    e.g.(delivery add --name Chocolate Cake --customer 1 --date 2024-10-10)
 2. If no fields or incorrect fields are provided, an error message will inform the user of the correct command usage.
-3. If the expected delivery date provided is before today's date, an error message will prompt the user to key in a 
+3. If the expected delivery date provided is before today's date, an error message will prompt the user to key in a
    date that is today or after today.
 4. The customer id provided is then cross-referenced with the stored customer list in `Model` to ensure that
    it corresponds to an existing `Customer`. If the customer id is not tied to any `Customer`, an error message will
@@ -884,6 +888,63 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 | `*`      | a registered owner | relate my inventory to my orders                                         | I can keep track of my inventory.                                                                                                                                                       |
 | `*`      | a registered owner | know the sum of all the materials required for a fixed delivery schedule | I can plan my inventory.                                                                                                                                                                |
 | `*`      | a registered owner | have different user authorisation levels                                 | I can control who has access to what.                                                                                                                                                   |
+
+### Planned Enhancements
+
+#### User Interface
+
+* The user interface can show two lists views of both customer and delivery lists side by side to allow the user to see
+  both lists at the same time.
+
+#### Command Format
+
+* Prefixes can be shortened to allow the user to type less. For example, `--name` can be shortened to `-n`.
+* Potentially frequently used commands such as `customer list` and `delivery list` can be shortened to `cl` and `dl`
+  respectively.
+
+#### Error Messages
+
+* Error messages for dates would be more specific to allow the user to know what is wrong with the date that they
+  entered. For example, if a user enters 2023-02-30, the error message would be "Invalid date. The date entered does
+  not exist.".
+* Error messages for IDs should specify whether it is for the customer ID or for delivery ID as the current
+  implementation has some error messages that only specifies "ID" instead of "Customer ID" or "Delivery ID".
+* Error messages for numerical parameters that require a positive integer should throw more specific errors for negative
+  values.
+* Error messages would be improved in general to be more informative and instructive.
+
+#### User Accounts
+
+* Allow the user to create multiple accounts for different businesses.
+* Allow the user to create multiple accounts for the same business.
+
+#### Security
+
+* The whole JSON authentication file would be encrypted to prevent unauthorised access to the user's account instead of
+  only hashing the user password.
+* The whole delivery and customer data would be encrypted to prevent unauthorised access to the customer and delivery
+  data.
+
+#### ID Generation
+
+* When a new customer or delivery is created, the ID of the customer or delivery would be the first available ID from 1
+  to the maximum integer in the list of customers or deliveries respectively.
+* ID of a new customer and delivery will reset to 1 for customers and deliveries if the user deletes all
+  customers and deliveries using the `clear` command.
+* ID of a new customer and delivery will reset to 1 for customers and deliveries if the user deletes his account.
+
+#### Find Customer Command
+
+* Find command for customer would disallow special characters as a user cannot add special characters to the name of a
+  customer.
+
+#### Delivery Status
+
+* Allow the user to set their own customised delivery status.
+
+#### Enhanced Delivery Address
+
+* Allow tagging by area and region name to delivery address and enable users to filter them accordingly.
 
 ### Use cases
 
@@ -1458,10 +1519,10 @@ otherwise)
       Use Case Ends.
 
 * 1h. User Specifies both filter fields and sort fields.
-    * 1c1. DMS displays a list of deliveries filtered by the specified filters and then expected delivery date sorted 
-           by the specified sort order.
-  
-       Use Case Ends.
+    * 1c1. DMS displays a list of deliveries filtered by the specified filters and then expected delivery date sorted
+      by the specified sort order.
+
+      Use Case Ends.
 
 #### **Use case:** UC16 - Delivery List for the Day
 
