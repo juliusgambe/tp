@@ -59,7 +59,7 @@ the `Logic` component.
 
 According to the sequence diagram you saw earlier (and repeated above for reference), the `UI` component yields control
 to the `Logic` component through a method named `execute`. Searching through the code base for an `execute()` method
-that belongs to the `Logic` component yields a promising candidate in `seedu.address.logic.Logic`.
+that belongs to the `Logic` component yields a promising candidate in `logic.com.homeboss.Logic`.
 
 <img src="../images/tracing/searchResultsForExecuteMethod.png" />
 
@@ -71,7 +71,7 @@ variant of that feature is quite useful here as we are looking for a _method_ na
 text `execute`.
 </box>
 
-A quick look at the `seedu.address.logic.Logic` (an extract given below) confirms that this indeed might be what we’re
+A quick look at the `logic.com.homeboss.Logic` (an extract given below) confirms that this indeed might be what we’re
 looking for.
 
 ```java

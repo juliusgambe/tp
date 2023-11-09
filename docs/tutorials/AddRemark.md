@@ -32,7 +32,7 @@ a `CommandResult` with an accompanying message.
 ```java
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
+import model.com.homeboss.Model;
 
 /**
  * Changes the remark of an existing customer in the address book.
@@ -106,7 +106,7 @@ change the error message to echo the values. While this is not a replacement for
 our code is functioning as intended.
 
 ```java
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static util.commons.com.homeboss.CollectionUtil.requireAllNonNull;
 //...
 public class RemarkCommand extends Command {
     //...
@@ -273,7 +273,7 @@ Without getting too deep into `fxml`, let’s go on a 5 minute adventure to get 
 customer.
 
 Simply add the following
-to [`seedu.address.ui.PersonCard`](https://github.com/se-edu/addressbook-level3/commit/850b78879582f38accb05dd20c245963c65ea599#diff-639834f1e05afe2276a86372adf0fe5f69314642c2d93cfa543d614ce5a76688)
+to [`ui.com.homeboss.PersonCard`](https://github.com/se-edu/addressbook-level3/commit/850b78879582f38accb05dd20c245963c65ea599#diff-639834f1e05afe2276a86372adf0fe5f69314642c2d93cfa543d614ce5a76688)
 .
 
 **`PersonCard.java`:**
