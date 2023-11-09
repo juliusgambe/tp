@@ -31,7 +31,7 @@
   * [Getting Started]({{ baseUrl }}/UserGuide.html#getting-started)
   * [Features]({{ baseUrl }}/UserGuide.html#features)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
-  * [Command Summary]({{ baseUrl }}/UserGuide.html#faq)
+  * [Command Summary]({{ baseUrl }}/UserGuide.html#command-summary)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
   * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
