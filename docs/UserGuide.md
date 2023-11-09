@@ -185,7 +185,8 @@ files / folders before the application is launched for the first time.
 
 </box>
 
-3. Run `HomeBoss.jar`. If you are unsure of how to run a `.jar` file, you may refer to this helpful
+
+3. Run `HomeBoss.jar`{.swift}. If you are unsure of how to run a `.jar`{.swift} file, you may refer to this helpful
    [guide](https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Run-JAR-file-example-windows-linux-ubuntu).
 4. If everything went well, you will be greeted by a window similar to the one shown below.
 5. If you are a first time user, we highly recommend reading the following sections to familiarise yourself with
@@ -328,10 +329,11 @@ logout
 * Command Phrase are keywords or short phrases that are unique to each Command.
 * Words that are in uppercase are parameters that are to be supplied by you.
 * Parameters that are preceded by a prefix must be supplied after that prefix, e.g. `--name DELIVERY_NAME`{.swift}
-  must be given as, for example, `--name furniture` and not `furniture` or `--name`.
+  must be given as, for example, `--name furniture`{.swift} and not `furniture`{.swift} or `--name`{.swift}.
 * Items that are placed in square brackets (`[]`{.swift}) are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`
   {.swift} can either be
   `1` or `1 --name furniture`.
+
 * However, items that are grouped together in square brackets (`[]`{.swift}) must all be provided together,
   e.g. for `[--password PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift} both `PASSWORD`{.swift} and
   `CONFIRM_PASSWORD`{.swift} must be provided.
@@ -397,17 +399,18 @@ found [here](#register).
 
 ![CustomerAdded](images/getting-started/customer_add.png){style="display: block; margin: 0 auto;"}
 
-1. Now, let's add a new Delivery for `Gabriel` into HomeBoss' Delivery database. For this example, `Gabriel` has just
-   ordered a `MacBook Pro` from you, and the delivery date that you expect to deliver to him by is `2023-12-03`.
+6. Now, let's add a new Delivery for `Gabriel`{.swift} into HomeBoss' Delivery database. For this example, `Gabriel`{.swift} has just
+   ordered a `MacBook Pro`{.swift} from you, and the delivery date that you expect to deliver to him by is `2023-12-03`{.swift}.
 
 * `DELIVERY_NAME`{.swift} : MacBook Pro
 * `DELIVERY_DATE`{.swift} : 2023-12-03
 
-7. Type `delivery add MacBook Pro --customer CUSTOMER_ID --date 2023-12-03`, replacing `CUSTOMER_ID`{.swift}
+7. Type `delivery add MacBook Pro --customer CUSTOMER_ID --date 2023-12-03`{.swift}, replacing `CUSTOMER_ID`{.swift}
    with Gabriel's ID, and hit enter.
 
-8. A new Delivery should have been added for `Gabriel`, you should see a new Delivery in the Delivery List panel,
+8. A new Delivery should have been added for `Gabriel`{.swift}, you should see a new Delivery in the Delivery List panel,
    similar to the image shown below.
+
 
 ![DeliveryAdded](images/getting-started/delivery_add.png){style="display: block; margin: 0 auto;"}
 
@@ -445,44 +448,45 @@ refer to the [Features](#features) section.
 
 _These are features for managing your user account in HomeBoss._
 
-- `register` - Registers a new user account to use HomeBoss.
-- `login` - Logs in to your user account.
-- `update` - Updates your user account details.
-- `recover account` - Recovers your user account.
-- `logout` - Logs out of your user account.
-- `delete account` - Deletes your user account.
+- `register`{.swift} - Registers a new user account to use HomeBoss.
+- `login`{.swift} - Logs in to your user account.
+- `update`{.swift} - Updates your user account details.
+- `recover account`{.swift} - Recovers your user account.
+- `logout`{.swift} - Logs out of your user account.
+- `delete account`{.swift} - Deletes your user account.
 
 ## </br>Customer features summary
 
 _These are features for managing your Customers in HomeBoss._
 
-- `customer add` - Adds a Customer to the address book.
-- `customer view` - Shows the details of the specified Customer.
-- `customer list` - Lists all Customers in the address book.
-- `customer find` - Finds Customers whose names contain any of the given keywords.
-- `customer edit` - Updates the details of an existing Customer in the address book.
-- `customer delete` - Deletes the specified Customer from the address book.
+- `customer add`{.swift} - Adds a customer to the address book.
+- `customer view`{.swift} - Shows the details of the specified Customer.
+- `customer list`{.swift} - Lists all Customers in the address book.
+- `customer find`{.swift} - Finds Customers whose names contain any of the given keywords.
+- `customer edit`{.swift} - Updates the details of an existing Customer in the address book.
+- `customer delete`{.swift} - Deletes the specified Customer from the address book.
+
 
 ## </br>Delivery features summary
 
 _These are features for managing your Deliveries in HomeBoss._
 
-- `delivery add` - Adds a Delivery to the delivery book.
-- `delivery view` - Shows the details of the specified Delivery.
-- `delivery list` - Lists all Deliveries in the delivery book.
-- `delivery find` - Finds Deliveries whose names contain any of the given keywords.
-- `delivery edit` - Updates the details of an existing Delivery in the delivery book.
-- `delivery status` - Changes the status of a specified Delivery.
-- `delivery note` - Creates a note for a specified Delivery.
-- `delivery delete` - Deletes the specified Delivery from the delivery book.
+- `delivery add`{.swift} - Adds a Delivery to the delivery book.
+- `delivery view`{.swift} - Shows the details of the specified Delivery.
+- `delivery list`{.swift} - Lists all Deliveries in the delivery book.
+- `delivery find`{.swift} - Finds deliveries whose names contain any of the given keywords.
+- `delivery edit`{.swift} - Updates the details of an existing Delivery in the Delivery book.
+- `delivery status`{.swift} - Changes the status of a specified Delivery.
+- `delivery note`{.swift} - Creates a note for a specified Delivery.
+- `delivery delete`{.swift} - Deletes the specified delivery from the delivery book.
 
 ## </br>Miscellaneous features summary
 
 _These are general features in HomeBoss._
 
-- `exit` - Exits the program.
-- `help` - Shows a list of commands and their usage.
-- `clear` - Clears both Customer and Delivery database.
+- `exit`{.swift} - Exits the program.
+- `help`{.swift} - Shows a list of commands and their usage.
+- `clear`{.swift} - Clears both Customer and Delivery database.
 
 <br/>
 
@@ -506,10 +510,12 @@ You can register for a new user account with HomeBoss by calling this command.
 
 </box>
 
+
 </br>**Format:**
 
-`register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
-{.swift}
+`register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn 
+SECRET_QUESTION --answer ANSWER`{.swift}
+
 
 <br/>
 
@@ -528,7 +534,8 @@ You can register for a new user account with HomeBoss by calling this command.
 
 </br>**Example:**
 
-* `register --user yourUsername --password GabrielIsGreat --confirmPass GabrielIsGreat --secretQn First Pet Name? --answer Koko`</br>
+* `register --user yourUsername --password GabrielIsGreat --confirmPass GabrielIsGreat 
+  --secretQn First Pet Name? --answer Koko`{.swift}</br>
 
   Registers a new user account with the username `yourUsername`, password `GabrielIsGreat`, secret
   question `First Pet Name?` and answer `Koko`.
@@ -1177,7 +1184,9 @@ your easy tracking.
 **Parameter(s):**
 
 * `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
-* `STATUS`{.swift} accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`.
+
+* `STATUS`{.swift} accepts the following values: `CREATED`{.swift}/`SHIPPED`{.swift}/`COMPLETED`{.swift}/`CANCELLED`{.swift}.
+
 
   </box>
 
