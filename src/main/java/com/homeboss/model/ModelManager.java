@@ -1,7 +1,7 @@
 package com.homeboss.model;
 
-import static java.util.Objects.requireNonNull;
 import static com.homeboss.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
@@ -12,15 +12,15 @@ import java.util.stream.Collectors;
 
 import com.homeboss.commons.core.GuiSettings;
 import com.homeboss.commons.core.LogsCenter;
-import com.homeboss.commons.util.CollectionUtil;
+import com.homeboss.model.delivery.Delivery;
 import com.homeboss.model.person.Customer;
+import com.homeboss.model.user.User;
 import com.homeboss.ui.ListItem;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import com.homeboss.model.delivery.Delivery;
-import com.homeboss.model.user.User;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -46,11 +46,11 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyBook<Customer> addressBook,
                         ReadOnlyBook<Delivery> deliveryBook,
                         ReadOnlyUserPrefs userPrefs, boolean isLoggedIn) {
-        CollectionUtil.requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
-                + ", delivery book" + deliveryBook
-                + " and user prefs " + userPrefs);
+            + ", delivery book" + deliveryBook
+            + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.deliveryBook = new DeliveryBook(deliveryBook);
@@ -98,15 +98,15 @@ public class ModelManager implements Model {
         String orderDateFormat = "Ordered on: %s";
         String deliveryDateFormat = "Deliver by: %s";
         this.uiList = this.getSortedDeliveryList().stream().map(
-                        delivery -> new ListItem(String.format("[%d] %s",
-                                delivery.getDeliveryId(),
-                                delivery.getName()),
-                                String.format(orderDateFormat,
-                                        delivery.getOrderDate().toString()),
-                                delivery.getStatus().toString(),
-                                String.format(deliveryDateFormat, delivery.getDeliveryDate().toString())))
-                .collect(Collectors.toCollection(
-                        FXCollections::observableArrayList));
+                delivery -> new ListItem(String.format("[%d] %s",
+                    delivery.getDeliveryId(),
+                    delivery.getName()),
+                    String.format(orderDateFormat,
+                        delivery.getOrderDate().toString()),
+                    delivery.getStatus().toString(),
+                    String.format(deliveryDateFormat, delivery.getDeliveryDate().toString())))
+            .collect(Collectors.toCollection(
+                FXCollections::observableArrayList));
     }
 
 
@@ -114,12 +114,12 @@ public class ModelManager implements Model {
     public void setUiListCustomer() {
         String descriptionFormat = "Email: %s\nAddress: %s";
         this.uiList = this.getFilteredPersonList().stream().map(
-                        person -> new ListItem(String.format("[%d] %s", person.getCustomerId(), person.getName()),
-                                String.format(descriptionFormat,
-                                        person.getEmail().toString(),
-                                        person.getAddress().toString()),
-                                person.getPhone().toString()))
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                person -> new ListItem(String.format("[%d] %s", person.getCustomerId(), person.getName()),
+                    String.format(descriptionFormat,
+                        person.getEmail().toString(),
+                        person.getAddress().toString()),
+                    person.getPhone().toString()))
+            .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     @Override
@@ -229,7 +229,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setPerson(Customer target, Customer editedCustomer) {
-        CollectionUtil.requireAllNonNull(target, editedCustomer);
+        requireAllNonNull(target, editedCustomer);
 
         addressBook.setPerson(target, editedCustomer);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
@@ -415,7 +415,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void setDelivery(Delivery target, Delivery editedDelivery) {
-        CollectionUtil.requireAllNonNull(target, editedDelivery);
+        requireAllNonNull(target, editedDelivery);
 
         deliveryBook.setDelivery(target, editedDelivery);
         updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
@@ -487,11 +487,11 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-                && deliveryBook.equals(otherModelManager.deliveryBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredCustomers.equals(otherModelManager.filteredCustomers)
-                && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
-                && isLoggedIn == otherModelManager.isLoggedIn;
+            && deliveryBook.equals(otherModelManager.deliveryBook)
+            && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredCustomers.equals(otherModelManager.filteredCustomers)
+            && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
+            && isLoggedIn == otherModelManager.isLoggedIn;
     }
 
 }

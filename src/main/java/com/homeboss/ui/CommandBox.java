@@ -4,6 +4,7 @@ import com.homeboss.logic.Logic;
 import com.homeboss.logic.commands.CommandResult;
 import com.homeboss.logic.commands.exceptions.CommandException;
 import com.homeboss.logic.parser.exceptions.ParseException;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

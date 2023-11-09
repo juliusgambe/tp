@@ -1,9 +1,9 @@
 package com.homeboss.testutil;
 
 import com.homeboss.logic.commands.customer.CustomerAddCommand;
+import com.homeboss.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
 import com.homeboss.logic.parser.CliSyntax;
 import com.homeboss.model.person.Customer;
-import com.homeboss.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
 
 /**
  * A utility class for Person.
@@ -38,7 +38,8 @@ public class CustomerUtil {
         descriptor.getName().ifPresent(name -> sb.append(CliSyntax.PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(CliSyntax.PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(CliSyntax.PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(CliSyntax.PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getAddress()
+                .ifPresent(address -> sb.append(CliSyntax.PREFIX_ADDRESS).append(address.value).append(" "));
         return sb.toString();
     }
 }

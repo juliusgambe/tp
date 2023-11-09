@@ -1,9 +1,7 @@
 package com.homeboss.model.user;
 
-import com.homeboss.commons.util.AppUtil;
-
-import static java.util.Objects.requireNonNull;
 import static com.homeboss.commons.util.AppUtil.checkArgument;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a User's username in the address book.
@@ -28,7 +26,7 @@ public class Username {
      */
     public Username(String username) {
         requireNonNull(username);
-        AppUtil.checkArgument(isValidUsername(username), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidUsername(username), MESSAGE_CONSTRAINTS);
         this.username = username;
     }
 

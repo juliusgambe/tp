@@ -1,13 +1,12 @@
 package com.homeboss.model.delivery;
 
-import com.homeboss.commons.util.AppUtil;
-
-import static java.util.Objects.requireNonNull;
 import static com.homeboss.commons.util.AppUtil.checkArgument;
+import static java.util.Objects.requireNonNull;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Comparator;
+
 
 /**
  * Represents a Date in the address book.
@@ -28,7 +27,7 @@ public class Date implements Comparable<Date> {
      */
     public Date(String date) throws DateTimeException {
         requireNonNull(date);
-        AppUtil.checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
 
         this.date = LocalDate.parse(date);
     }

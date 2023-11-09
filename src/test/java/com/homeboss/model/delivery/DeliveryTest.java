@@ -1,14 +1,14 @@
 package com.homeboss.model.delivery;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.homeboss.testutil.TypicalDeliveries.GABRIELS_MILK;
 import static com.homeboss.testutil.TypicalDeliveries.GAMBES_RICE;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.homeboss.testutil.TypicalPersons;
 import org.junit.jupiter.api.Test;
 
 import com.homeboss.testutil.DeliveryBuilder;
+import com.homeboss.testutil.TypicalPersons;
 
 
 public class DeliveryTest {

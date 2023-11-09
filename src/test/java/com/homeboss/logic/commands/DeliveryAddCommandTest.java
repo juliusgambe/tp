@@ -1,10 +1,10 @@
 package com.homeboss.logic.commands;
 
+import static com.homeboss.testutil.Assert.assertThrows;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static com.homeboss.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -12,34 +12,34 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import org.junit.jupiter.api.Test;
+
 import com.homeboss.commons.core.GuiSettings;
 import com.homeboss.commons.util.ToStringBuilder;
 import com.homeboss.logic.Messages;
-import com.homeboss.logic.commands.exceptions.CommandException;
-import com.homeboss.model.AddressBook;
-import com.homeboss.model.Model;
-import com.homeboss.model.ReadOnlyUserPrefs;
-import com.homeboss.model.person.Customer;
-import com.homeboss.testutil.Assert;
-import com.homeboss.testutil.DeliveryAddDescriptorBuilder;
-import com.homeboss.ui.ListItem;
-import org.junit.jupiter.api.Test;
-
-import javafx.collections.ObservableList;
 import com.homeboss.logic.commands.delivery.DeliveryAddCommand;
 import com.homeboss.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
+import com.homeboss.logic.commands.exceptions.CommandException;
+import com.homeboss.model.AddressBook;
 import com.homeboss.model.DeliveryBook;
+import com.homeboss.model.Model;
 import com.homeboss.model.ReadOnlyBook;
+import com.homeboss.model.ReadOnlyUserPrefs;
 import com.homeboss.model.delivery.Delivery;
+import com.homeboss.model.person.Customer;
 import com.homeboss.model.user.User;
 import com.homeboss.testutil.CustomerBuilder;
+import com.homeboss.testutil.DeliveryAddDescriptorBuilder;
 import com.homeboss.testutil.DeliveryBuilder;
+import com.homeboss.ui.ListItem;
+
+import javafx.collections.ObservableList;
 
 public class DeliveryAddCommandTest {
 
     @Test
     public void constructor_nullDeliveryAddDescriptor_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new DeliveryAddCommand(null));
+        assertThrows(NullPointerException.class, () -> new DeliveryAddCommand(null));
     }
 
     @Test
@@ -77,7 +77,7 @@ public class DeliveryAddCommandTest {
         DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(
                 new DeliveryAddDescriptorBuilder(validDelivery).build());
 
-        Assert.assertThrows(CommandException.class, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX, () ->
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX, () ->
                 deliveryAddCommand.execute(modelStub));
     }
 
@@ -94,7 +94,7 @@ public class DeliveryAddCommandTest {
         DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(new
                 DeliveryAddDescriptorBuilder(validDelivery).build());
 
-        Assert.assertThrows(CommandException.class, Messages.MESSAGE_INVALID_DELIVERY_DATE, () ->
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_DELIVERY_DATE, () ->
                 deliveryAddCommand.execute(modelStub));
     }
 
@@ -108,7 +108,7 @@ public class DeliveryAddCommandTest {
 
         DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(new
                 DeliveryAddDescriptorBuilder(validDelivery).build());
-        Assert.assertThrows(CommandException.class, Messages.MESSAGE_USER_NOT_AUTHENTICATED, () ->
+        assertThrows(CommandException.class, Messages.MESSAGE_USER_NOT_AUTHENTICATED, () ->
                 deliveryAddCommand.execute(modelStub));
 
     }

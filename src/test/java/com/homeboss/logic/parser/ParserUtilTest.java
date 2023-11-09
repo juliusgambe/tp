@@ -1,9 +1,9 @@
 package com.homeboss.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static com.homeboss.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static com.homeboss.testutil.Assert.assertThrows;
 import static com.homeboss.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 

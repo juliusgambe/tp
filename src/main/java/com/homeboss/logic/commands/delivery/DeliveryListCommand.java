@@ -1,12 +1,12 @@
 package com.homeboss.logic.commands.delivery;
 
-import static java.util.Objects.requireNonNull;
 import static com.homeboss.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 import static com.homeboss.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static com.homeboss.logic.parser.CliSyntax.PREFIX_DATE;
 import static com.homeboss.logic.parser.CliSyntax.PREFIX_SORT;
 import static com.homeboss.logic.parser.CliSyntax.PREFIX_STATUS;
 import static com.homeboss.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
 import java.util.Objects;

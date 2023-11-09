@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.homeboss.logic.commands.CommandTestUtil;
-import com.homeboss.testutil.CustomerEditDescriptorBuilder;
 import org.junit.jupiter.api.Test;
 
+import com.homeboss.logic.commands.CommandTestUtil;
 import com.homeboss.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
+import com.homeboss.testutil.CustomerEditDescriptorBuilder;
 
 public class CustomerEditDescriptorTest {
 
@@ -34,22 +34,22 @@ public class CustomerEditDescriptorTest {
 
         // different name -> returns false
         CustomerEditDescriptor editedAmy = new CustomerEditDescriptorBuilder(CommandTestUtil.DESC_AMY).withName(
-            CommandTestUtil.VALID_NAME_BOB).build();
+                CommandTestUtil.VALID_NAME_BOB).build();
         assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
         editedAmy = new CustomerEditDescriptorBuilder(CommandTestUtil.DESC_AMY).withPhone(
-            CommandTestUtil.VALID_PHONE_BOB).build();
+                CommandTestUtil.VALID_PHONE_BOB).build();
         assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
 
         // different email -> returns false
         editedAmy = new CustomerEditDescriptorBuilder(CommandTestUtil.DESC_AMY).withEmail(
-            CommandTestUtil.VALID_EMAIL_BOB).build();
+                CommandTestUtil.VALID_EMAIL_BOB).build();
         assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
 
         // different address -> returns false
         editedAmy = new CustomerEditDescriptorBuilder(CommandTestUtil.DESC_AMY).withAddress(
-            CommandTestUtil.VALID_ADDRESS_BOB).build();
+                CommandTestUtil.VALID_ADDRESS_BOB).build();
         assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
     }
 

@@ -4,10 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.homeboss.logic.Messages;
+import com.homeboss.logic.commands.customer.CustomerViewCommand;
 import com.homeboss.logic.parser.Parser;
 import com.homeboss.logic.parser.ParserUtil;
 import com.homeboss.logic.parser.exceptions.ParseException;
-import com.homeboss.logic.commands.customer.CustomerViewCommand;
 
 /**
  * Parses input arguments and creates a new DeliveryViewCommand object
@@ -21,6 +21,7 @@ public class CustomerViewCommandParser implements Parser<CustomerViewCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the CustomerViewCommand
      * and returns an CustomerViewCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override

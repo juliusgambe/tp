@@ -1,28 +1,27 @@
 package com.homeboss.model.delivery;
 
+import static com.homeboss.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static com.homeboss.testutil.Assert.assertThrows;
 
-import com.homeboss.testutil.Assert;
 import org.junit.jupiter.api.Test;
 
 public class NoteTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new Note(null));
+        assertThrows(NullPointerException.class, () -> new Note(null));
     }
 
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
         String invalidName = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new Note(invalidName));
+        assertThrows(IllegalArgumentException.class, () -> new Note(invalidName));
     }
 
     @Test
     public void isValid() {
         // null name
-        Assert.assertThrows(NullPointerException.class, () -> Note.isValid(null));
+        assertThrows(NullPointerException.class, () -> Note.isValid(null));
 
         // invalid note -> returns false
         assertFalse(Note.isValid("")); // empty string

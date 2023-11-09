@@ -14,11 +14,6 @@ import com.homeboss.commons.util.ConfigUtil;
 import com.homeboss.commons.util.StringUtil;
 import com.homeboss.logic.Logic;
 import com.homeboss.logic.LogicManager;
-import com.homeboss.model.person.Customer;
-import com.homeboss.ui.Ui;
-import com.homeboss.ui.UiManager;
-import javafx.application.Application;
-import javafx.stage.Stage;
 import com.homeboss.model.AddressBook;
 import com.homeboss.model.DeliveryBook;
 import com.homeboss.model.Model;
@@ -27,6 +22,7 @@ import com.homeboss.model.ReadOnlyBook;
 import com.homeboss.model.ReadOnlyUserPrefs;
 import com.homeboss.model.UserPrefs;
 import com.homeboss.model.delivery.Delivery;
+import com.homeboss.model.person.Customer;
 import com.homeboss.storage.BookStorage;
 import com.homeboss.storage.BookStorageWithReference;
 import com.homeboss.storage.JsonAddressBookStorage;
@@ -35,6 +31,12 @@ import com.homeboss.storage.JsonUserPrefsStorage;
 import com.homeboss.storage.Storage;
 import com.homeboss.storage.StorageManager;
 import com.homeboss.storage.UserPrefsStorage;
+import com.homeboss.ui.Ui;
+import com.homeboss.ui.UiManager;
+
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 
 /**
  * Runs the application.
@@ -64,7 +66,7 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         BookStorage<Customer> addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         BookStorageWithReference<Delivery, Customer> deliveryBookStorage =
-                new JsonDeliveryBookStorage(userPrefs.getDeliveryBookFilePath());
+            new JsonDeliveryBookStorage(userPrefs.getDeliveryBookFilePath());
         storage = new StorageManager(addressBookStorage, deliveryBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
@@ -87,7 +89,7 @@ public class MainApp extends Application {
             Files.createDirectories(storage.getAddressBookParentPath());
         } catch (IOException e) {
             logger.info("Data Folder failed to be created at " + storage.getAddressBookParentPath()
-                    + " " + e);
+                + " " + e);
         }
 
         Optional<ReadOnlyBook<Customer>> addressBookOptional;
@@ -102,7 +104,7 @@ public class MainApp extends Application {
             initialAddressData = addressBookOptional.orElseGet(AddressBook::new);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+                + " Will be starting with an empty AddressBook.");
             initialAddressData = new AddressBook();
         }
 
@@ -115,7 +117,7 @@ public class MainApp extends Application {
             initialDeliveryData = deliveryBookOptional.orElseGet(DeliveryBook::new);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+                + " Will be starting with an empty AddressBook.");
             initialDeliveryData = new DeliveryBook();
         }
 
@@ -153,7 +155,7 @@ public class MainApp extends Application {
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataLoadingException e) {
             logger.warning("Config file at " + configFilePathUsed + " could not be loaded."
-                    + " Using default config properties.");
+                + " Using default config properties.");
             initializedConfig = new Config();
         }
 
@@ -184,7 +186,7 @@ public class MainApp extends Application {
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataLoadingException e) {
             logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
-                    + " Using default preferences.");
+                + " Using default preferences.");
             initializedPrefs = new UserPrefs();
         }
 

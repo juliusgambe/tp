@@ -2,20 +2,20 @@ package com.homeboss.logic.parser.customer;
 
 import static com.homeboss.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import com.homeboss.logic.commands.CommandTestUtil;
-import com.homeboss.logic.parser.CliSyntax;
-import com.homeboss.logic.parser.CommandParserTestUtil;
-import com.homeboss.testutil.TypicalPersons;
 import org.junit.jupiter.api.Test;
 
 import com.homeboss.logic.Messages;
+import com.homeboss.logic.commands.CommandTestUtil;
 import com.homeboss.logic.commands.customer.CustomerAddCommand;
+import com.homeboss.logic.parser.CliSyntax;
+import com.homeboss.logic.parser.CommandParserTestUtil;
 import com.homeboss.model.person.Address;
 import com.homeboss.model.person.Customer;
 import com.homeboss.model.person.Email;
 import com.homeboss.model.person.Name;
 import com.homeboss.model.person.Phone;
 import com.homeboss.testutil.CustomerBuilder;
+import com.homeboss.testutil.TypicalPersons;
 
 
 public class CustomerAddCommandParserTest {
@@ -28,94 +28,107 @@ public class CustomerAddCommandParserTest {
                 .withCustomerId(Customer.getCustomerCount()).build();
 
 
-
         // whitespace only preamble
-        CommandParserTestUtil.assertParseSuccess(parser, CommandTestUtil.PREAMBLE_WHITESPACE + CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-            + CommandTestUtil.ADDRESS_DESC_BOB, new CustomerAddCommand(expectedCustomer));
+        CommandParserTestUtil.assertParseSuccess(parser,
+                CommandTestUtil.PREAMBLE_WHITESPACE + CommandTestUtil.NAME_DESC_BOB
+                        + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
+                        + CommandTestUtil.ADDRESS_DESC_BOB, new CustomerAddCommand(expectedCustomer));
 
 
         // multiple tags - all accepted
 
-        Customer expectedCustomerMultipleTags = new CustomerBuilder(TypicalPersons.BOB).withCustomerId(Customer.getCustomerCount())
+        Customer expectedCustomerMultipleTags = new CustomerBuilder(TypicalPersons.BOB).withCustomerId(
+                        Customer.getCustomerCount())
                 .build();
 
 
         CommandParserTestUtil.assertParseSuccess(parser,
-            CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
-            new CustomerAddCommand(expectedCustomerMultipleTags));
+                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
+                new CustomerAddCommand(expectedCustomerMultipleTags));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedPersonString = CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-            + CommandTestUtil.ADDRESS_DESC_BOB;
+        String validExpectedPersonString =
+                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
+                        + CommandTestUtil.ADDRESS_DESC_BOB;
 
         // multiple names
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_AMY + validExpectedPersonString,
-            Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NAME));
+        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_AMY
+                + validExpectedPersonString, Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NAME));
 
         // multiple phones
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.PHONE_DESC_AMY + validExpectedPersonString,
-            Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
+        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.PHONE_DESC_AMY
+                + validExpectedPersonString, Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
 
         // multiple emails
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.EMAIL_DESC_AMY + validExpectedPersonString,
-            Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_EMAIL));
+        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.EMAIL_DESC_AMY
+                + validExpectedPersonString, Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_EMAIL));
 
         // multiple addresses
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.ADDRESS_DESC_AMY + validExpectedPersonString,
-            Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_ADDRESS));
+        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.ADDRESS_DESC_AMY
+                + validExpectedPersonString, Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_ADDRESS));
 
         // multiple fields repeated
         CommandParserTestUtil.assertParseFailure(parser,
-            validExpectedPersonString + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY
-                + validExpectedPersonString,
-            Messages.getErrorMessageForDuplicatePrefixes(
-                CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_PHONE));
+                validExpectedPersonString + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY
+                        + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY
+                        + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(
+                        CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_EMAIL,
+                        CliSyntax.PREFIX_PHONE));
 
         // invalid value followed by valid value
 
         // invalid name
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.INVALID_NAME_DESC + validExpectedPersonString,
-            Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NAME));
+        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.INVALID_NAME_DESC
+                + validExpectedPersonString, Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NAME));
 
         // invalid email
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.INVALID_EMAIL_DESC + validExpectedPersonString,
-            Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_EMAIL));
+        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.INVALID_EMAIL_DESC
+                + validExpectedPersonString, Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_EMAIL));
 
         // invalid phone, with alphabets
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.INVALID_PHONE_DESC + validExpectedPersonString,
-            Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
+        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.INVALID_PHONE_DESC
+                + validExpectedPersonString, Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
 
         // invalid phone, with less than 8 digits
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.INVALID_PHONE_DESC_2 + validExpectedPersonString,
+        CommandParserTestUtil.assertParseFailure(parser,
+                CommandTestUtil.INVALID_PHONE_DESC_2 + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
 
         // invalid phone, with more than 8 digits
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.INVALID_PHONE_DESC_3 + validExpectedPersonString,
+        CommandParserTestUtil.assertParseFailure(parser,
+                CommandTestUtil.INVALID_PHONE_DESC_3 + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
 
         // invalid address
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.INVALID_ADDRESS_DESC + validExpectedPersonString,
-            Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_ADDRESS));
+        CommandParserTestUtil.assertParseFailure(parser,
+                CommandTestUtil.INVALID_ADDRESS_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_ADDRESS));
 
         // valid value followed by invalid value
 
         // invalid name
-        CommandParserTestUtil.assertParseFailure(parser, validExpectedPersonString + CommandTestUtil.INVALID_NAME_DESC,
-            Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NAME));
+        CommandParserTestUtil.assertParseFailure(parser, validExpectedPersonString
+                        + CommandTestUtil.INVALID_NAME_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NAME));
 
         // invalid email
-        CommandParserTestUtil.assertParseFailure(parser, validExpectedPersonString + CommandTestUtil.INVALID_EMAIL_DESC,
-            Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_EMAIL));
+        CommandParserTestUtil.assertParseFailure(parser, validExpectedPersonString
+                        + CommandTestUtil.INVALID_EMAIL_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_EMAIL));
 
         // invalid phone
-        CommandParserTestUtil.assertParseFailure(parser, validExpectedPersonString + CommandTestUtil.INVALID_PHONE_DESC,
-            Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
+        CommandParserTestUtil.assertParseFailure(parser, validExpectedPersonString
+                        + CommandTestUtil.INVALID_PHONE_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PHONE));
 
         // invalid address
-        CommandParserTestUtil.assertParseFailure(parser, validExpectedPersonString + CommandTestUtil.INVALID_ADDRESS_DESC,
-            Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_ADDRESS));
+        CommandParserTestUtil.assertParseFailure(parser,
+                validExpectedPersonString + CommandTestUtil.INVALID_ADDRESS_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_ADDRESS));
     }
 
     @Test
@@ -123,59 +136,85 @@ public class CustomerAddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, CustomerAddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_NAME_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
-            expectedMessage);
+        CommandParserTestUtil.assertParseFailure(parser,
+                CommandTestUtil.VALID_NAME_BOB + CommandTestUtil.PHONE_DESC_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
+                expectedMessage);
 
         // missing phone prefix
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.VALID_PHONE_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
-            expectedMessage);
+        CommandParserTestUtil.assertParseFailure(parser,
+                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.VALID_PHONE_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
+                expectedMessage);
 
         // missing email prefix
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.VALID_EMAIL_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
-            expectedMessage);
+        CommandParserTestUtil.assertParseFailure(parser,
+                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
+                        + CommandTestUtil.VALID_EMAIL_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
+                expectedMessage);
 
         // missing address prefix
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.VALID_ADDRESS_BOB,
-            expectedMessage);
+        CommandParserTestUtil.assertParseFailure(parser,
+                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.VALID_ADDRESS_BOB,
+                expectedMessage);
 
         // all prefixes missing
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_NAME_BOB + CommandTestUtil.VALID_PHONE_BOB + CommandTestUtil.VALID_EMAIL_BOB + CommandTestUtil.VALID_ADDRESS_BOB,
-            expectedMessage);
+        CommandParserTestUtil.assertParseFailure(parser,
+                CommandTestUtil.VALID_NAME_BOB + CommandTestUtil.VALID_PHONE_BOB
+                        + CommandTestUtil.VALID_EMAIL_BOB + CommandTestUtil.VALID_ADDRESS_BOB,
+                expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
+        CommandParserTestUtil.assertParseFailure(parser,
+                CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.PHONE_DESC_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone with alphabets
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
+        CommandParserTestUtil.assertParseFailure(parser,
+                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.INVALID_PHONE_DESC
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
                 Phone.MESSAGE_CONSTRAINTS);
 
         // invalid phone with less than 8 digits
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.INVALID_PHONE_DESC_2 + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
+        CommandParserTestUtil.assertParseFailure(parser,
+                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.INVALID_PHONE_DESC_2
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
                 Phone.MESSAGE_CONSTRAINTS);
 
         // invalid phone with more than 8 digits
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.INVALID_PHONE_DESC_3 + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
+        CommandParserTestUtil.assertParseFailure(parser,
+                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.INVALID_PHONE_DESC_3
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
                 Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.INVALID_EMAIL_DESC + CommandTestUtil.ADDRESS_DESC_BOB,
+        CommandParserTestUtil.assertParseFailure(parser,
+                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
+                        + CommandTestUtil.INVALID_EMAIL_DESC + CommandTestUtil.ADDRESS_DESC_BOB,
                 Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_ADDRESS_DESC,
+        CommandParserTestUtil.assertParseFailure(parser,
+                CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_ADDRESS_DESC,
                 Address.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_ADDRESS_DESC,
-            Name.MESSAGE_CONSTRAINTS);
+        CommandParserTestUtil.assertParseFailure(parser,
+                CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.PHONE_DESC_BOB
+                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_ADDRESS_DESC,
+                Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.PREAMBLE_NON_EMPTY + CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-                + CommandTestUtil.ADDRESS_DESC_BOB,
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, CustomerAddCommand.MESSAGE_USAGE));
+        CommandParserTestUtil.assertParseFailure(parser,
+                CommandTestUtil.PREAMBLE_NON_EMPTY + CommandTestUtil.NAME_DESC_BOB
+                        + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
+                        + CommandTestUtil.ADDRESS_DESC_BOB,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CustomerAddCommand.MESSAGE_USAGE));
     }
 }

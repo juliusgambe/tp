@@ -1,9 +1,9 @@
 package com.homeboss.logic.commands.user;
 
-import static java.util.Objects.requireNonNull;
 import static com.homeboss.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static com.homeboss.logic.parser.CliSyntax.PREFIX_USER;
 import static com.homeboss.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
+import static java.util.Objects.requireNonNull;
 
 import com.homeboss.logic.commands.Command;
 import com.homeboss.logic.commands.CommandResult;
@@ -18,19 +18,19 @@ public class UserLoginCommand extends Command {
 
     public static final String COMMAND_WORD = "login";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Login to HomeBoss.\n\n"
-            + "Parameters: "
-            + PREFIX_USER + " USERNAME "
-            + PREFIX_PASSWORD + " PASSWORD\n\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_USER + " yourUsername "
-            + PREFIX_PASSWORD + " yourPassword ";
+        + ": Login to HomeBoss.\n\n"
+        + "Parameters: "
+        + PREFIX_USER + " USERNAME "
+        + PREFIX_PASSWORD + " PASSWORD\n\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_USER + " yourUsername "
+        + PREFIX_PASSWORD + " yourPassword ";
     public static final String MESSAGE_SUCCESS = "Welcome back to HomeBoss!";
     public static final String MESSAGE_WRONG_CREDENTIALS = "Wrong username/password";
     public static final String MESSAGE_ALREADY_LOGGED_IN = "You are already logged in!";
 
     public static final String MESSAGE_NO_REGISTERED_ACCOUNT_FOUND = "No registered account found.\n\n"
-            + "Please register an account first.\n\n" + UserRegisterCommand.MESSAGE_USAGE;
+        + "Please register an account first.\n\n" + UserRegisterCommand.MESSAGE_USAGE;
 
     private final User user;
 

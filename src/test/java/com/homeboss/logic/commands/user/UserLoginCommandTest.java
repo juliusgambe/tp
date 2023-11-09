@@ -1,8 +1,10 @@
 package com.homeboss.logic.commands.user;
 
+import static com.homeboss.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static com.homeboss.logic.commands.CommandTestUtil.assertCommandSuccess;
+
+import org.junit.jupiter.api.Test;
 
 import com.homeboss.logic.commands.CommandTestUtil;
 import com.homeboss.model.Model;
@@ -13,12 +15,12 @@ import com.homeboss.model.user.User;
 import com.homeboss.model.user.Username;
 import com.homeboss.testutil.TypicalDeliveries;
 import com.homeboss.testutil.TypicalPersons;
-import org.junit.jupiter.api.Test;
 
 public class UserLoginCommandTest {
     @Test
     public void execute_userAlreadyLoggedIn_throwsCommandException() {
-        Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), TypicalDeliveries.getTypicalDeliveryBook(),
+        Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(),
+                TypicalDeliveries.getTypicalDeliveryBook(),
                 new UserPrefs(), true);
         User user = new User(new Username("username"), new Password("password"), false);
         model.setLoggedInUser(user);
@@ -29,7 +31,8 @@ public class UserLoginCommandTest {
 
     @Test
     public void execute_userLogin_success() {
-        Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), TypicalDeliveries.getTypicalDeliveryBook(),
+        Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(),
+                TypicalDeliveries.getTypicalDeliveryBook(),
                 new UserPrefs(), false);
         User user = new User(new Username("username"), new Password("password"), false);
         model.setLoggedInUser(user);
@@ -41,13 +44,14 @@ public class UserLoginCommandTest {
         expectedModel.setLoginSuccess();
         expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
 
-        CommandTestUtil.assertCommandSuccess(userLoginCommand, model, UserLoginCommand.MESSAGE_SUCCESS,
+        assertCommandSuccess(userLoginCommand, model, UserLoginCommand.MESSAGE_SUCCESS,
                 expectedModel, true);
     }
 
     @Test
     public void execute_userLoginWrongCredentials_throwsCommandException() {
-        Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), TypicalDeliveries.getTypicalDeliveryBook(),
+        Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(),
+                TypicalDeliveries.getTypicalDeliveryBook(),
                 new UserPrefs(), false);
         User user = new User(new Username("username"), new Password("password"), false);
         model.setLoggedInUser(user);
@@ -60,13 +64,15 @@ public class UserLoginCommandTest {
 
     @Test
     public void execute_userLoginButNoStoredUserFound_throwsCommandException() {
-        Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), TypicalDeliveries.getTypicalDeliveryBook(),
+        Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(),
+                TypicalDeliveries.getTypicalDeliveryBook(),
                 new UserPrefs(), false);
         User user = new User(new Username("username"), new Password("password"), false);
         model.setLoggedInUser(null);
         UserLoginCommand userLoginCommand = new UserLoginCommand(user);
 
-        CommandTestUtil.assertCommandFailure(userLoginCommand, model, UserLoginCommand.MESSAGE_NO_REGISTERED_ACCOUNT_FOUND);
+        CommandTestUtil.assertCommandFailure(userLoginCommand, model,
+                UserLoginCommand.MESSAGE_NO_REGISTERED_ACCOUNT_FOUND);
     }
 
     @Test

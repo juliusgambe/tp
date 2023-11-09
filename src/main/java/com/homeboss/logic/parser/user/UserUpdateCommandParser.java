@@ -2,12 +2,13 @@ package com.homeboss.logic.parser.user;
 
 import com.homeboss.logic.Messages;
 import com.homeboss.logic.commands.user.UserUpdateCommand;
-import com.homeboss.logic.parser.*;
-import com.homeboss.logic.parser.exceptions.ParseException;
+import com.homeboss.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
 import com.homeboss.logic.parser.ArgumentMultimap;
 import com.homeboss.logic.parser.ArgumentTokenizer;
+import com.homeboss.logic.parser.CliSyntax;
 import com.homeboss.logic.parser.Parser;
 import com.homeboss.logic.parser.ParserUtil;
+import com.homeboss.logic.parser.exceptions.ParseException;
 import com.homeboss.model.user.Password;
 
 /**
@@ -22,21 +23,25 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
      */
     public UserUpdateCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_USER, CliSyntax.PREFIX_PASSWORD, CliSyntax.PREFIX_PASSWORD_CONFIRM,
-                        CliSyntax.PREFIX_SECRET_QUESTION, CliSyntax.PREFIX_ANSWER);
+                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_USER, CliSyntax.PREFIX_PASSWORD,
+                        CliSyntax.PREFIX_PASSWORD_CONFIRM, CliSyntax.PREFIX_SECRET_QUESTION,
+                        CliSyntax.PREFIX_ANSWER);
 
         argMultimap.verifyNoDuplicatePrefixesFor(
-            CliSyntax.PREFIX_USER, CliSyntax.PREFIX_PASSWORD, CliSyntax.PREFIX_PASSWORD_CONFIRM,
+                CliSyntax.PREFIX_USER, CliSyntax.PREFIX_PASSWORD, CliSyntax.PREFIX_PASSWORD_CONFIRM,
                 CliSyntax.PREFIX_SECRET_QUESTION, CliSyntax.PREFIX_ANSWER);
 
-        UserUpdateCommand.UserUpdateDescriptor userUpdateDescriptor = new UserUpdateCommand.UserUpdateDescriptor();
+        UserUpdateCommand.UserUpdateDescriptor userUpdateDescriptor =
+                new UserUpdateCommand.UserUpdateDescriptor();
 
         if (!argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, UserUpdateCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    UserUpdateCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(CliSyntax.PREFIX_USER).isPresent()) {
-            userUpdateDescriptor.setUsername(ParserUtil.parseUsername(argMultimap.getValue(CliSyntax.PREFIX_USER).get()));
+            userUpdateDescriptor.setUsername(
+                    ParserUtil.parseUsername(argMultimap.getValue(CliSyntax.PREFIX_USER).get()));
         }
 
         userUpdateDescriptor = parsePasswords(argMultimap, userUpdateDescriptor);
@@ -45,7 +50,8 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
 
         if (!userUpdateDescriptor.isAnyFieldEdited()) {
             throw new ParseException(
-                    String.format(UserUpdateCommand.MESSAGE_MISSING_FIELDS, UserUpdateCommand.MESSAGE_USAGE));
+                    String.format(UserUpdateCommand.MESSAGE_MISSING_FIELDS,
+                            UserUpdateCommand.MESSAGE_USAGE));
         }
 
         return new UserUpdateCommand(userUpdateDescriptor);
@@ -60,8 +66,8 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
      * @throws ParseException if the password and confirm password fields are not both present or both absent,
      *                        and if they are both present but does not match each other
      */
-    public UserUpdateCommand.UserUpdateDescriptor parsePasswords(ArgumentMultimap argMultimap, UserUpdateCommand.UserUpdateDescriptor userUpdateDescriptor)
-            throws ParseException {
+    public UserUpdateDescriptor parsePasswords(ArgumentMultimap argMultimap,
+                                               UserUpdateDescriptor userUpdateDescriptor) throws ParseException {
         // Either one of password or confirm password is missing.
         if (argMultimap.getValue(CliSyntax.PREFIX_PASSWORD).isPresent()
                 && argMultimap.getValue(CliSyntax.PREFIX_PASSWORD_CONFIRM).isEmpty()) {
@@ -74,8 +80,10 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
         // Both password and confirm password are present.
         if (argMultimap.getValue(CliSyntax.PREFIX_PASSWORD).isPresent()
                 && argMultimap.getValue(CliSyntax.PREFIX_PASSWORD_CONFIRM).isPresent()) {
-            Password password = ParserUtil.parsePassword(argMultimap.getValue(CliSyntax.PREFIX_PASSWORD).get());
-            Password confirmPassword = ParserUtil.parsePassword(argMultimap.getValue(CliSyntax.PREFIX_PASSWORD_CONFIRM).get());
+            Password password = ParserUtil.parsePassword(
+                    argMultimap.getValue(CliSyntax.PREFIX_PASSWORD).get());
+            Password confirmPassword = ParserUtil.parsePassword(
+                    argMultimap.getValue(CliSyntax.PREFIX_PASSWORD_CONFIRM).get());
             // Passwords mismatch
             if (!password.equals(confirmPassword)) {
                 throw new ParseException(UserUpdateCommand.MESSAGE_PASSWORD_MISMATCH);
@@ -93,8 +101,8 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
      * @return the updated {@code UserUpdateDescriptor}
      * @throws ParseException if the secret question and answer fields are not both present or both absent.
      */
-    public UserUpdateCommand.UserUpdateDescriptor parseSecretQuestionAndAnswer(ArgumentMultimap argMultimap,
-                                                                               UserUpdateCommand.UserUpdateDescriptor userUpdateDescriptor)
+    public UserUpdateDescriptor parseSecretQuestionAndAnswer(ArgumentMultimap argMultimap,
+                                                             UserUpdateDescriptor userUpdateDescriptor)
             throws ParseException {
         // Either one of secret question or answer is missing.
         if (argMultimap.getValue(CliSyntax.PREFIX_SECRET_QUESTION).isPresent()
@@ -110,7 +118,8 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
                 && argMultimap.getValue(CliSyntax.PREFIX_ANSWER).isPresent()) {
             userUpdateDescriptor.setSecretQuestion(ParserUtil.parseSecretQuestion(
                     argMultimap.getValue(CliSyntax.PREFIX_SECRET_QUESTION).get()));
-            userUpdateDescriptor.setAnswer(ParserUtil.parseAnswer(argMultimap.getValue(CliSyntax.PREFIX_ANSWER).get()));
+            userUpdateDescriptor.setAnswer(
+                    ParserUtil.parseAnswer(argMultimap.getValue(CliSyntax.PREFIX_ANSWER).get()));
         }
         return userUpdateDescriptor;
     }

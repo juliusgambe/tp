@@ -2,7 +2,6 @@ package com.homeboss.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import com.homeboss.commons.exceptions.IllegalValueException;
 import com.homeboss.model.person.Address;
 import com.homeboss.model.person.Customer;
@@ -100,7 +99,7 @@ class JsonAdaptedPerson {
             }
         } catch (NumberFormatException e) {
             throw new IllegalValueException("Customer ID should only contain numbers, "
-                    + "and it should be more than 0");
+                + "and it should be more than 0");
         }
 
         return new Customer(modelCustomerId, modelName, modelPhone, modelEmail, modelAddress);

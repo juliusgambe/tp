@@ -1,7 +1,7 @@
 package com.homeboss.logic.commands.user;
 
-import static java.util.Objects.requireNonNull;
 import static com.homeboss.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
+import static java.util.Objects.requireNonNull;
 
 import com.homeboss.logic.commands.Command;
 import com.homeboss.logic.commands.CommandResult;
@@ -17,17 +17,18 @@ public class UserRegisterCommand extends Command {
 
     public static final String COMMAND_WORD = "register";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Register an account for HomeBoss.\n\n"
-            + "Parameters: "
-            + CliSyntax.PREFIX_USER + " USERNAME " + CliSyntax.PREFIX_PASSWORD + " PASSWORD " + CliSyntax.PREFIX_PASSWORD_CONFIRM
-            + " CONFIRM_PASSWORD " + CliSyntax.PREFIX_SECRET_QUESTION + " SECRET_QUESTION " + CliSyntax.PREFIX_ANSWER
-            + " ANSWER\n\n"
-            + "Example: " + COMMAND_WORD + " "
-            + CliSyntax.PREFIX_USER + " yourUsername "
-            + CliSyntax.PREFIX_PASSWORD + " yourPassword "
-            + CliSyntax.PREFIX_PASSWORD_CONFIRM + " yourPassword "
-            + CliSyntax.PREFIX_SECRET_QUESTION + " yourSecretQuestion "
-            + CliSyntax.PREFIX_ANSWER + " yourAnswer";
+        + ": Register an account for HomeBoss.\n\n"
+        + "Parameters: "
+        + CliSyntax.PREFIX_USER + " USERNAME " + CliSyntax.PREFIX_PASSWORD + " PASSWORD "
+        + CliSyntax.PREFIX_PASSWORD_CONFIRM
+        + " CONFIRM_PASSWORD " + CliSyntax.PREFIX_SECRET_QUESTION + " SECRET_QUESTION " + CliSyntax.PREFIX_ANSWER
+        + " ANSWER\n\n"
+        + "Example: " + COMMAND_WORD + " "
+        + CliSyntax.PREFIX_USER + " yourUsername "
+        + CliSyntax.PREFIX_PASSWORD + " yourPassword "
+        + CliSyntax.PREFIX_PASSWORD_CONFIRM + " yourPassword "
+        + CliSyntax.PREFIX_SECRET_QUESTION + " yourSecretQuestion "
+        + CliSyntax.PREFIX_ANSWER + " yourAnswer";
     public static final String MESSAGE_SUCCESS = "Registration successful. Welcome to HomeBoss!";
     public static final String MESSAGE_PASSWORD_MISMATCH = "Passwords do not match. Please try again.";
     public static final String MESSAGE_ALREADY_HAVE_ACCOUNT = "You have an account already with username %s. ";

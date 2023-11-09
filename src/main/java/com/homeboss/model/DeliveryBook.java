@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.homeboss.commons.util.ToStringBuilder;
-import com.homeboss.model.person.Customer;
-import javafx.collections.ObservableList;
 import com.homeboss.model.delivery.Delivery;
 import com.homeboss.model.delivery.UniqueDeliveryList;
+import com.homeboss.model.person.Customer;
+
+import javafx.collections.ObservableList;
+
 
 /**
  * Wraps all data at the book level
@@ -104,8 +106,8 @@ public class DeliveryBook implements ReadOnlyBook<Delivery> {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("deliveries", deliveries)
-                .toString();
+            .add("deliveries", deliveries)
+            .toString();
     }
 
     @Override

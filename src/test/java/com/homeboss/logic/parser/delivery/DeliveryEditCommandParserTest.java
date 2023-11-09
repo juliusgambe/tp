@@ -1,5 +1,7 @@
 package com.homeboss.logic.parser.delivery;
 
+import org.junit.jupiter.api.Test;
+
 import com.homeboss.commons.core.index.Index;
 import com.homeboss.logic.Messages;
 import com.homeboss.logic.commands.CommandTestUtil;
@@ -7,14 +9,12 @@ import com.homeboss.logic.commands.delivery.DeliveryEditCommand;
 import com.homeboss.logic.parser.CliSyntax;
 import com.homeboss.logic.parser.CommandParserTestUtil;
 import com.homeboss.logic.parser.ParserUtil;
-import com.homeboss.model.person.Name;
-import com.homeboss.testutil.DeliveryEditDescriptorBuilder;
-import com.homeboss.testutil.TypicalIndexes;
-import org.junit.jupiter.api.Test;
-
 import com.homeboss.model.delivery.DeliveryDate;
 import com.homeboss.model.delivery.DeliveryStatus;
 import com.homeboss.model.delivery.Note;
+import com.homeboss.model.person.Name;
+import com.homeboss.testutil.DeliveryEditDescriptorBuilder;
+import com.homeboss.testutil.TypicalIndexes;
 
 
 public class DeliveryEditCommandParserTest {
@@ -38,10 +38,12 @@ public class DeliveryEditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        CommandParserTestUtil.assertParseFailure(parser, "-5" + CommandTestUtil.NAME_DESC_MILK, MESSAGE_INVALID_FORMAT);
+        CommandParserTestUtil.assertParseFailure(parser, "-5"
+                + CommandTestUtil.NAME_DESC_MILK, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        CommandParserTestUtil.assertParseFailure(parser, "0" + CommandTestUtil.NAME_DESC_MILK, MESSAGE_INVALID_FORMAT);
+        CommandParserTestUtil.assertParseFailure(parser, "0"
+                + CommandTestUtil.NAME_DESC_MILK, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         CommandParserTestUtil.assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -53,37 +55,47 @@ public class DeliveryEditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         //in valid name
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_NAME_DESC,
+                Name.MESSAGE_CONSTRAINTS);
         //invalid customer id
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_CUSTOMER_ID_DESC, ParserUtil.MESSAGE_INVALID_INDEX);
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_CUSTOMER_ID_DESC,
+                ParserUtil.MESSAGE_INVALID_INDEX);
         //invalid delivery date
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_FORMAT_DELIVERY_DATE_DESC, DeliveryDate.MESSAGE_CONSTRAINTS);
+        CommandParserTestUtil.assertParseFailure(parser, "1"
+                + CommandTestUtil.INVALID_FORMAT_DELIVERY_DATE_DESC, DeliveryDate.MESSAGE_CONSTRAINTS);
 
         //invalid status
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_STATUS_DESC, DeliveryStatus.MESSAGE_CONSTRAINTS);
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_STATUS_DESC,
+                DeliveryStatus.MESSAGE_CONSTRAINTS);
 
         //invalid note
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_NOTE_DESC, Note.MESSAGE_CONSTRAINTS);
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_NOTE_DESC,
+                Note.MESSAGE_CONSTRAINTS);
 
         //invalid name followed by valid customer id
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.CUSTOMER_ID_DESC_MILK, Name.MESSAGE_CONSTRAINTS);
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_NAME_DESC
+                + CommandTestUtil.CUSTOMER_ID_DESC_MILK, Name.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.INVALID_CUSTOMER_ID_DESC + CommandTestUtil.INVALID_NOTE_DESC,
-               Name.MESSAGE_CONSTRAINTS);
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_NAME_DESC
+                        + CommandTestUtil.INVALID_CUSTOMER_ID_DESC + CommandTestUtil.INVALID_NOTE_DESC,
+                Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = TypicalIndexes.INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.NAME_DESC_JAMES_MILK + CommandTestUtil.DELIVERY_DATE_DESC_MILK
-                + CommandTestUtil.VALID_STATUS_DESC + CommandTestUtil.CUSTOMER_ID_DESC_MILK + CommandTestUtil.VALID_NOTE_DESC;
+        String userInput = targetIndex.getOneBased() + CommandTestUtil.NAME_DESC_JAMES_MILK
+                + CommandTestUtil.DELIVERY_DATE_DESC_MILK
+                + CommandTestUtil.VALID_STATUS_DESC + CommandTestUtil.CUSTOMER_ID_DESC_MILK
+                + CommandTestUtil.VALID_NOTE_DESC;
 
         DeliveryEditCommand.DeliveryEditDescriptor descriptor =
                 new DeliveryEditDescriptorBuilder().withDeliveryName(CommandTestUtil.VALID_NAME_JAMES_MILK)
                         .withDeliveryDate(CommandTestUtil.VALID_DELIVERY_DATE_1).withStatus(
-                        CommandTestUtil.VALID_STATUS_CREATED)
-                        .withCustomerId(CommandTestUtil.VALID_CUSTOMER_ID_1).withNote(CommandTestUtil.VALID_NOTE).build();
+                                CommandTestUtil.VALID_STATUS_CREATED)
+                        .withCustomerId(CommandTestUtil.VALID_CUSTOMER_ID_1).withNote(CommandTestUtil.VALID_NOTE)
+                        .build();
 
         DeliveryEditCommand expectedCommand = new DeliveryEditCommand(targetIndex, descriptor);
 
@@ -94,11 +106,12 @@ public class DeliveryEditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() { //not done
         Index targetIndex = TypicalIndexes.INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.NAME_DESC_JAMES_MILK + CommandTestUtil.VALID_STATUS_DESC;
+        String userInput =
+                targetIndex.getOneBased() + CommandTestUtil.NAME_DESC_JAMES_MILK + CommandTestUtil.VALID_STATUS_DESC;
 
         DeliveryEditCommand.DeliveryEditDescriptor descriptor =
                 new DeliveryEditDescriptorBuilder().withDeliveryName(CommandTestUtil.VALID_NAME_JAMES_MILK)
-                .withStatus(CommandTestUtil.VALID_STATUS_CREATED).build();
+                        .withStatus(CommandTestUtil.VALID_STATUS_CREATED).build();
         DeliveryEditCommand expectedCommand = new DeliveryEditCommand(targetIndex, descriptor);
 
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
@@ -116,7 +129,8 @@ public class DeliveryEditCommandParserTest {
 
         // delivery date
         userInput = targetIndex.getOneBased() + CommandTestUtil.DELIVERY_DATE_DESC_MILK;
-        descriptor = new DeliveryEditDescriptorBuilder().withDeliveryDate(CommandTestUtil.VALID_DELIVERY_DATE_1).build();
+        descriptor = new DeliveryEditDescriptorBuilder().withDeliveryDate(CommandTestUtil.VALID_DELIVERY_DATE_1)
+                .build();
         expectedCommand = new DeliveryEditCommand(targetIndex, descriptor);
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -148,32 +162,42 @@ public class DeliveryEditCommandParserTest {
 
         // valid followed by invalid
         Index targetIndex = TypicalIndexes.INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.NAME_DESC_MILK + CommandTestUtil.INVALID_NAME_DESC;
+        String userInput =
+                targetIndex.getOneBased() + CommandTestUtil.NAME_DESC_MILK + CommandTestUtil.INVALID_NAME_DESC;
 
         CommandParserTestUtil.assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(
-            CliSyntax.PREFIX_NAME));
+                CliSyntax.PREFIX_NAME));
 
         // invalid followed by valid
-        userInput = targetIndex.getOneBased() + CommandTestUtil.INVALID_CUSTOMER_ID_DESC + CommandTestUtil.CUSTOMER_ID_DESC_MILK;
+        userInput =
+                targetIndex.getOneBased() + CommandTestUtil.INVALID_CUSTOMER_ID_DESC
+                        + CommandTestUtil.CUSTOMER_ID_DESC_MILK;
 
         CommandParserTestUtil.assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(
-            CliSyntax.PREFIX_CUSTOMER_ID));
+                CliSyntax.PREFIX_CUSTOMER_ID));
 
         // mulltiple valid fields repeated
         userInput =
-                targetIndex.getOneBased() + CommandTestUtil.NAME_DESC_MILK + CommandTestUtil.CUSTOMER_ID_DESC_MILK + CommandTestUtil.NAME_DESC_JAMES_MILK
-                        + CommandTestUtil.DELIVERY_DATE_DESC_MILK + CommandTestUtil.CUSTOMER_ID_DESC_RICE + CommandTestUtil.DELIVERY_DATE_DESC_RICE;
+                targetIndex.getOneBased() + CommandTestUtil.NAME_DESC_MILK + CommandTestUtil.CUSTOMER_ID_DESC_MILK
+                        + CommandTestUtil.NAME_DESC_JAMES_MILK
+                        + CommandTestUtil.DELIVERY_DATE_DESC_MILK + CommandTestUtil.CUSTOMER_ID_DESC_RICE
+                        + CommandTestUtil.DELIVERY_DATE_DESC_RICE;
 
         CommandParserTestUtil.assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_CUSTOMER_ID, CliSyntax.PREFIX_DATE));
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_CUSTOMER_ID,
+                        CliSyntax.PREFIX_DATE));
 
         //multiple invalid values
 
-        userInput = targetIndex.getOneBased() + CommandTestUtil.INVALID_NOTE_DESC + CommandTestUtil.INVALID_CUSTOMER_ID_DESC + CommandTestUtil.INVALID_NOTE_DESC
-                + CommandTestUtil.INVALID_CUSTOMER_ID_DESC + CommandTestUtil.INVALID_DELIVERY_NAME_DESC + CommandTestUtil.INVALID_DELIVERY_NAME_DESC;
+        userInput =
+                targetIndex.getOneBased() + CommandTestUtil.INVALID_NOTE_DESC
+                        + CommandTestUtil.INVALID_CUSTOMER_ID_DESC + CommandTestUtil.INVALID_NOTE_DESC
+                        + CommandTestUtil.INVALID_CUSTOMER_ID_DESC + CommandTestUtil.INVALID_DELIVERY_NAME_DESC
+                        + CommandTestUtil.INVALID_DELIVERY_NAME_DESC;
 
         CommandParserTestUtil.assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NOTE, CliSyntax.PREFIX_CUSTOMER_ID, CliSyntax.PREFIX_NAME));
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NOTE, CliSyntax.PREFIX_CUSTOMER_ID,
+                        CliSyntax.PREFIX_NAME));
     }
 
 }

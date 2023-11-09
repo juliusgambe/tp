@@ -1,12 +1,12 @@
 package com.homeboss.logic.parser.delivery;
 
+import org.junit.jupiter.api.Test;
+
 import com.homeboss.logic.Messages;
+import com.homeboss.logic.commands.delivery.DeliveryDeleteCommand;
 import com.homeboss.logic.parser.CommandParserTestUtil;
 import com.homeboss.logic.parser.DeliveryDeleteCommandParser;
 import com.homeboss.testutil.TypicalIndexes;
-import org.junit.jupiter.api.Test;
-
-import com.homeboss.logic.commands.delivery.DeliveryDeleteCommand;
 
 public class DeliveryDeleteCommandParserTest {
     private DeliveryDeleteCommandParser parser = new DeliveryDeleteCommandParser();
@@ -14,7 +14,7 @@ public class DeliveryDeleteCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
         CommandParserTestUtil.assertParseSuccess(parser, "0001", new DeliveryDeleteCommand(
-            TypicalIndexes.INDEX_FIRST_PERSON));
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test

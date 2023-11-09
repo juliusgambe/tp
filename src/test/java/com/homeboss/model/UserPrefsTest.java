@@ -1,14 +1,13 @@
 package com.homeboss.model;
 
+import static com.homeboss.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static com.homeboss.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import com.homeboss.testutil.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -24,24 +23,24 @@ public class UserPrefsTest {
     @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
         UserPrefs userPrefs = new UserPrefs();
-        Assert.assertThrows(NullPointerException.class, () -> userPrefs.setGuiSettings(null));
+        assertThrows(NullPointerException.class, () -> userPrefs.setGuiSettings(null));
     }
 
     @Test
     public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
         UserPrefs userPrefs = new UserPrefs();
-        Assert.assertThrows(NullPointerException.class, () -> userPrefs.setAddressBookFilePath(null));
+        assertThrows(NullPointerException.class, () -> userPrefs.setAddressBookFilePath(null));
     }
 
     @Test
     public void setAuthenticationPath_nullPath_throwsNullPointerException() {
         UserPrefs userPrefs = new UserPrefs();
-        Assert.assertThrows(NullPointerException.class, () -> userPrefs.setAuthenticationFilePath(null));
+        assertThrows(NullPointerException.class, () -> userPrefs.setAuthenticationFilePath(null));
     }
 
     @Test
     public void readFileAsString_invalidFilePath_throwsException() {
-        Assert.assertThrows(Exception.class, () -> UserPrefs.readFileAsString("invalidFilePath"));
+        assertThrows(Exception.class, () -> UserPrefs.readFileAsString("invalidFilePath"));
     }
 
     @Test
@@ -76,7 +75,7 @@ public class UserPrefsTest {
     @Test
     public void registerUser_nullUser_throwsNullPointerException() {
         UserPrefs userPrefs = new UserPrefs();
-        Assert.assertThrows(NullPointerException.class, () -> userPrefs.registerUser(null));
+        assertThrows(NullPointerException.class, () -> userPrefs.registerUser(null));
     }
 
     @Test

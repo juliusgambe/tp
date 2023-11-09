@@ -2,11 +2,11 @@ package com.homeboss.logic.parser.customer;
 
 import static com.homeboss.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import com.homeboss.logic.parser.CommandParserTestUtil;
-import com.homeboss.testutil.TypicalIndexes;
 import org.junit.jupiter.api.Test;
 
 import com.homeboss.logic.commands.customer.CustomerDeleteCommand;
+import com.homeboss.logic.parser.CommandParserTestUtil;
+import com.homeboss.testutil.TypicalIndexes;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path
@@ -24,7 +24,7 @@ public class CustomerDeleteCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
         CommandParserTestUtil.assertParseSuccess(parser, "0001", new CustomerDeleteCommand(
-            TypicalIndexes.INDEX_FIRST_PERSON));
+                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test

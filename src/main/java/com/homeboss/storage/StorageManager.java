@@ -7,11 +7,11 @@ import java.util.logging.Logger;
 
 import com.homeboss.commons.core.LogsCenter;
 import com.homeboss.commons.exceptions.DataLoadingException;
-import com.homeboss.model.person.Customer;
 import com.homeboss.model.ReadOnlyBook;
 import com.homeboss.model.ReadOnlyUserPrefs;
 import com.homeboss.model.UserPrefs;
 import com.homeboss.model.delivery.Delivery;
+import com.homeboss.model.person.Customer;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -27,9 +27,9 @@ public class StorageManager implements Storage {
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(
-            BookStorage<Customer> addressBookStorage,
-            BookStorageWithReference<Delivery, Customer> deliveryBookStorage,
-            UserPrefsStorage userPrefsStorage) {
+        BookStorage<Customer> addressBookStorage,
+        BookStorageWithReference<Delivery, Customer> deliveryBookStorage,
+        UserPrefsStorage userPrefsStorage) {
         this.addressBookStorage = addressBookStorage;
         this.deliveryBookStorage = deliveryBookStorage;
         this.userPrefsStorage = userPrefsStorage;

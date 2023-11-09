@@ -8,7 +8,6 @@ import static com.homeboss.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.stream.Stream;
 
-import com.homeboss.model.person.Customer;
 import com.homeboss.logic.commands.customer.CustomerAddCommand;
 import com.homeboss.logic.parser.ArgumentMultimap;
 import com.homeboss.logic.parser.ArgumentTokenizer;
@@ -17,6 +16,7 @@ import com.homeboss.logic.parser.ParserUtil;
 import com.homeboss.logic.parser.Prefix;
 import com.homeboss.logic.parser.exceptions.ParseException;
 import com.homeboss.model.person.Address;
+import com.homeboss.model.person.Customer;
 import com.homeboss.model.person.Email;
 import com.homeboss.model.person.Name;
 import com.homeboss.model.person.Phone;

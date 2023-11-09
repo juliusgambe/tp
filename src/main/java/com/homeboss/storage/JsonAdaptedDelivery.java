@@ -4,17 +4,16 @@ import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import com.homeboss.commons.exceptions.IllegalValueException;
 import com.homeboss.logic.Messages;
 import com.homeboss.model.ReadOnlyBook;
+import com.homeboss.model.delivery.Delivery;
 import com.homeboss.model.delivery.DeliveryDate;
 import com.homeboss.model.delivery.DeliveryName;
+import com.homeboss.model.delivery.DeliveryStatus;
 import com.homeboss.model.delivery.Note;
 import com.homeboss.model.delivery.OrderDate;
 import com.homeboss.model.person.Customer;
-import com.homeboss.model.delivery.Delivery;
-import com.homeboss.model.delivery.DeliveryStatus;
 
 /**
  * Jackson-friendly version of {@link Customer}.

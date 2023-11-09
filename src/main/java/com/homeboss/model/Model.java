@@ -6,11 +6,13 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import com.homeboss.commons.core.GuiSettings;
-import com.homeboss.model.person.Customer;
-import com.homeboss.ui.ListItem;
-import javafx.collections.ObservableList;
 import com.homeboss.model.delivery.Delivery;
+import com.homeboss.model.person.Customer;
 import com.homeboss.model.user.User;
+import com.homeboss.ui.ListItem;
+
+import javafx.collections.ObservableList;
+
 
 /**
  * The API of the Model component.

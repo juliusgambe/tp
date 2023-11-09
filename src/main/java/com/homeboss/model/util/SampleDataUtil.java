@@ -1,10 +1,5 @@
 package com.homeboss.model.util;
 
-import com.homeboss.model.person.Address;
-import com.homeboss.model.person.Customer;
-import com.homeboss.model.person.Name;
-import com.homeboss.model.person.Phone;
-import javafx.collections.ObservableList;
 import com.homeboss.model.AddressBook;
 import com.homeboss.model.DeliveryBook;
 import com.homeboss.model.ReadOnlyBook;
@@ -13,7 +8,14 @@ import com.homeboss.model.delivery.DeliveryDate;
 import com.homeboss.model.delivery.DeliveryName;
 import com.homeboss.model.delivery.DeliveryStatus;
 import com.homeboss.model.delivery.OrderDate;
+import com.homeboss.model.person.Address;
+import com.homeboss.model.person.Customer;
 import com.homeboss.model.person.Email;
+import com.homeboss.model.person.Name;
+import com.homeboss.model.person.Phone;
+
+import javafx.collections.ObservableList;
+
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.

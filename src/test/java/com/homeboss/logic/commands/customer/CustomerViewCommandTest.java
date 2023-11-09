@@ -1,11 +1,13 @@
 package com.homeboss.logic.commands.customer;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.homeboss.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
 
 import com.homeboss.logic.Messages;
 import com.homeboss.logic.commands.ClearCommand;
@@ -16,15 +18,15 @@ import com.homeboss.model.ModelManager;
 import com.homeboss.model.UserPrefs;
 import com.homeboss.model.person.Customer;
 import com.homeboss.testutil.TypicalPersons;
-import org.junit.jupiter.api.Test;
+
 
 public class CustomerViewCommandTest {
 
     private Model model = new ModelManager(
-        TypicalPersons.getTypicalAddressBook(),
-        getTypicalDeliveryBook(),
-        new UserPrefs(),
-        true
+            TypicalPersons.getTypicalAddressBook(),
+            getTypicalDeliveryBook(),
+            new UserPrefs(),
+            true
     );
 
     @Test
@@ -39,7 +41,8 @@ public class CustomerViewCommandTest {
     @Test
     public void execute_invalidTargetId_throwsCommandException() {
         CustomerViewCommand customerViewCommand = new CustomerViewCommand(-1);
-        CommandTestUtil.assertCommandFailure(customerViewCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        CommandTestUtil.assertCommandFailure(customerViewCommand, model,
+                Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
     }
 
     @Test

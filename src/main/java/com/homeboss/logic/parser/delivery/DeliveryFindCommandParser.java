@@ -3,9 +3,9 @@ package com.homeboss.logic.parser.delivery;
 import java.util.Arrays;
 
 import com.homeboss.logic.Messages;
+import com.homeboss.logic.commands.delivery.DeliveryFindCommand;
 import com.homeboss.logic.parser.Parser;
 import com.homeboss.logic.parser.exceptions.ParseException;
-import com.homeboss.logic.commands.delivery.DeliveryFindCommand;
 import com.homeboss.model.delivery.DeliveryNameContainsKeywordsPredicate;
 
 /**
@@ -16,6 +16,7 @@ public class DeliveryFindCommandParser implements Parser<DeliveryFindCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeliveryFindCommand
      * and returns a DeliveryFindCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeliveryFindCommand parse(String args) throws ParseException {

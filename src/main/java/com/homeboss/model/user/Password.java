@@ -1,7 +1,7 @@
 package com.homeboss.model.user;
 
-import static java.util.Objects.requireNonNull;
 import static com.homeboss.commons.util.AppUtil.checkArgument;
+import static java.util.Objects.requireNonNull;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -9,7 +9,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
 
 import com.homeboss.commons.core.LogsCenter;
-import com.homeboss.commons.util.AppUtil;
 import com.homeboss.storage.StorageManager;
 
 
@@ -19,7 +18,7 @@ import com.homeboss.storage.StorageManager;
 public class Password {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Password should only contain alphanumeric characters, at least 8 characters, and it should not be blank";
+        "Password should only contain alphanumeric characters, at least 8 characters, and it should not be blank";
 
     /*
      * The first character of the password must not be a whitespace,
@@ -56,7 +55,7 @@ public class Password {
     private String hashAndValidatePassword(String passwordString, boolean shouldValidate) {
         requireNonNull(passwordString);
         if (shouldValidate) {
-            AppUtil.checkArgument(isValidPassword(passwordString), MESSAGE_CONSTRAINTS);
+            checkArgument(isValidPassword(passwordString), MESSAGE_CONSTRAINTS);
         }
         return hashPassword(passwordString);
     }

@@ -1,9 +1,9 @@
 package com.homeboss.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static com.homeboss.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static com.homeboss.testutil.Assert.assertThrows;
 import static com.homeboss.testutil.TypicalPersons.BENSON;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 

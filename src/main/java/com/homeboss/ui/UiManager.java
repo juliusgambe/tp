@@ -2,15 +2,16 @@ package com.homeboss.ui;
 
 import java.util.logging.Logger;
 
+import com.homeboss.MainApp;
 import com.homeboss.commons.core.LogsCenter;
 import com.homeboss.commons.util.StringUtil;
 import com.homeboss.logic.Logic;
+
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import com.homeboss.MainApp;
 
 /**
  * The manager of the UI component.

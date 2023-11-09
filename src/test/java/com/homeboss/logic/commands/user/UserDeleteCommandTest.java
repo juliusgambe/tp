@@ -1,8 +1,8 @@
 package com.homeboss.logic.commands.user;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static com.homeboss.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,12 +10,11 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.logging.Logger;
 
-import com.homeboss.commons.core.LogsCenter;
-import com.homeboss.logic.commands.CommandTestUtil;
-import com.homeboss.testutil.TypicalPersons;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import com.homeboss.commons.core.LogsCenter;
+import com.homeboss.logic.commands.CommandTestUtil;
 import com.homeboss.model.AddressBook;
 import com.homeboss.model.DeliveryBook;
 import com.homeboss.model.Model;
@@ -25,6 +24,7 @@ import com.homeboss.model.user.Password;
 import com.homeboss.model.user.User;
 import com.homeboss.model.user.Username;
 import com.homeboss.storage.StorageManager;
+import com.homeboss.testutil.TypicalPersons;
 
 public class UserDeleteCommandTest {
 
@@ -74,7 +74,8 @@ public class UserDeleteCommandTest {
                 model.getUserPrefs(), false);
         expectedModel.setLoggedInUser(null);
 
-        CommandTestUtil.assertCommandSuccess(userDeleteCommand, model, UserDeleteCommand.MESSAGE_SUCCESS, expectedModel, true);
+        assertCommandSuccess(userDeleteCommand, model, UserDeleteCommand.MESSAGE_SUCCESS, expectedModel,
+                true);
     }
 
     @Test
@@ -98,7 +99,8 @@ public class UserDeleteCommandTest {
                 model.getUserPrefs(), false);
         expectedModel.setLoggedInUser(null);
 
-        CommandTestUtil.assertCommandSuccess(userDeleteCommand, model, UserDeleteCommand.MESSAGE_SUCCESS, expectedModel, true);
+        assertCommandSuccess(userDeleteCommand, model, UserDeleteCommand.MESSAGE_SUCCESS, expectedModel,
+                true);
     }
 
 }

@@ -3,6 +3,7 @@ package com.homeboss.ui;
 import java.util.logging.Logger;
 
 import com.homeboss.commons.core.LogsCenter;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;

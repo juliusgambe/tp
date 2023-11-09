@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import com.homeboss.commons.exceptions.DataLoadingException;
 import com.homeboss.commons.core.Config;
+import com.homeboss.commons.exceptions.DataLoadingException;
 
 /**
  * A class for accessing the Config File.

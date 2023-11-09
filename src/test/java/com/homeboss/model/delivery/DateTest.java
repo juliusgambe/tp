@@ -1,29 +1,28 @@
 package com.homeboss.model.delivery;
 
+import static com.homeboss.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static com.homeboss.testutil.Assert.assertThrows;
 
-import com.homeboss.testutil.Assert;
 import org.junit.jupiter.api.Test;
 
 public class DateTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new Date(null));
+        assertThrows(NullPointerException.class, () -> new Date(null));
     }
 
     @Test
     public void constructor_invalidDate_throwsIllegalArgumentException() {
         String invalidDate = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new Date(invalidDate));
+        assertThrows(IllegalArgumentException.class, () -> new Date(invalidDate));
     }
 
     @Test
     public void isValidDate() {
         // null date
-        Assert.assertThrows(NullPointerException.class, () -> Date.isValidDate(null));
+        assertThrows(NullPointerException.class, () -> Date.isValidDate(null));
 
         // invalid date
         assertFalse(Date.isValidDate("")); // empty string

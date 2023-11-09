@@ -1,9 +1,9 @@
 package com.homeboss.testutil;
 
-import com.homeboss.model.person.Customer;
 import com.homeboss.logic.commands.customer.CustomerEditCommand;
 import com.homeboss.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
 import com.homeboss.model.person.Address;
+import com.homeboss.model.person.Customer;
 import com.homeboss.model.person.Email;
 import com.homeboss.model.person.Name;
 import com.homeboss.model.person.Phone;

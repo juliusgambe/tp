@@ -1,10 +1,10 @@
 package com.homeboss.logic.commands.customer;
 
+import static com.homeboss.testutil.Assert.assertThrows;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static com.homeboss.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -13,30 +13,30 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import com.homeboss.commons.core.GuiSettings;
-import com.homeboss.logic.commands.CommandResult;
-import com.homeboss.logic.commands.exceptions.CommandException;
-import com.homeboss.model.person.Customer;
-import com.homeboss.testutil.Assert;
-import com.homeboss.testutil.TypicalPersons;
-import com.homeboss.ui.ListItem;
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
+import com.homeboss.commons.core.GuiSettings;
 import com.homeboss.logic.Messages;
+import com.homeboss.logic.commands.CommandResult;
+import com.homeboss.logic.commands.exceptions.CommandException;
 import com.homeboss.model.AddressBook;
 import com.homeboss.model.Model;
 import com.homeboss.model.ReadOnlyBook;
 import com.homeboss.model.ReadOnlyUserPrefs;
 import com.homeboss.model.delivery.Delivery;
+import com.homeboss.model.person.Customer;
 import com.homeboss.model.user.User;
 import com.homeboss.testutil.CustomerBuilder;
+import com.homeboss.testutil.TypicalPersons;
+import com.homeboss.ui.ListItem;
+
+import javafx.collections.ObservableList;
 
 public class CustomerAddCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new CustomerAddCommand(null));
+        assertThrows(NullPointerException.class, () -> new CustomerAddCommand(null));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class CustomerAddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validCustomer);
 
 
-        Assert.assertThrows(CommandException.class,
+        assertThrows(CommandException.class,
                 CustomerAddCommand.MESSAGE_DUPLICATE_CUSTOMER, () -> customerAddCommand.execute(modelStub));
 
     }
@@ -70,7 +70,7 @@ public class CustomerAddCommandTest {
 
         CustomerAddCommand customerAddCommand = new CustomerAddCommand(validCustomer);
 
-        Assert.assertThrows(CommandException.class,
+        assertThrows(CommandException.class,
                 Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> customerAddCommand.execute(modelStub));
     }
 
@@ -268,6 +268,7 @@ public class CustomerAddCommandTest {
         public ObservableList<Delivery> getSortedDeliveryList() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public Delivery getDeliveryUsingFilteredList(int id) {
             throw new AssertionError("This method should not be called.");

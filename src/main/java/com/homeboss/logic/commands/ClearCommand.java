@@ -1,8 +1,8 @@
 package com.homeboss.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static com.homeboss.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 import static com.homeboss.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
+import static java.util.Objects.requireNonNull;
 
 import com.homeboss.logic.commands.exceptions.CommandException;
 import com.homeboss.model.AddressBook;

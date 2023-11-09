@@ -1,9 +1,9 @@
 package com.homeboss.logic;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static com.homeboss.logic.Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX;
 import static com.homeboss.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static com.homeboss.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -11,17 +11,12 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
-import com.homeboss.logic.commands.CommandTestUtil;
-import com.homeboss.model.person.Customer;
-import com.homeboss.testutil.Assert;
-import com.homeboss.testutil.TypicalPersons;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import com.homeboss.logic.commands.CommandResult;
+import com.homeboss.logic.commands.CommandTestUtil;
 import com.homeboss.logic.commands.customer.CustomerAddCommand;
 import com.homeboss.logic.commands.customer.CustomerListCommand;
 import com.homeboss.logic.commands.exceptions.CommandException;
@@ -31,12 +26,17 @@ import com.homeboss.model.ModelManager;
 import com.homeboss.model.ReadOnlyBook;
 import com.homeboss.model.UserPrefs;
 import com.homeboss.model.delivery.Delivery;
+import com.homeboss.model.person.Customer;
 import com.homeboss.storage.JsonAddressBookStorage;
 import com.homeboss.storage.JsonDeliveryBookStorage;
 import com.homeboss.storage.JsonUserPrefsStorage;
 import com.homeboss.storage.StorageManager;
 import com.homeboss.testutil.CustomerBuilder;
+import com.homeboss.testutil.TypicalPersons;
 import com.homeboss.ui.ListItem;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -55,7 +55,8 @@ public class LogicManagerTest {
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonDeliveryBookStorage deliveryBookStorage =
                 new JsonDeliveryBookStorage(temporaryFolder.resolve("deliveryBook.json"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder
+                .resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, deliveryBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
@@ -92,7 +93,7 @@ public class LogicManagerTest {
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
     /**
@@ -150,7 +151,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage, Model expectedModel) {
-        Assert.assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
+        assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
         assertEquals(expectedModel, model);
     }
 
@@ -180,11 +181,12 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = CustomerAddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY
-            + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY;
+        String addCommand =
+                CustomerAddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY
+                        + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY;
 
         Customer expectedCustomer = new CustomerBuilder(TypicalPersons.AMY)
-            .withCustomerId(Customer.getCustomerCount()).build();
+                .withCustomerId(Customer.getCustomerCount()).build();
 
 
         ModelManager expectedModel = new ModelManager();
@@ -229,7 +231,8 @@ public class LogicManagerTest {
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonDeliveryBookStorage deliveryBookStorage =
                 new JsonDeliveryBookStorage(temporaryFolder.resolve("deliveryBook.json"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder
+                .resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, deliveryBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 

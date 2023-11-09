@@ -5,11 +5,11 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import com.homeboss.commons.exceptions.DataLoadingException;
-import com.homeboss.model.person.Customer;
 import com.homeboss.model.ReadOnlyBook;
 import com.homeboss.model.ReadOnlyUserPrefs;
 import com.homeboss.model.UserPrefs;
 import com.homeboss.model.delivery.Delivery;
+import com.homeboss.model.person.Customer;
 
 /**
  * API of the Storage component

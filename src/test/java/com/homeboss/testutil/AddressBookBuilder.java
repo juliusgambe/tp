@@ -1,7 +1,7 @@
 package com.homeboss.testutil;
 
-import com.homeboss.model.person.Customer;
 import com.homeboss.model.AddressBook;
+import com.homeboss.model.person.Customer;
 
 /**
  * A utility class to help with building Addressbook objects.

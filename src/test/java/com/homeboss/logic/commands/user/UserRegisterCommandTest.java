@@ -1,22 +1,22 @@
 package com.homeboss.logic.commands.user;
 
+import static com.homeboss.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static com.homeboss.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
+
+import org.junit.jupiter.api.Test;
 
 import com.homeboss.logic.commands.CommandResult;
 import com.homeboss.logic.commands.CommandTestUtil;
-import com.homeboss.testutil.TypicalPersons;
-import org.junit.jupiter.api.Test;
-
 import com.homeboss.model.Model;
 import com.homeboss.model.ModelManager;
 import com.homeboss.model.UserPrefs;
 import com.homeboss.model.user.Password;
 import com.homeboss.model.user.User;
 import com.homeboss.model.user.Username;
+import com.homeboss.testutil.TypicalPersons;
 
 public class UserRegisterCommandTest {
 
@@ -69,7 +69,8 @@ public class UserRegisterCommandTest {
         CommandResult result;
 
         model.setLoggedInUser(null);
-        CommandTestUtil.assertCommandSuccess(userRegisterCommand, model, UserRegisterCommand.MESSAGE_SUCCESS, model, true);
+        assertCommandSuccess(userRegisterCommand, model, UserRegisterCommand.MESSAGE_SUCCESS, model,
+                true);
     }
 
     @Test

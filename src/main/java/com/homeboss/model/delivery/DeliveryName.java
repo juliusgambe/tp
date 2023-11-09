@@ -1,9 +1,7 @@
 package com.homeboss.model.delivery;
 
-import com.homeboss.commons.util.AppUtil;
-
-import static java.util.Objects.requireNonNull;
 import static com.homeboss.commons.util.AppUtil.checkArgument;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Delivery's name in HomeBoss.
@@ -29,7 +27,7 @@ public class DeliveryName implements Comparable<DeliveryName> {
      */
     public DeliveryName(String name) {
         requireNonNull(name);
-        AppUtil.checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         this.deliveryName = name;
     }
 

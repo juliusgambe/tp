@@ -1,13 +1,11 @@
 package com.homeboss.storage;
 
+import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 
 import java.nio.file.Path;
 
-import com.homeboss.model.person.Customer;
-import com.homeboss.testutil.TypicalPersons;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -18,6 +16,8 @@ import com.homeboss.model.DeliveryBook;
 import com.homeboss.model.ReadOnlyBook;
 import com.homeboss.model.UserPrefs;
 import com.homeboss.model.delivery.Delivery;
+import com.homeboss.model.person.Customer;
+import com.homeboss.testutil.TypicalPersons;
 
 public class StorageManagerTest {
 

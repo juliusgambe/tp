@@ -5,9 +5,9 @@ import static com.homeboss.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.stream.Stream;
 
-import com.homeboss.logic.parser.exceptions.ParseException;
 import com.homeboss.logic.commands.delivery.DeliveryAddCommand;
 import com.homeboss.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
+import com.homeboss.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new DeliveryAddCommand object
@@ -23,10 +23,10 @@ public class DeliveryAddCommandParser implements Parser<DeliveryAddCommand> {
     public DeliveryAddCommand parse(String args) throws ParseException {
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_CUSTOMER_ID, CliSyntax.PREFIX_DATE);
+            ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_CUSTOMER_ID, CliSyntax.PREFIX_DATE);
 
         if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_CUSTOMER_ID, CliSyntax.PREFIX_DATE)
-                || argMultimap.getPreamble().isEmpty()) {
+            || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeliveryAddCommand.MESSAGE_USAGE));
         }
 
@@ -36,15 +36,15 @@ public class DeliveryAddCommandParser implements Parser<DeliveryAddCommand> {
 
         if (!argMultimap.getPreamble().isEmpty()) {
             deliveryAddDescriptor.setDeliveryName(ParserUtil
-                    .parseDeliveryName(argMultimap.getPreamble()));
+                .parseDeliveryName(argMultimap.getPreamble()));
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_CUSTOMER_ID).isPresent()) {
             deliveryAddDescriptor.setCustomerId(ParserUtil
-                    .parseId(argMultimap.getValue(CliSyntax.PREFIX_CUSTOMER_ID).get()));
+                .parseId(argMultimap.getValue(CliSyntax.PREFIX_CUSTOMER_ID).get()));
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_DATE).isPresent()) {
             deliveryAddDescriptor.setDeliveryDate(ParserUtil
-                    .parseDeliveryDate(argMultimap.getValue(CliSyntax.PREFIX_DATE).get()));
+                .parseDeliveryDate(argMultimap.getValue(CliSyntax.PREFIX_DATE).get()));
         }
 
         return new DeliveryAddCommand(deliveryAddDescriptor);

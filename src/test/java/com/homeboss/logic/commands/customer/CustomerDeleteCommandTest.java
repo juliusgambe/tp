@@ -1,22 +1,22 @@
 package com.homeboss.logic.commands.customer;
 
+import static com.homeboss.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static com.homeboss.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 
-import com.homeboss.commons.core.index.Index;
-import com.homeboss.logic.commands.CommandTestUtil;
-import com.homeboss.model.person.Customer;
-import com.homeboss.testutil.TypicalIndexes;
-import com.homeboss.testutil.TypicalPersons;
 import org.junit.jupiter.api.Test;
 
+import com.homeboss.commons.core.index.Index;
 import com.homeboss.logic.Messages;
+import com.homeboss.logic.commands.CommandTestUtil;
 import com.homeboss.model.Model;
 import com.homeboss.model.ModelManager;
 import com.homeboss.model.UserPrefs;
+import com.homeboss.model.person.Customer;
+import com.homeboss.testutil.TypicalIndexes;
+import com.homeboss.testutil.TypicalPersons;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -24,7 +24,8 @@ import com.homeboss.model.UserPrefs;
  */
 public class CustomerDeleteCommandTest {
 
-    private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
+    private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), getTypicalDeliveryBook(),
+            new UserPrefs(), true);
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -32,14 +33,14 @@ public class CustomerDeleteCommandTest {
         CustomerDeleteCommand deleteCommand = new CustomerDeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(CustomerDeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS,
-            Messages.format(customerToDelete));
+                Messages.format(customerToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
-            new UserPrefs(), model.getUserLoginStatus());
+                new UserPrefs(), model.getUserLoginStatus());
         expectedModel.deletePerson(customerToDelete);
         expectedModel.deleteDeliveryByCustomer(customerToDelete);
 
-        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, true);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
@@ -58,14 +59,14 @@ public class CustomerDeleteCommandTest {
         CustomerDeleteCommand deleteCommand = new CustomerDeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(CustomerDeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS,
-            Messages.format(customerToDelete));
+                Messages.format(customerToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
-            new UserPrefs(), model.getUserLoginStatus());
+                new UserPrefs(), model.getUserLoginStatus());
         expectedModel.deletePerson(customerToDelete);
         expectedModel.deleteDeliveryByCustomer(customerToDelete);
 
-        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, true);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, true);
     }
 
 

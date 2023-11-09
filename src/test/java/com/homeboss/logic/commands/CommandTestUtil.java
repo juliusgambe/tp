@@ -1,7 +1,5 @@
 package com.homeboss.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.homeboss.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static com.homeboss.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static com.homeboss.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
@@ -17,12 +15,13 @@ import static com.homeboss.logic.parser.CliSyntax.PREFIX_SORT;
 import static com.homeboss.logic.parser.CliSyntax.PREFIX_STATUS;
 import static com.homeboss.logic.parser.CliSyntax.PREFIX_USER;
 import static com.homeboss.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.homeboss.model.person.Customer;
 import com.homeboss.commons.core.index.Index;
 import com.homeboss.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
 import com.homeboss.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
@@ -34,6 +33,7 @@ import com.homeboss.model.Model;
 import com.homeboss.model.delivery.Delivery;
 import com.homeboss.model.delivery.DeliveryNameContainsKeywordsPredicate;
 import com.homeboss.model.delivery.DeliveryStatus;
+import com.homeboss.model.person.Customer;
 import com.homeboss.model.person.NameContainsKeywordsPredicate;
 import com.homeboss.testutil.CustomerEditDescriptorBuilder;
 import com.homeboss.testutil.DeliveryAddDescriptorBuilder;
@@ -125,11 +125,11 @@ public class CommandTestUtil {
     // password string is qwerty1234
     public static final String VALID_PASSWORD_AARON = "qwerty1234";
     public static final String VALID_HASHED_PASSWORD_AARON =
-        "17F80754644D33AC685B0842A402229ADBB43FC9312F7BDF36BA24237A1F1FFB";
+            "17F80754644D33AC685B0842A402229ADBB43FC9312F7BDF36BA24237A1F1FFB";
     // password string is BEARYf00d
     public static final String VALID_PASSWORD_FOODBEAR = "BEARYf00d";
     public static final String VALID_HASHED_PASSWORD_FOODBEAR =
-        "26CC1E3D7988F3AE6FB06859123B5046A5A84D47611092037E059F66E1C0E461";
+            "26CC1E3D7988F3AE6FB06859123B5046A5A84D47611092037E059F66E1C0E461";
     public static final String VALID_SECRET_QUESTION_AARON = "What is my name?";
     public static final String VALID_SECRET_QUESTION_FOODBEAR = "What is my favourite food?";
     public static final String VALID_ANSWER_AARON = "Aaron";
@@ -151,7 +151,7 @@ public class CommandTestUtil {
     public static final String PASSWORD_CONFIRM_DESC_FOODBEAR = " " + PREFIX_PASSWORD_CONFIRM + VALID_PASSWORD_FOODBEAR;
     public static final String SECRET_QUESTION_DESC_AARON = " " + PREFIX_SECRET_QUESTION + "What is my name?";
     public static final String SECRET_QUESTION_DESC_FOODBEAR = " "
-        + PREFIX_SECRET_QUESTION + "What is my favourite food?";
+            + PREFIX_SECRET_QUESTION + "What is my favourite food?";
     public static final String ANSWER_DESC_AARON = " " + PREFIX_ANSWER + "Aaron";
     public static final String ANSWER_DESC_FOODBEAR = " " + PREFIX_ANSWER + "Food";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -161,7 +161,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_USERNAME_DESC = " " + PREFIX_USER
-        + "thisIs^myName"; // '^' not allowed in username
+            + "thisIs^myName"; // '^' not allowed in username
     public static final String INVALID_PASSWORD_DESC = " " + PREFIX_PASSWORD + "qwerty"; // lesser than 8 characters
     public static final String INVALID_PASSWORD_CONFIRM_DESC = " " + PREFIX_PASSWORD_CONFIRM + "qwerty";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -199,30 +199,30 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new CustomerEditDescriptorBuilder().withName(VALID_NAME_AMY)
-            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).build();
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).build();
         DESC_BOB = new CustomerEditDescriptorBuilder().withName(VALID_NAME_BOB)
-            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).build();
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).build();
         DESC_MILK = new DeliveryAddDescriptorBuilder().withCustomerId(VALID_CUSTOMER_ID_1)
-            .withDeliveryDate(VALID_DELIVERY_DATE_1).withDeliveryName(VALID_NAME_GABRIELS_MILK).build();
+                .withDeliveryDate(VALID_DELIVERY_DATE_1).withDeliveryName(VALID_NAME_GABRIELS_MILK).build();
 
         DESC_RICE = new DeliveryAddDescriptorBuilder().withCustomerId(VALID_CUSTOMER_ID_2)
-            .withDeliveryDate(VALID_DELIVERY_DATE_2).withDeliveryName(VALID_NAME_JAMES_MILK).build();
+                .withDeliveryDate(VALID_DELIVERY_DATE_2).withDeliveryName(VALID_NAME_JAMES_MILK).build();
 
         DESC_EDIT_MILK = new DeliveryEditDescriptorBuilder().withDeliveryDate(VALID_DELIVERY_DATE_3)
-            .withDeliveryName(VALID_NAME_JAMES_MILK).withStatus(VALID_STATUS_SHIPPED)
-            .withCustomerId(VALID_CUSTOMER_ID_2).withNote(VALID_NOTE).build();
+                .withDeliveryName(VALID_NAME_JAMES_MILK).withStatus(VALID_STATUS_SHIPPED)
+                .withCustomerId(VALID_CUSTOMER_ID_2).withNote(VALID_NOTE).build();
 
         DESC_EDIT_CHIPS = new DeliveryEditDescriptorBuilder().withDeliveryDate(VALID_DELIVERY_DATE_1)
-            .withDeliveryName(VALID_NAME_CHIPS).withStatus(VALID_STATUS_SHIPPED)
-            .withCustomerId(VALID_CUSTOMER_ID_1).withNote(VALID_NOTE).build();
+                .withDeliveryName(VALID_NAME_CHIPS).withStatus(VALID_STATUS_SHIPPED)
+                .withCustomerId(VALID_CUSTOMER_ID_1).withNote(VALID_NOTE).build();
 
         DESC_AARON = new UpdateUserDescriptorBuilder().withUsername(VALID_USERNAME_AARON)
-            .withPassword(VALID_PASSWORD_AARON).withSecretQuestion(VALID_SECRET_QUESTION_AARON)
-            .withAnswer(VALID_ANSWER_AARON).build();
+                .withPassword(VALID_PASSWORD_AARON).withSecretQuestion(VALID_SECRET_QUESTION_AARON)
+                .withAnswer(VALID_ANSWER_AARON).build();
 
         DESC_FOODBEAR = new UpdateUserDescriptorBuilder().withUsername(VALID_USERNAME_FOODBEAR)
-            .withPassword(VALID_PASSWORD_FOODBEAR).withSecretQuestion(VALID_SECRET_QUESTION_FOODBEAR)
-            .withAnswer(VALID_ANSWER_FOODBEAR).build();
+                .withPassword(VALID_PASSWORD_FOODBEAR).withSecretQuestion(VALID_SECRET_QUESTION_FOODBEAR)
+                .withAnswer(VALID_ANSWER_FOODBEAR).build();
     }
 
     /**

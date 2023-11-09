@@ -1,9 +1,9 @@
 package com.homeboss.model.user;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.homeboss.testutil.TypicalUsers.AARON;
 import static com.homeboss.testutil.TypicalUsers.FOODBEAR;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 

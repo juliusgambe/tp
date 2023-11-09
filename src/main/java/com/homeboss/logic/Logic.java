@@ -7,10 +7,11 @@ import com.homeboss.logic.commands.CommandResult;
 import com.homeboss.logic.commands.exceptions.CommandException;
 import com.homeboss.logic.parser.exceptions.ParseException;
 import com.homeboss.model.Model;
+import com.homeboss.model.ReadOnlyBook;
 import com.homeboss.model.person.Customer;
 import com.homeboss.ui.ListItem;
+
 import javafx.collections.ObservableList;
-import com.homeboss.model.ReadOnlyBook;
 
 /**
  * API of the Logic component

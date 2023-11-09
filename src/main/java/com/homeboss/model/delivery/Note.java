@@ -1,9 +1,7 @@
 package com.homeboss.model.delivery;
 
-import com.homeboss.commons.util.AppUtil;
-
-import static java.util.Objects.requireNonNull;
 import static com.homeboss.commons.util.AppUtil.checkArgument;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Delivery's note in the delivery list.
@@ -21,7 +19,7 @@ public class Note {
      */
     public Note(String note) {
         requireNonNull(note);
-        AppUtil.checkArgument(isValid(note), MESSAGE_CONSTRAINTS);
+        checkArgument(isValid(note), MESSAGE_CONSTRAINTS);
         this.note = note;
     }
 

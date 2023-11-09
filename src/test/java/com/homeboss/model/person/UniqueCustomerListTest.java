@@ -1,13 +1,13 @@
 package com.homeboss.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.homeboss.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static com.homeboss.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static com.homeboss.testutil.Assert.assertThrows;
 import static com.homeboss.testutil.TypicalPersons.ALICE;
 import static com.homeboss.testutil.TypicalPersons.BOB;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;

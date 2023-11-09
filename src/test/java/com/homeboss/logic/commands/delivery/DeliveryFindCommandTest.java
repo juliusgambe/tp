@@ -1,39 +1,39 @@
 package com.homeboss.logic.commands.delivery;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.homeboss.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static com.homeboss.testutil.TypicalDeliveries.GABRIELS_MILK;
 import static com.homeboss.testutil.TypicalDeliveries.GAMBES_RICE;
 import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
+
+import org.junit.jupiter.api.Test;
 
 import com.homeboss.logic.Messages;
 import com.homeboss.logic.commands.CommandTestUtil;
 import com.homeboss.model.Model;
 import com.homeboss.model.ModelManager;
 import com.homeboss.model.UserPrefs;
-import com.homeboss.testutil.TypicalPersons;
-import org.junit.jupiter.api.Test;
-
 import com.homeboss.model.delivery.DeliveryNameContainsKeywordsPredicate;
+import com.homeboss.testutil.TypicalPersons;
 
 public class DeliveryFindCommandTest {
 
     private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), getTypicalDeliveryBook(),
-        new UserPrefs(), true);
+            new UserPrefs(), true);
     private Model expectedModel = new ModelManager(TypicalPersons.getTypicalAddressBook(), getTypicalDeliveryBook(),
-        new UserPrefs(), true);
+            new UserPrefs(), true);
 
     @Test
     public void equals() {
         DeliveryNameContainsKeywordsPredicate firstPredicate =
-            new DeliveryNameContainsKeywordsPredicate(Collections.singletonList("first"));
+                new DeliveryNameContainsKeywordsPredicate(Collections.singletonList("first"));
         DeliveryNameContainsKeywordsPredicate secondPredicate =
-            new DeliveryNameContainsKeywordsPredicate(Collections.singletonList("second"));
+                new DeliveryNameContainsKeywordsPredicate(Collections.singletonList("second"));
 
         DeliveryFindCommand deliveryFindFirstCommand = new DeliveryFindCommand(firstPredicate);
         DeliveryFindCommand deliveryFindSecondCommand = new DeliveryFindCommand(secondPredicate);
@@ -61,7 +61,7 @@ public class DeliveryFindCommandTest {
         DeliveryNameContainsKeywordsPredicate predicate = preparePredicate(" ");
         DeliveryFindCommand command = new DeliveryFindCommand(predicate);
         expectedModel.updateFilteredDeliveryList(predicate);
-        CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel, true);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, true);
         assertEquals(Collections.emptyList(), model.getFilteredDeliveryList());
     }
 
@@ -71,7 +71,7 @@ public class DeliveryFindCommandTest {
         DeliveryNameContainsKeywordsPredicate predicate = preparePredicate("Gabriel Gambe");
         DeliveryFindCommand command = new DeliveryFindCommand(predicate);
         expectedModel.updateFilteredDeliveryList(predicate);
-        CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel, true);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, true);
         assertEquals(Arrays.asList(GABRIELS_MILK, GAMBES_RICE), model.getFilteredDeliveryList());
     }
 

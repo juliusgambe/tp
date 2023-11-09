@@ -9,13 +9,13 @@ import com.homeboss.logic.Messages;
 import com.homeboss.logic.commands.CommandResult;
 import com.homeboss.logic.commands.exceptions.CommandException;
 import com.homeboss.model.Model;
+import com.homeboss.model.delivery.Delivery;
 import com.homeboss.model.delivery.DeliveryDate;
 import com.homeboss.model.delivery.DeliveryName;
+import com.homeboss.model.delivery.DeliveryStatus;
 import com.homeboss.model.delivery.Note;
 import com.homeboss.model.delivery.OrderDate;
 import com.homeboss.model.person.Customer;
-import com.homeboss.model.delivery.Delivery;
-import com.homeboss.model.delivery.DeliveryStatus;
 
 /**
  * Represents a Command to update DeliveryStatus
@@ -25,10 +25,10 @@ public class DeliveryStatusCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "status";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the status of the delivery identified "
-            + "by the ID of the delivery. Existing status will be overwritten by the input status.\n\n"
-            + "Parameters: ID (must be a integer representing a valid ID) "
-            + "STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED)\n\n"
-            + "Example: " + COMMAND_WORD + " 1 COMPLETED";
+        + "by the ID of the delivery. Existing status will be overwritten by the input status.\n\n"
+        + "Parameters: ID (must be a integer representing a valid ID) "
+        + "STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED)\n\n"
+        + "Example: " + COMMAND_WORD + " 1 COMPLETED";
 
     public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery:\n\n%1$s";
 
@@ -69,7 +69,8 @@ public class DeliveryStatusCommand extends DeliveryCommand {
         // Update Delivery
         model.setDelivery(targetDelivery.get(), editedDelivery);
         model.updateFilteredDeliveryList(Model.PREDICATE_SHOW_ALL_DELIVERIES);
-        return new CommandResult(String.format(MESSAGE_EDIT_DELIVERY_SUCCESS, Messages.format(editedDelivery)), true);
+        return new CommandResult(String.format(MESSAGE_EDIT_DELIVERY_SUCCESS, Messages.format(editedDelivery)),
+            true);
     }
 
     /**
@@ -89,7 +90,7 @@ public class DeliveryStatusCommand extends DeliveryCommand {
 
 
         return new Delivery(updatedId, updatedName, updatedCustomer, updatedOrderDate,
-                updatedDeliveryDate, updatedStatus, updatedNote);
+            updatedDeliveryDate, updatedStatus, updatedNote);
     }
 
     @Override
@@ -105,14 +106,14 @@ public class DeliveryStatusCommand extends DeliveryCommand {
 
         DeliveryStatusCommand otherStatusCommand = (DeliveryStatusCommand) other;
         return targetId == otherStatusCommand.targetId
-                && updatedStatus.equals(otherStatusCommand.updatedStatus);
+            && updatedStatus.equals(otherStatusCommand.updatedStatus);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetId", targetId)
-                .add("status", updatedStatus)
-                .toString();
+            .add("targetId", targetId)
+            .add("status", updatedStatus)
+            .toString();
     }
 }

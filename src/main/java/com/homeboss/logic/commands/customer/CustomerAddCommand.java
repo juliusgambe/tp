@@ -1,15 +1,15 @@
 package com.homeboss.logic.commands.customer;
 
-import static java.util.Objects.requireNonNull;
 import static com.homeboss.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
+import static java.util.Objects.requireNonNull;
 
 import com.homeboss.commons.util.ToStringBuilder;
+import com.homeboss.logic.Messages;
 import com.homeboss.logic.commands.CommandResult;
 import com.homeboss.logic.commands.exceptions.CommandException;
 import com.homeboss.logic.parser.CliSyntax;
-import com.homeboss.model.person.Customer;
-import com.homeboss.logic.Messages;
 import com.homeboss.model.Model;
+import com.homeboss.model.person.Customer;
 
 /**
  * Adds a person to the address book.
@@ -19,16 +19,16 @@ public class CustomerAddCommand extends CustomerCommand {
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " " + "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to the HomeBoss database."
-        + "\n\nParameters: "
-        + CliSyntax.PREFIX_NAME + " NAME "
-        + CliSyntax.PREFIX_PHONE + " PHONE "
-        + CliSyntax.PREFIX_EMAIL + " EMAIL "
-        + CliSyntax.PREFIX_ADDRESS + " ADDRESS\n\n"
-        + "Example: " + COMMAND_WORD + " "
-        + CliSyntax.PREFIX_NAME + " John Doe "
-        + CliSyntax.PREFIX_PHONE + " 98765432 "
-        + CliSyntax.PREFIX_EMAIL + " johnd@example.com "
-        + CliSyntax.PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25";
+            + "\n\nParameters: "
+            + CliSyntax.PREFIX_NAME + " NAME "
+            + CliSyntax.PREFIX_PHONE + " PHONE "
+            + CliSyntax.PREFIX_EMAIL + " EMAIL "
+            + CliSyntax.PREFIX_ADDRESS + " ADDRESS\n\n"
+            + "Example: " + COMMAND_WORD + " "
+            + CliSyntax.PREFIX_NAME + " John Doe "
+            + CliSyntax.PREFIX_PHONE + " 98765432 "
+            + CliSyntax.PREFIX_EMAIL + " johnd@example.com "
+            + CliSyntax.PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25";
 
     public static final String MESSAGE_SUCCESS = "New customer added:\n\n%1$s";
     public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in HomeBoss";
@@ -82,7 +82,7 @@ public class CustomerAddCommand extends CustomerCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("toAdd", toAdd)
-            .toString();
+                .add("toAdd", toAdd)
+                .toString();
     }
 }

@@ -1,12 +1,11 @@
 package com.homeboss.model.delivery;
 
+import static com.homeboss.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static com.homeboss.testutil.Assert.assertThrows;
 
 import java.time.DateTimeException;
 
-import com.homeboss.testutil.Assert;
 import org.junit.jupiter.api.Test;
 
 
@@ -14,19 +13,19 @@ public class DeliveryDateTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new DeliveryDate(null));
+        assertThrows(NullPointerException.class, () -> new DeliveryDate(null));
     }
 
     @Test
     public void constructor_invalidDate_throwsIllegalArgumentException() {
         String invalidDate = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new DeliveryDate(invalidDate));
+        assertThrows(IllegalArgumentException.class, () -> new DeliveryDate(invalidDate));
     }
 
     @Test
     public void isValidDate() {
         // null date
-        Assert.assertThrows(NullPointerException.class, () -> DeliveryDate.isValidDate(null));
+        assertThrows(NullPointerException.class, () -> DeliveryDate.isValidDate(null));
 
         // invalid date
         assertFalse(DeliveryDate.isValidDate("")); // empty string
@@ -43,7 +42,7 @@ public class DeliveryDateTest {
     @Test
     public void isNotPastDate() {
         // null date
-        Assert.assertThrows(NullPointerException.class, () -> DeliveryDate.isFutureDate(null));
+        assertThrows(NullPointerException.class, () -> DeliveryDate.isFutureDate(null));
 
         // future date
         assertTrue(DeliveryDate.isFutureDate("2023-12-12"));
@@ -55,7 +54,7 @@ public class DeliveryDateTest {
     @Test
     public void isValidDeliveryDate() {
         // null date
-        Assert.assertThrows(NullPointerException.class, () -> DeliveryDate.isValidDeliveryDate(null));
+        assertThrows(NullPointerException.class, () -> DeliveryDate.isValidDeliveryDate(null));
 
         // invalid date
         assertFalse(DeliveryDate.isValidDeliveryDate("")); // empty string
@@ -63,8 +62,8 @@ public class DeliveryDateTest {
         assertFalse(DeliveryDate.isValidDeliveryDate("10-12-2023")); // wrong format
         assertFalse(DeliveryDate.isValidDeliveryDate("2023=12+32")); // wrong format
         assertFalse(DeliveryDate.isValidDeliveryDate("2023-12")); // missing day
-        Assert.assertThrows(DateTimeException.class, () -> DeliveryDate.isValidDeliveryDate("2023-13-12")); // wrong month
-        Assert.assertThrows(DateTimeException.class, () -> DeliveryDate.isValidDeliveryDate("2023-12-32")); // wrong day
+        assertThrows(DateTimeException.class, () -> DeliveryDate.isValidDeliveryDate("2023-13-12")); // wrong month
+        assertThrows(DateTimeException.class, () -> DeliveryDate.isValidDeliveryDate("2023-12-32")); // wrong day
         assertFalse(DeliveryDate.isValidDeliveryDate("2023-08-12")); // correct date but past date
 
         // valid date

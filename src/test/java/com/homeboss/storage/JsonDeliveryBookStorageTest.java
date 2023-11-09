@@ -1,29 +1,28 @@
 package com.homeboss.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static com.homeboss.testutil.Assert.assertThrows;
 import static com.homeboss.testutil.TypicalDeliveries.GAMBES_RICE;
 import static com.homeboss.testutil.TypicalDeliveries.JY_CAKE;
 import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import com.homeboss.commons.exceptions.DataLoadingException;
-import com.homeboss.model.DeliveryBook;
-import com.homeboss.model.ReadOnlyBook;
-import com.homeboss.testutil.Assert;
-import com.homeboss.testutil.TypicalPersons;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import com.homeboss.commons.exceptions.DataLoadingException;
+import com.homeboss.model.DeliveryBook;
+import com.homeboss.model.ReadOnlyBook;
 import com.homeboss.model.delivery.Delivery;
+import com.homeboss.testutil.TypicalPersons;
 
 public class JsonDeliveryBookStorageTest {
     private static final Path TEST_DATA_FOLDER =
-        Paths.get("src", "test", "data", "JsonDeliveryBookStorageTest");
+            Paths.get("src", "test", "data", "JsonDeliveryBookStorageTest");
 
     @TempDir
     public Path testFolder;
@@ -44,7 +43,7 @@ public class JsonDeliveryBookStorageTest {
 
     @Test
     public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> readDeliveryBook(null));
+        assertThrows(NullPointerException.class, () -> readDeliveryBook(null));
     }
 
     private java.util.Optional<ReadOnlyBook<Delivery>> readDeliveryBook(String filePath) throws Exception {
@@ -55,27 +54,28 @@ public class JsonDeliveryBookStorageTest {
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
         return prefsFileInTestDataFolder != null
-            ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder)
-            : null;
+                ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder)
+                : null;
     }
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
         assertFalse(readDeliveryBook("NonExistentFile.json").isPresent());
     }
+
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        Assert.assertThrows(DataLoadingException.class, () -> readDeliveryBook("notJsonFormatDeliveryBook.json"));
+        assertThrows(DataLoadingException.class, () -> readDeliveryBook("notJsonFormatDeliveryBook.json"));
     }
 
     @Test
     public void readAddressBook_invalidDeliveryAddressBook_throwDataLoadingException() {
-        Assert.assertThrows(DataLoadingException.class, () -> readDeliveryBook("invalidDeliveryBook.json"));
+        assertThrows(DataLoadingException.class, () -> readDeliveryBook("invalidDeliveryBook.json"));
     }
 
     @Test
     public void readAddressBook_invalidAndValidDeliveryAddressBook_throwDataLoadingException() {
-        Assert.assertThrows(DataLoadingException.class, () -> readDeliveryBook("invalidAndValidDeliveryBook.json"));
+        assertThrows(DataLoadingException.class, () -> readDeliveryBook("invalidAndValidDeliveryBook.json"));
     }
 
     @Test
@@ -106,7 +106,7 @@ public class JsonDeliveryBookStorageTest {
 
     @Test
     public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> saveDeliveryBook(null, "SomeFile.json"));
+        assertThrows(NullPointerException.class, () -> saveDeliveryBook(null, "SomeFile.json"));
     }
 
     /**
@@ -115,7 +115,7 @@ public class JsonDeliveryBookStorageTest {
     private void saveDeliveryBook(ReadOnlyBook<Delivery> deliveryBook, String filePath) {
         try {
             new JsonDeliveryBookStorage(Paths.get(filePath))
-                .saveBook(deliveryBook, addToTestDataPathIfNotNull(filePath));
+                    .saveBook(deliveryBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
@@ -123,7 +123,7 @@ public class JsonDeliveryBookStorageTest {
 
     @Test
     public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> saveDeliveryBook(new DeliveryBook(), null));
+        assertThrows(NullPointerException.class, () -> saveDeliveryBook(new DeliveryBook(), null));
     }
 
 }

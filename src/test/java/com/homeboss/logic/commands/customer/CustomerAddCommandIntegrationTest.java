@@ -3,17 +3,17 @@ package com.homeboss.logic.commands.customer;
 import static com.homeboss.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 
-import com.homeboss.logic.commands.CommandTestUtil;
-import com.homeboss.model.person.Customer;
-import com.homeboss.testutil.TypicalPersons;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.homeboss.logic.Messages;
+import com.homeboss.logic.commands.CommandTestUtil;
 import com.homeboss.model.Model;
 import com.homeboss.model.ModelManager;
 import com.homeboss.model.UserPrefs;
+import com.homeboss.model.person.Customer;
 import com.homeboss.testutil.CustomerBuilder;
+import com.homeboss.testutil.TypicalPersons;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -24,7 +24,8 @@ public class CustomerAddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalPersons.getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
+        model = new ModelManager(TypicalPersons.getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(),
+                true);
     }
 
     @Test
@@ -35,7 +36,7 @@ public class CustomerAddCommandIntegrationTest {
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.addPerson(validCustomer);
 
-        CommandTestUtil.assertCommandSuccess(new CustomerAddCommand(validCustomer), model,
+        assertCommandSuccess(new CustomerAddCommand(validCustomer), model,
                 String.format(CustomerAddCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
                 expectedModel, true);
     }
@@ -66,7 +67,8 @@ public class CustomerAddCommandIntegrationTest {
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.addPerson(validCustomer);
 
-        CommandTestUtil.assertCommandFailure(new CustomerAddCommand(validCustomer), model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+        CommandTestUtil.assertCommandFailure(new CustomerAddCommand(validCustomer), model,
+                Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
     @Test

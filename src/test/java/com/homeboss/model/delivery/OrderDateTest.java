@@ -1,31 +1,30 @@
 package com.homeboss.model.delivery;
 
+import static com.homeboss.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static com.homeboss.testutil.Assert.assertThrows;
 
 import java.time.DateTimeException;
 
-import com.homeboss.testutil.Assert;
 import org.junit.jupiter.api.Test;
 
 public class OrderDateTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new OrderDate(null));
+        assertThrows(NullPointerException.class, () -> new OrderDate(null));
     }
 
     @Test
     public void constructor_invalidDate_throwsIllegalArgumentException() {
         String invalidDate = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new OrderDate(invalidDate));
+        assertThrows(IllegalArgumentException.class, () -> new OrderDate(invalidDate));
     }
 
     @Test
     public void isValidDate() {
         // null date
-        Assert.assertThrows(NullPointerException.class, () -> OrderDate.isValidDate(null));
+        assertThrows(NullPointerException.class, () -> OrderDate.isValidDate(null));
 
         // invalid date
         assertFalse(OrderDate.isValidDate("")); // empty string
@@ -42,7 +41,7 @@ public class OrderDateTest {
     @Test
     public void isNotPastDate() {
         // null date
-        Assert.assertThrows(NullPointerException.class, () -> OrderDate.isPastDate(null));
+        assertThrows(NullPointerException.class, () -> OrderDate.isPastDate(null));
 
         // past date
         assertTrue(OrderDate.isPastDate("2020-12-12")); // past date
@@ -54,7 +53,7 @@ public class OrderDateTest {
     @Test
     public void isValidOrderDate() {
         // null date
-        Assert.assertThrows(NullPointerException.class, () -> OrderDate.isValidOrderDate(null));
+        assertThrows(NullPointerException.class, () -> OrderDate.isValidOrderDate(null));
 
         // invalid date
         assertFalse(OrderDate.isValidOrderDate("")); // empty string
@@ -62,8 +61,8 @@ public class OrderDateTest {
         assertFalse(OrderDate.isValidOrderDate("10-12-2023")); // wrong format
         assertFalse(OrderDate.isValidOrderDate("2023=12+32")); // wrong format
         assertFalse(OrderDate.isValidOrderDate("2023-12")); // missing day
-        Assert.assertThrows(DateTimeException.class, () -> OrderDate.isValidOrderDate("2023-13-12")); // wrong month
-        Assert.assertThrows(DateTimeException.class, () -> OrderDate.isValidOrderDate("2023-12-32")); // wrong day
+        assertThrows(DateTimeException.class, () -> OrderDate.isValidOrderDate("2023-13-12")); // wrong month
+        assertThrows(DateTimeException.class, () -> OrderDate.isValidOrderDate("2023-12-32")); // wrong day
         assertFalse(OrderDate.isValidOrderDate("2023-12-12")); // correct date but past date
 
         // valid date

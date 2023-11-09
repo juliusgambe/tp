@@ -5,9 +5,9 @@ import static com.homeboss.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 
 import java.util.Optional;
 
-import com.homeboss.logic.commands.exceptions.CommandException;
 import com.homeboss.logic.Messages;
 import com.homeboss.logic.commands.CommandResult;
+import com.homeboss.logic.commands.exceptions.CommandException;
 import com.homeboss.model.Model;
 import com.homeboss.model.delivery.Delivery;
 
@@ -18,10 +18,10 @@ public class DeliveryViewCommand extends DeliveryCommand {
 
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " view";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays a single delivery order.\n\n"
-            + "Parameters: "
-            + "DELIVERY_ID (Must be a positive integer)\n\n"
-            + "Example: " + COMMAND_WORD + " "
-            + "1";
+        + "Parameters: "
+        + "DELIVERY_ID (Must be a positive integer)\n\n"
+        + "Example: " + COMMAND_WORD + " "
+        + "1";
 
     public static final String MESSAGE_SUCCESS = "Delivery order displayed: %1$s";
 
@@ -53,7 +53,7 @@ public class DeliveryViewCommand extends DeliveryCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeliveryViewCommand // instanceof handles nulls
-                && deliveryId == ((DeliveryViewCommand) other).deliveryId); // state check
+            || (other instanceof DeliveryViewCommand // instanceof handles nulls
+            && deliveryId == ((DeliveryViewCommand) other).deliveryId); // state check
     }
 }

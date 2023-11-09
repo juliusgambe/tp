@@ -13,11 +13,12 @@ import com.homeboss.logic.commands.exceptions.CommandException;
 import com.homeboss.logic.parser.AddressBookParser;
 import com.homeboss.logic.parser.exceptions.ParseException;
 import com.homeboss.model.Model;
+import com.homeboss.model.ReadOnlyBook;
 import com.homeboss.model.person.Customer;
 import com.homeboss.storage.Storage;
 import com.homeboss.ui.ListItem;
+
 import javafx.collections.ObservableList;
-import com.homeboss.model.ReadOnlyBook;
 
 /**
  * The main LogicManager of the app.
@@ -26,7 +27,7 @@ public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
-            "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
+        "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 

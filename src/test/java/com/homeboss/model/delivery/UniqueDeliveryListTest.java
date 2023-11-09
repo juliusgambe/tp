@@ -1,23 +1,22 @@
 package com.homeboss.model.delivery;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.homeboss.testutil.Assert.assertThrows;
 import static com.homeboss.testutil.TypicalDeliveries.GABRIELS_MILK;
 import static com.homeboss.testutil.TypicalDeliveries.GAMBES_RICE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.Test;
+
 import com.homeboss.logic.commands.CommandTestUtil;
 import com.homeboss.model.delivery.exceptions.DeliveryNotFoundException;
 import com.homeboss.model.delivery.exceptions.DuplicateDeliveryException;
-import com.homeboss.testutil.Assert;
-import org.junit.jupiter.api.Test;
-
 import com.homeboss.testutil.DeliveryBuilder;
 
 public class UniqueDeliveryListTest {
@@ -26,7 +25,7 @@ public class UniqueDeliveryListTest {
 
     @Test
     public void contains_nullDelivery_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniqueDeliveryList.contains(null));
+        assertThrows(NullPointerException.class, () -> uniqueDeliveryList.contains(null));
     }
 
     @Test
@@ -49,36 +48,36 @@ public class UniqueDeliveryListTest {
 
     @Test
     public void add_nullDelivery_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniqueDeliveryList.add(null));
+        assertThrows(NullPointerException.class, () -> uniqueDeliveryList.add(null));
     }
 
     @Test
     public void add_duplicateDelivery_throwsDuplicateDeliveryException() {
         uniqueDeliveryList.add(GABRIELS_MILK);
-        Assert.assertThrows(DuplicateDeliveryException.class, () -> uniqueDeliveryList.add(GABRIELS_MILK));
+        assertThrows(DuplicateDeliveryException.class, () -> uniqueDeliveryList.add(GABRIELS_MILK));
     }
 
     @Test
     public void add_deliveryWithSameIdDifferentFields_throwsDuplicateDeliveryException() {
         uniqueDeliveryList.add(GABRIELS_MILK);
         Delivery delivery = new DeliveryBuilder().withId(1).build();
-        Assert.assertThrows(DuplicateDeliveryException.class, () -> uniqueDeliveryList.add(delivery));
+        assertThrows(DuplicateDeliveryException.class, () -> uniqueDeliveryList.add(delivery));
     }
 
     @Test
     public void setDelivery_nullTargetDelivery_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniqueDeliveryList.setDelivery(null, GABRIELS_MILK));
+        assertThrows(NullPointerException.class, () -> uniqueDeliveryList.setDelivery(null, GABRIELS_MILK));
     }
 
     @Test
     public void setDelivery_nullEditedDelivery_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniqueDeliveryList.setDelivery(GABRIELS_MILK, null));
+        assertThrows(NullPointerException.class, () -> uniqueDeliveryList.setDelivery(GABRIELS_MILK, null));
     }
 
     @Test
     public void setDelivery_targetDeliveryNotInList_throwsDeliveryNotFoundException() {
-        Assert.assertThrows(DeliveryNotFoundException.class, () -> uniqueDeliveryList.setDelivery(GABRIELS_MILK,
-            GABRIELS_MILK));
+        assertThrows(DeliveryNotFoundException.class, () -> uniqueDeliveryList.setDelivery(GABRIELS_MILK,
+                GABRIELS_MILK));
     }
 
     @Test
@@ -93,7 +92,8 @@ public class UniqueDeliveryListTest {
     @Test
     public void setDelivery_editedDeliveryHasSameIdentity_success() {
         uniqueDeliveryList.add(GABRIELS_MILK);
-        Delivery editedDelivery = new DeliveryBuilder(GABRIELS_MILK).withName(CommandTestUtil.VALID_NAME_JAMES_MILK).build();
+        Delivery editedDelivery = new DeliveryBuilder(GABRIELS_MILK).withName(CommandTestUtil.VALID_NAME_JAMES_MILK)
+                .build();
         uniqueDeliveryList.setDelivery(GABRIELS_MILK, editedDelivery);
         UniqueDeliveryList expectedUniqueDeliveryList = new UniqueDeliveryList();
         expectedUniqueDeliveryList.add(editedDelivery);
@@ -113,18 +113,18 @@ public class UniqueDeliveryListTest {
     public void setDelivery_editedDeliveryHasNonUniqueIdentity_throwsDuplicateDeliveryException() {
         uniqueDeliveryList.add(GABRIELS_MILK);
         uniqueDeliveryList.add(GAMBES_RICE);
-        Assert.assertThrows(DuplicateDeliveryException.class, ()
-            -> uniqueDeliveryList.setDelivery(GABRIELS_MILK, GAMBES_RICE));
+        assertThrows(DuplicateDeliveryException.class, ()
+                -> uniqueDeliveryList.setDelivery(GABRIELS_MILK, GAMBES_RICE));
     }
 
     @Test
     public void remove_nullDelivery_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniqueDeliveryList.remove(null));
+        assertThrows(NullPointerException.class, () -> uniqueDeliveryList.remove(null));
     }
 
     @Test
     public void remove_deliveryDoesNotExists_throwsDeliveryNotFoundException() {
-        Assert.assertThrows(DeliveryNotFoundException.class, () -> uniqueDeliveryList.remove(GABRIELS_MILK));
+        assertThrows(DeliveryNotFoundException.class, () -> uniqueDeliveryList.remove(GABRIELS_MILK));
     }
 
     @Test
@@ -137,7 +137,7 @@ public class UniqueDeliveryListTest {
 
     @Test
     public void setDeliveries_nullUniqueDeliveryList_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniqueDeliveryList.setDeliveries((UniqueDeliveryList) null));
+        assertThrows(NullPointerException.class, () -> uniqueDeliveryList.setDeliveries((UniqueDeliveryList) null));
     }
 
     @Test
@@ -151,7 +151,7 @@ public class UniqueDeliveryListTest {
 
     @Test
     public void setDeliveries_nullList_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniqueDeliveryList.setDeliveries((List<Delivery>) null));
+        assertThrows(NullPointerException.class, () -> uniqueDeliveryList.setDeliveries((List<Delivery>) null));
     }
 
     @Test
@@ -167,8 +167,8 @@ public class UniqueDeliveryListTest {
     @Test
     public void setDeliveries_listWithDuplicateDeliveries_throwsDuplicatePersonException() {
         List<Delivery> deliveryListWithDuplicateDeliveries = Arrays.asList(GABRIELS_MILK, GABRIELS_MILK);
-        Assert.assertThrows(DuplicateDeliveryException.class, ()
-            -> uniqueDeliveryList.setDeliveries(deliveryListWithDuplicateDeliveries));
+        assertThrows(DuplicateDeliveryException.class, ()
+                -> uniqueDeliveryList.setDeliveries(deliveryListWithDuplicateDeliveries));
     }
 
     @Test
@@ -194,8 +194,8 @@ public class UniqueDeliveryListTest {
 
     @Test
     public void asUnmodifiableList_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, ()
-            -> uniqueDeliveryList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, ()
+                -> uniqueDeliveryList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test

@@ -1,28 +1,27 @@
 package com.homeboss.model.user;
 
+import static com.homeboss.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static com.homeboss.testutil.Assert.assertThrows;
 
-import com.homeboss.testutil.Assert;
 import org.junit.jupiter.api.Test;
 
 public class PasswordTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new Password(null));
+        assertThrows(NullPointerException.class, () -> new Password(null));
     }
 
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
         String invalidPassword = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new Password(invalidPassword));
+        assertThrows(IllegalArgumentException.class, () -> new Password(invalidPassword));
     }
 
     @Test
     public void isValidPassword() {
-        Assert.assertThrows(NullPointerException.class, () -> Password.isValidPassword(null));
+        assertThrows(NullPointerException.class, () -> Password.isValidPassword(null));
 
         // invalid name
         assertFalse(Password.isValidPassword("")); // empty string

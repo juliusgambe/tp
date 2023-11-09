@@ -5,9 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import com.homeboss.model.person.Customer;
 import com.homeboss.commons.core.index.Index;
 import com.homeboss.model.Model;
+import com.homeboss.model.person.Customer;
 
 /**
  * A utility class for test cases.

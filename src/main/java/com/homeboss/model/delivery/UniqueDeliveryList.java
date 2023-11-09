@@ -1,18 +1,18 @@
 package com.homeboss.model.delivery;
 
-import static java.util.Objects.requireNonNull;
 import static com.homeboss.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import com.homeboss.commons.util.CollectionUtil;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import com.homeboss.model.delivery.exceptions.DeliveryNotFoundException;
 import com.homeboss.model.delivery.exceptions.DuplicateDeliveryException;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * A list of deliveries that enforces uniqueness between its elements and does not allow nulls.
@@ -30,7 +30,7 @@ public class UniqueDeliveryList implements Iterable<Delivery> {
 
     private final ObservableList<Delivery> internalList = FXCollections.observableArrayList();
     private final ObservableList<Delivery> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+        FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
@@ -58,7 +58,7 @@ public class UniqueDeliveryList implements Iterable<Delivery> {
      * The delivery identity of {@code editedDelivery} must not be the same as another existing Delivery in the list.
      */
     public void setDelivery(Delivery target, Delivery editedDelivery) {
-        CollectionUtil.requireAllNonNull(target, editedDelivery);
+        requireAllNonNull(target, editedDelivery);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
@@ -93,7 +93,7 @@ public class UniqueDeliveryList implements Iterable<Delivery> {
      * {@code persons} must not contain duplicate deliveries.
      */
     public void setDeliveries(List<Delivery> deliveries) {
-        CollectionUtil.requireAllNonNull(deliveries);
+        requireAllNonNull(deliveries);
         if (!deliveriesAreUnique(deliveries)) {
             throw new DuplicateDeliveryException();
         }

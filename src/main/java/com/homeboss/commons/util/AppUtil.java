@@ -2,8 +2,9 @@ package com.homeboss.commons.util;
 
 import static java.util.Objects.requireNonNull;
 
-import javafx.scene.image.Image;
 import com.homeboss.MainApp;
+
+import javafx.scene.image.Image;
 
 /**
  * A container for App specific utility functions

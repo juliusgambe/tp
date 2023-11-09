@@ -12,8 +12,8 @@ import com.homeboss.commons.exceptions.DataLoadingException;
 import com.homeboss.commons.exceptions.IllegalValueException;
 import com.homeboss.commons.util.FileUtil;
 import com.homeboss.commons.util.JsonUtil;
-import com.homeboss.model.person.Customer;
 import com.homeboss.model.ReadOnlyBook;
+import com.homeboss.model.person.Customer;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
@@ -51,7 +51,7 @@ public class JsonAddressBookStorage implements BookStorage<Customer> {
         requireNonNull(filePath);
 
         Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
+            filePath, JsonSerializableAddressBook.class);
         if (!jsonAddressBook.isPresent()) {
             return Optional.empty();
         }

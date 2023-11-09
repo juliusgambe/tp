@@ -7,11 +7,10 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-
 import com.homeboss.commons.exceptions.IllegalValueException;
-import com.homeboss.model.person.Customer;
 import com.homeboss.model.AddressBook;
 import com.homeboss.model.ReadOnlyBook;
+import com.homeboss.model.person.Customer;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.

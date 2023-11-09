@@ -2,14 +2,14 @@ package com.homeboss.testutil;
 
 import java.time.LocalDate;
 
-import com.homeboss.model.person.Address;
-import com.homeboss.model.person.Customer;
 import com.homeboss.model.delivery.Delivery;
 import com.homeboss.model.delivery.DeliveryDate;
 import com.homeboss.model.delivery.DeliveryName;
 import com.homeboss.model.delivery.DeliveryStatus;
 import com.homeboss.model.delivery.Note;
 import com.homeboss.model.delivery.OrderDate;
+import com.homeboss.model.person.Address;
+import com.homeboss.model.person.Customer;
 
 /**
  * A utility class to help with building Delivery objects.

@@ -1,42 +1,43 @@
 package com.homeboss.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.homeboss.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 
 import com.homeboss.commons.core.index.Index;
 import com.homeboss.logic.Messages;
+import com.homeboss.logic.commands.delivery.DeliveryDeleteCommand;
 import com.homeboss.logic.commands.delivery.DeliveryListCommand;
 import com.homeboss.model.Model;
 import com.homeboss.model.ModelManager;
 import com.homeboss.model.UserPrefs;
-import com.homeboss.testutil.TypicalIndexes;
-import com.homeboss.testutil.TypicalPersons;
-import org.junit.jupiter.api.Test;
-
-import com.homeboss.logic.commands.delivery.DeliveryDeleteCommand;
 import com.homeboss.model.delivery.Delivery;
 import com.homeboss.model.delivery.DeliveryStatus;
+import com.homeboss.testutil.TypicalIndexes;
+import com.homeboss.testutil.TypicalPersons;
 
 public class DeliveryDeleteCommandTest {
 
     private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), getTypicalDeliveryBook(),
-        new UserPrefs(), true);
+            new UserPrefs(), true);
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Delivery deliveryToDelete = model.getFilteredDeliveryList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
+        Delivery deliveryToDelete = model.getFilteredDeliveryList()
+                .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
         DeliveryDeleteCommand deleteCommand = new DeliveryDeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeliveryDeleteCommand.MESSAGE_DELETE_DELIVERY_SUCCESS,
-            Messages.format(deliveryToDelete));
+                Messages.format(deliveryToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
-            new UserPrefs(), true);
+                new UserPrefs(), true);
         expectedModel.deleteDelivery(deliveryToDelete);
 
-        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, true);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
@@ -44,7 +45,8 @@ public class DeliveryDeleteCommandTest {
 
         DeliveryDeleteCommand deleteCommand = new DeliveryDeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
         DeliveryDeleteCommand otherDeleteCommand = new DeliveryDeleteCommand(TypicalIndexes.INDEX_SECOND_PERSON);
-        DeliveryListCommand deliveryListCommand = new DeliveryListCommand(DeliveryStatus.CREATED, null, null, null);
+        DeliveryListCommand deliveryListCommand = new DeliveryListCommand(DeliveryStatus.CREATED, null,
+                null, null);
 
         assertTrue(deleteCommand.equals(deleteCommand));
         assertFalse(deleteCommand.equals(deliveryListCommand));
@@ -63,17 +65,18 @@ public class DeliveryDeleteCommandTest {
     public void execute_validIndexFilteredList_success() {
         CommandTestUtil.showDeliveryAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
 
-        Delivery deliveryToDelete = model.getFilteredDeliveryList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
+        Delivery deliveryToDelete = model.getFilteredDeliveryList()
+                .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
         DeliveryDeleteCommand deleteCommand = new DeliveryDeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeliveryDeleteCommand.MESSAGE_DELETE_DELIVERY_SUCCESS,
-            Messages.format(deliveryToDelete));
+                Messages.format(deliveryToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
-            new UserPrefs(), true);
+                new UserPrefs(), true);
         expectedModel.deleteDelivery(deliveryToDelete);
 
-        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, true);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test

@@ -12,13 +12,13 @@ import com.homeboss.logic.commands.CommandResult;
 import com.homeboss.logic.commands.exceptions.CommandException;
 import com.homeboss.logic.parser.CliSyntax;
 import com.homeboss.model.Model;
-import com.homeboss.model.person.Customer;
 import com.homeboss.model.ReadOnlyBook;
 import com.homeboss.model.delivery.Delivery;
 import com.homeboss.model.delivery.DeliveryDate;
 import com.homeboss.model.delivery.DeliveryName;
 import com.homeboss.model.delivery.DeliveryStatus;
 import com.homeboss.model.delivery.OrderDate;
+import com.homeboss.model.person.Customer;
 
 /**
  * Adds a delivery to the delivery book.
@@ -28,14 +28,14 @@ public class DeliveryAddCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Delivery to the HomeBoss database.\n\n"
-            + "Parameters: "
-            + "DELIVERY_NAME "
-            + CliSyntax.PREFIX_CUSTOMER_ID + " CUSTOMER_ID "
-            + CliSyntax.PREFIX_DATE + " DELIVERY_DATE\n\n"
-            + "Example: " + COMMAND_WORD + " "
-            + "furniture "
-            + CliSyntax.PREFIX_CUSTOMER_ID + " 5 "
-            + CliSyntax.PREFIX_DATE + " 2023-12-03 ";
+        + "Parameters: "
+        + "DELIVERY_NAME "
+        + CliSyntax.PREFIX_CUSTOMER_ID + " CUSTOMER_ID "
+        + CliSyntax.PREFIX_DATE + " DELIVERY_DATE\n\n"
+        + "Example: " + COMMAND_WORD + " "
+        + "furniture "
+        + CliSyntax.PREFIX_CUSTOMER_ID + " 5 "
+        + CliSyntax.PREFIX_DATE + " 2023-12-03 ";
 
     public static final String MESSAGE_SUCCESS = "New delivery added:\n\n%1$s";
     public static final String MESSAGE_DUPLICATE_DELIVERY = "This delivery already exists in HomeBoss";
@@ -84,12 +84,12 @@ public class DeliveryAddCommand extends DeliveryCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", deliveryAddDescriptor)
-                .toString();
+            .add("toAdd", deliveryAddDescriptor)
+            .toString();
     }
 
-    private static Delivery createDelivery(Model model, DeliveryAddDescriptor deliveryAddDescriptor)
-            throws CommandException {
+    private static Delivery createDelivery(Model model,
+                                           DeliveryAddDescriptor deliveryAddDescriptor) throws CommandException {
 
         DeliveryName deliveryName = deliveryAddDescriptor.getDeliveryName().get();
         int customerId = deliveryAddDescriptor.getCustomerId().get();
@@ -195,18 +195,18 @@ public class DeliveryAddCommand extends DeliveryCommand {
             DeliveryAddDescriptor otherDeliveryAddDescriptor = (DeliveryAddDescriptor) other;
 
             return Objects.equals(deliveryName, otherDeliveryAddDescriptor.deliveryName)
-                    && Objects.equals(customerId, otherDeliveryAddDescriptor.customerId)
-                    && Objects.equals(deliveryDate, otherDeliveryAddDescriptor.deliveryDate);
+                && Objects.equals(customerId, otherDeliveryAddDescriptor.customerId)
+                && Objects.equals(deliveryDate, otherDeliveryAddDescriptor.deliveryDate);
 
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", deliveryName)
-                    .add("customer", customerId)
-                    .add("deliveredAt", deliveryDate)
-                    .toString();
+                .add("name", deliveryName)
+                .add("customer", customerId)
+                .add("deliveredAt", deliveryDate)
+                .toString();
         }
     }
 }

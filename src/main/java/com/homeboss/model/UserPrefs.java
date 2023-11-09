@@ -10,14 +10,13 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.homeboss.commons.core.GuiSettings;
 import com.homeboss.commons.core.LogsCenter;
 import com.homeboss.model.authentication.AuthenticationData;
-import com.homeboss.storage.StorageManager;
 import com.homeboss.model.user.Password;
 import com.homeboss.model.user.User;
 import com.homeboss.model.user.Username;
+import com.homeboss.storage.StorageManager;
 
 
 /**
@@ -123,7 +122,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             AuthenticationData authenticationData =
-                    objectMapper.readValue(authenticationFilePath.toFile(), AuthenticationData.class);
+                objectMapper.readValue(authenticationFilePath.toFile(), AuthenticationData.class);
 
             // if username in the authentication file is empty, return null
             if ((!Username.isValidUsername(authenticationData.getUsername()))) {
@@ -132,11 +131,11 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
             // Create User objects
             User storedUser =
-                    new User(new Username(authenticationData.getUsername()),
-                            new Password(authenticationData.getPassword(), true),
-                            true,
-                            authenticationData.getSecretQuestion(),
-                            authenticationData.getAnswer());
+                new User(new Username(authenticationData.getUsername()),
+                    new Password(authenticationData.getPassword(), true),
+                    true,
+                    authenticationData.getSecretQuestion(),
+                    authenticationData.getAnswer());
             return storedUser;
         } catch (IOException e) {
             logger.fine("Error reading authentication file: " + e.getMessage());
@@ -157,8 +156,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
             // Create an AuthenticationData object from the User
             AuthenticationData authenticationData =
-                    new AuthenticationData(user.getUsername().toString(), user.getPassword().toString(),
-                            user.getSecretQuestion(), user.getAnswer());
+                new AuthenticationData(user.getUsername().toString(), user.getPassword().toString(),
+                    user.getSecretQuestion(), user.getAnswer());
 
             // Serialize the authenticationData to a JSON file
             objectMapper.writeValue(authenticationFilePath.toFile(), authenticationData);
@@ -189,9 +188,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath)
-                && deliveryBookFilePath.equals(otherUserPrefs.deliveryBookFilePath)
-                && authenticationFilePath.equals(otherUserPrefs.authenticationFilePath);
+            && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath)
+            && deliveryBookFilePath.equals(otherUserPrefs.deliveryBookFilePath)
+            && authenticationFilePath.equals(otherUserPrefs.authenticationFilePath);
     }
 
     @Override

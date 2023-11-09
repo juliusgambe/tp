@@ -1,9 +1,9 @@
 package com.homeboss.model;
 
+import static com.homeboss.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static com.homeboss.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,16 +11,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.Test;
+
 import com.homeboss.logic.commands.CommandTestUtil;
 import com.homeboss.model.person.Customer;
-import com.homeboss.testutil.Assert;
+import com.homeboss.model.person.exceptions.DuplicatePersonException;
+import com.homeboss.testutil.CustomerBuilder;
 import com.homeboss.testutil.TypicalPersons;
-import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import com.homeboss.model.person.exceptions.DuplicatePersonException;
-import com.homeboss.testutil.CustomerBuilder;
 
 public class AddressBookTest {
 
@@ -33,7 +33,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
     }
 
     @Test
@@ -47,17 +47,18 @@ public class AddressBookTest {
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
 
-        Customer editedAlice = new CustomerBuilder(TypicalPersons.ALICE).withAddress(CommandTestUtil.VALID_ADDRESS_BOB).build();
+        Customer editedAlice = new CustomerBuilder(TypicalPersons.ALICE).withAddress(CommandTestUtil.VALID_ADDRESS_BOB)
+                .build();
 
         List<Customer> newCustomers = Arrays.asList(TypicalPersons.ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newCustomers);
 
-        Assert.assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
     }
 
     @Test
@@ -75,14 +76,15 @@ public class AddressBookTest {
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(TypicalPersons.ALICE);
 
-        Customer editedAlice = new CustomerBuilder(TypicalPersons.ALICE).withAddress(CommandTestUtil.VALID_ADDRESS_BOB).build();
+        Customer editedAlice = new CustomerBuilder(TypicalPersons.ALICE).withAddress(CommandTestUtil.VALID_ADDRESS_BOB)
+                .build();
 
         assertTrue(addressBook.hasPerson(editedAlice));
     }
 
     @Test
     public void hasCustomerWithSamePhone_nullPerson_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> addressBook.hasCustomerWithSamePhone(null));
+        assertThrows(NullPointerException.class, () -> addressBook.hasCustomerWithSamePhone(null));
     }
 
     @Test
@@ -108,14 +110,14 @@ public class AddressBookTest {
     public void hasCustomerWithSamePhone_personWithSamePhoneFieldInAddressBook_returnsTrue() {
         addressBook.addPerson(TypicalPersons.ALICE);
         Customer editedAlice = new CustomerBuilder(TypicalPersons.ALICE).withCustomerId(101).withName(
-                CommandTestUtil.VALID_NAME_BOB)
+                        CommandTestUtil.VALID_NAME_BOB)
                 .withAddress(CommandTestUtil.VALID_ADDRESS_BOB).build();
         assertTrue(addressBook.hasCustomerWithSamePhone(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> addressBook.getList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getList().remove(0));
     }
 
     @Test

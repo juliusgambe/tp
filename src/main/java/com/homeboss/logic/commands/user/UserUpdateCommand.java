@@ -1,11 +1,11 @@
 package com.homeboss.logic.commands.user;
 
+import static com.homeboss.commons.util.CollectionUtil.isAnyNonNull;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 import java.util.Optional;
 
-import com.homeboss.commons.util.CollectionUtil;
 import com.homeboss.commons.util.ToStringBuilder;
 import com.homeboss.logic.Messages;
 import com.homeboss.logic.commands.Command;
@@ -24,23 +24,23 @@ public class UserUpdateCommand extends Command {
 
     public static final String COMMAND_WORD = "update";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Update your account details.\n\n"
-            + "Parameters: "
-            + "[" + CliSyntax.PREFIX_USER + " USERNAME] "
-            + "[" + CliSyntax.PREFIX_PASSWORD + " PASSWORD "
-            + CliSyntax.PREFIX_PASSWORD_CONFIRM + " CONFIRM_PASSWORD] "
-            + "[" + CliSyntax.PREFIX_SECRET_QUESTION + " SECRET_QUESTION "
-            + CliSyntax.PREFIX_ANSWER + " ANSWER]\n\n"
-            + "Example: " + COMMAND_WORD + " "
-            + CliSyntax.PREFIX_PASSWORD + " yourNewPassword "
-            + CliSyntax.PREFIX_PASSWORD_CONFIRM + " yourNewPassword ";
+        + ": Update your account details.\n\n"
+        + "Parameters: "
+        + "[" + CliSyntax.PREFIX_USER + " USERNAME] "
+        + "[" + CliSyntax.PREFIX_PASSWORD + " PASSWORD "
+        + CliSyntax.PREFIX_PASSWORD_CONFIRM + " CONFIRM_PASSWORD] "
+        + "[" + CliSyntax.PREFIX_SECRET_QUESTION + " SECRET_QUESTION "
+        + CliSyntax.PREFIX_ANSWER + " ANSWER]\n\n"
+        + "Example: " + COMMAND_WORD + " "
+        + CliSyntax.PREFIX_PASSWORD + " yourNewPassword "
+        + CliSyntax.PREFIX_PASSWORD_CONFIRM + " yourNewPassword ";
     public static final String MESSAGE_SUCCESS = "Update successful.";
     public static final String MESSAGE_MISSING_FIELDS = "Please provide at least one field to update! \n%1$s";
     public static final String MESSAGE_PASSWORD_OR_CONFIRM_PASSWORD_MISSING = "Password and Confirm Password "
-            + "have to be either all present or all absent. Try again.";
+        + "have to be either all present or all absent. Try again.";
     public static final String MESSAGE_PASSWORD_MISMATCH = "Passwords do not match. Please try again.";
     public static final String MESSAGE_QUESTION_OR_ANSWER_MISSING = "Secret Question and Answer have to be "
-            + "either all present or all absent. Try again.";
+        + "either all present or all absent. Try again.";
     private final UserUpdateDescriptor userUpdateDescriptor;
 
     /**
@@ -85,7 +85,8 @@ public class UserUpdateCommand extends Command {
 
         Username updatedUsername = userUpdateDescriptor.getUsername().orElse(storedUser.getUsername());
         Password updatedPassword = userUpdateDescriptor.getPassword().orElse(storedUser.getPassword());
-        String updatedSecretQuestion = userUpdateDescriptor.getSecretQuestion().orElse(storedUser.getSecretQuestion());
+        String updatedSecretQuestion = userUpdateDescriptor.getSecretQuestion()
+            .orElse(storedUser.getSecretQuestion());
         String updatedAnswer = userUpdateDescriptor.getAnswer().orElse(storedUser.getAnswer());
 
         return new User(updatedUsername, updatedPassword, true, updatedSecretQuestion, updatedAnswer);
@@ -112,8 +113,8 @@ public class UserUpdateCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("updateUserDescriptor", userUpdateDescriptor)
-                .toString();
+            .add("updateUserDescriptor", userUpdateDescriptor)
+            .toString();
     }
 
     /**
@@ -143,7 +144,7 @@ public class UserUpdateCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(username, password, secretQuestion, answer);
+            return isAnyNonNull(username, password, secretQuestion, answer);
         }
 
         public void setUsername(Username username) {
@@ -191,19 +192,19 @@ public class UserUpdateCommand extends Command {
 
             UserUpdateDescriptor otherUserUpdateDescriptor = (UserUpdateDescriptor) other;
             return Objects.equals(username, otherUserUpdateDescriptor.username)
-                    && Objects.equals(password, otherUserUpdateDescriptor.password)
-                    && Objects.equals(secretQuestion, otherUserUpdateDescriptor.secretQuestion)
-                    && Objects.equals(answer, otherUserUpdateDescriptor.answer);
+                && Objects.equals(password, otherUserUpdateDescriptor.password)
+                && Objects.equals(secretQuestion, otherUserUpdateDescriptor.secretQuestion)
+                && Objects.equals(answer, otherUserUpdateDescriptor.answer);
         }
 
         @Override
         public String toString() {
             // does not show password for security reasons
             return new ToStringBuilder(this)
-                    .add("username", username)
-                    .add("secretQuestion", secretQuestion)
-                    .add("answer", answer)
-                    .toString();
+                .add("username", username)
+                .add("secretQuestion", secretQuestion)
+                .add("answer", answer)
+                .toString();
         }
     }
 }

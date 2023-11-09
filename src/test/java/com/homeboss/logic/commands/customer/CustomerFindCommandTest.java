@@ -1,24 +1,24 @@
 package com.homeboss.logic.commands.customer;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.homeboss.logic.Messages.MESSAGE_CUSTOMERS_MATCHED_LISTED;
 import static com.homeboss.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import com.homeboss.logic.commands.CommandTestUtil;
-import com.homeboss.testutil.TypicalPersons;
 import org.junit.jupiter.api.Test;
 
 import com.homeboss.logic.Messages;
+import com.homeboss.logic.commands.CommandTestUtil;
 import com.homeboss.model.Model;
 import com.homeboss.model.ModelManager;
 import com.homeboss.model.UserPrefs;
 import com.homeboss.model.person.NameContainsKeywordsPredicate;
+import com.homeboss.testutil.TypicalPersons;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -64,7 +64,7 @@ public class CustomerFindCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         CustomerFindCommand command = new CustomerFindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel, true);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, true);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
@@ -76,8 +76,9 @@ public class CustomerFindCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         CustomerFindCommand command = new CustomerFindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel, true);
-        assertEquals(Arrays.asList(TypicalPersons.CARL, TypicalPersons.ELLE, TypicalPersons.FIONA), model.getFilteredPersonList());
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, true);
+        assertEquals(Arrays.asList(TypicalPersons.CARL, TypicalPersons.ELLE, TypicalPersons.FIONA),
+                model.getFilteredPersonList());
     }
 
     @Test

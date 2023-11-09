@@ -1,13 +1,13 @@
 package com.homeboss.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.homeboss.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 import static com.homeboss.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 import static com.homeboss.testutil.Assert.assertThrows;
 import static com.homeboss.testutil.TypicalDeliveries.GABRIELS_MILK;
 import static com.homeboss.testutil.TypicalDeliveries.GAMBES_RICE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,21 +15,20 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Optional;
 
-import com.homeboss.model.person.Customer;
-import com.homeboss.testutil.AddressBookBuilder;
-import com.homeboss.testutil.Assert;
-import com.homeboss.testutil.TypicalPersons;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.homeboss.commons.core.GuiSettings;
 import com.homeboss.model.delivery.Delivery;
 import com.homeboss.model.delivery.DeliveryNameContainsKeywordsPredicate;
+import com.homeboss.model.person.Customer;
 import com.homeboss.model.person.NameContainsKeywordsPredicate;
 import com.homeboss.model.user.Password;
 import com.homeboss.model.user.User;
 import com.homeboss.model.user.Username;
+import com.homeboss.testutil.AddressBookBuilder;
 import com.homeboss.testutil.DeliveryBookBuilder;
+import com.homeboss.testutil.TypicalPersons;
 
 public class ModelManagerTest {
 
@@ -44,7 +43,7 @@ public class ModelManagerTest {
 
     @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
     }
 
     @Test
@@ -63,7 +62,7 @@ public class ModelManagerTest {
 
     @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.setGuiSettings(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setGuiSettings(null));
     }
 
     @Test
@@ -75,7 +74,7 @@ public class ModelManagerTest {
 
     @Test
     public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
     }
 
     @Test
@@ -116,7 +115,7 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
     }
 
     @Test
@@ -132,7 +131,7 @@ public class ModelManagerTest {
 
     @Test
     public void hasCustomerWithSamePhone_nullPerson_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.hasCustomerWithSamePhone(null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasCustomerWithSamePhone(null));
     }
 
     @Test
@@ -148,13 +147,13 @@ public class ModelManagerTest {
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
 
     // Delivery
     @Test
     public void setDeliveryBookFilePath_nullPath_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.setDeliveryBookFilePath(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setDeliveryBookFilePath(null));
     }
 
     @Test
@@ -179,7 +178,7 @@ public class ModelManagerTest {
 
     @Test
     public void hasDelivery_nullDelivery_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.hasDelivery(null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasDelivery(null));
     }
 
     @Test
@@ -195,7 +194,7 @@ public class ModelManagerTest {
 
     @Test
     public void getFilteredDeliveryList_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredDeliveryList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredDeliveryList().remove(0));
     }
 
     @Test
@@ -219,7 +218,7 @@ public class ModelManagerTest {
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(TypicalPersons.ALICE).withPerson(
-            TypicalPersons.BENSON).build();
+                TypicalPersons.BENSON).build();
         DeliveryBook deliveryBook =
                 new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -287,7 +286,7 @@ public class ModelManagerTest {
     @Test
     public void getLoginStatus_storedUserAndLoggedIn_success() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(TypicalPersons.ALICE).withPerson(
-            TypicalPersons.BENSON).build();
+                TypicalPersons.BENSON).build();
         DeliveryBook deliveryBook =
                 new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
@@ -304,11 +303,12 @@ public class ModelManagerTest {
     @Test
     public void getLoginStatus_storedUserAndLoggedOut_success() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(TypicalPersons.ALICE).withPerson(
-            TypicalPersons.BENSON).build();
+                TypicalPersons.BENSON).build();
         DeliveryBook deliveryBook =
                 new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
+        userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication",
+                "authentication.json"));
         Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, false);
         User loggedInUser = modelManager.getStoredUser();
 
@@ -321,11 +321,12 @@ public class ModelManagerTest {
     @Test
     public void getLoginStatus_noStoredUser_success() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(TypicalPersons.ALICE).withPerson(
-            TypicalPersons.BENSON).build();
+                TypicalPersons.BENSON).build();
         DeliveryBook deliveryBook =
                 new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
+        userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication",
+                "authentication.json"));
         Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, false);
         modelManager.setLoggedInUser(null);
 

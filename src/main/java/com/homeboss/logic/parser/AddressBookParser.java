@@ -12,40 +12,40 @@ import com.homeboss.logic.commands.ClearCommand;
 import com.homeboss.logic.commands.Command;
 import com.homeboss.logic.commands.ExitCommand;
 import com.homeboss.logic.commands.HelpCommand;
+import com.homeboss.logic.commands.customer.CustomerAddCommand;
+import com.homeboss.logic.commands.customer.CustomerDeleteCommand;
+import com.homeboss.logic.commands.customer.CustomerEditCommand;
 import com.homeboss.logic.commands.customer.CustomerFindCommand;
+import com.homeboss.logic.commands.customer.CustomerListCommand;
+import com.homeboss.logic.commands.customer.CustomerViewCommand;
+import com.homeboss.logic.commands.delivery.DeliveryAddCommand;
 import com.homeboss.logic.commands.delivery.DeliveryCreateNoteCommand;
+import com.homeboss.logic.commands.delivery.DeliveryDeleteCommand;
+import com.homeboss.logic.commands.delivery.DeliveryEditCommand;
+import com.homeboss.logic.commands.delivery.DeliveryFindCommand;
 import com.homeboss.logic.commands.delivery.DeliveryListCommand;
+import com.homeboss.logic.commands.delivery.DeliveryStatusCommand;
 import com.homeboss.logic.commands.delivery.DeliveryViewCommand;
 import com.homeboss.logic.commands.user.UserDeleteCommand;
 import com.homeboss.logic.commands.user.UserLoginCommand;
 import com.homeboss.logic.commands.user.UserLogoutCommand;
+import com.homeboss.logic.commands.user.UserRecoverAccountCommand;
 import com.homeboss.logic.commands.user.UserRegisterCommand;
+import com.homeboss.logic.commands.user.UserUpdateCommand;
 import com.homeboss.logic.parser.customer.CustomerAddCommandParser;
 import com.homeboss.logic.parser.customer.CustomerDeleteCommandParser;
 import com.homeboss.logic.parser.customer.CustomerEditCommandParser;
 import com.homeboss.logic.parser.customer.CustomerFindCommandParser;
+import com.homeboss.logic.parser.customer.CustomerViewCommandParser;
 import com.homeboss.logic.parser.delivery.DeliveryCreateNoteCommandParser;
+import com.homeboss.logic.parser.delivery.DeliveryEditCommandParser;
+import com.homeboss.logic.parser.delivery.DeliveryFindCommandParser;
 import com.homeboss.logic.parser.delivery.DeliveryStatusCommandParser;
 import com.homeboss.logic.parser.delivery.DeliveryViewCommandParser;
 import com.homeboss.logic.parser.exceptions.ParseException;
 import com.homeboss.logic.parser.user.UserLoginCommandParser;
 import com.homeboss.logic.parser.user.UserRecoverAccountCommandParser;
 import com.homeboss.logic.parser.user.UserRegisterCommandParser;
-import com.homeboss.logic.commands.customer.CustomerAddCommand;
-import com.homeboss.logic.commands.customer.CustomerDeleteCommand;
-import com.homeboss.logic.commands.customer.CustomerEditCommand;
-import com.homeboss.logic.commands.customer.CustomerListCommand;
-import com.homeboss.logic.commands.customer.CustomerViewCommand;
-import com.homeboss.logic.commands.delivery.DeliveryAddCommand;
-import com.homeboss.logic.commands.delivery.DeliveryDeleteCommand;
-import com.homeboss.logic.commands.delivery.DeliveryEditCommand;
-import com.homeboss.logic.commands.delivery.DeliveryFindCommand;
-import com.homeboss.logic.commands.delivery.DeliveryStatusCommand;
-import com.homeboss.logic.commands.user.UserRecoverAccountCommand;
-import com.homeboss.logic.commands.user.UserUpdateCommand;
-import com.homeboss.logic.parser.customer.CustomerViewCommandParser;
-import com.homeboss.logic.parser.delivery.DeliveryEditCommandParser;
-import com.homeboss.logic.parser.delivery.DeliveryFindCommandParser;
 import com.homeboss.logic.parser.user.UserUpdateCommandParser;
 
 /**
@@ -57,7 +57,7 @@ public class AddressBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
-            "(?<commandWord>customer \\S+|delivery \\S+|delete \\S+|recover \\S+|\\S+)(?<arguments>.*)"
+        "(?<commandWord>customer \\S+|delivery \\S+|delete \\S+|recover \\S+|\\S+)(?<arguments>.*)"
     );
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 

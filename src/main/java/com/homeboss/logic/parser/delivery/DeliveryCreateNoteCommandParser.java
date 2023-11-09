@@ -1,8 +1,8 @@
 package com.homeboss.logic.parser.delivery;
 
-import static java.util.Objects.requireNonNull;
 import static com.homeboss.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static com.homeboss.logic.parser.CliSyntax.PREFIX_NOTE;
+import static java.util.Objects.requireNonNull;
 
 import java.util.stream.Stream;
 
@@ -23,6 +23,7 @@ public class DeliveryCreateNoteCommandParser implements Parser<DeliveryCreateNot
     /**
      * Parses the given {@code String} of arguments in the context of the DeliveryCreateNoteCommand
      * and returns an DeliveryCreateNoteCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeliveryCreateNoteCommand parse(String args) throws ParseException {

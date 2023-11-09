@@ -4,7 +4,6 @@ import static com.homeboss.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import com.homeboss.commons.util.CollectionUtil;
 import com.homeboss.commons.util.ToStringBuilder;
 
 /**
@@ -25,7 +24,7 @@ public class User {
      * This constructor assumes a non-hashed password is passed in
      */
     public User(Username username, Password password) {
-        CollectionUtil.requireAllNonNull(username, password);
+        requireAllNonNull(username, password);
         this.username = username;
         this.hashedPassword = new Password(password.toString());
     }
@@ -36,7 +35,7 @@ public class User {
      * @param isHashed indicates whether the password is hashed
      */
     public User(Username username, Password password, boolean isHashed) {
-        CollectionUtil.requireAllNonNull(username, password);
+        requireAllNonNull(username, password);
         this.username = username;
         this.hashedPassword = isHashed ? password : new Password(password.toString());
     }
@@ -48,7 +47,7 @@ public class User {
      * @param answer         String representing the answer to the secret question
      */
     public User(Username username, Password password, boolean isHashed, String secretQuestion, String answer) {
-        CollectionUtil.requireAllNonNull(username, password);
+        requireAllNonNull(username, password);
         this.username = username;
         this.hashedPassword = isHashed ? password : new Password(password.toString());
         this.secretQuestion = secretQuestion;
@@ -100,7 +99,7 @@ public class User {
         }
 
         return otherUser != null
-                && otherUser.getUsername().equals(getUsername());
+            && otherUser.getUsername().equals(getUsername());
     }
 
     /**
@@ -120,7 +119,7 @@ public class User {
         // ignore secret question and answer
         User otherUser = (User) other;
         return username.equals(otherUser.username)
-                && hashedPassword.equals(otherUser.hashedPassword);
+            && hashedPassword.equals(otherUser.hashedPassword);
     }
 
     @Override
@@ -133,8 +132,8 @@ public class User {
     public String toString() {
         // does not show password for security reason
         return new ToStringBuilder(this)
-                .add("username", username)
-                .toString();
+            .add("username", username)
+            .toString();
     }
 
 }

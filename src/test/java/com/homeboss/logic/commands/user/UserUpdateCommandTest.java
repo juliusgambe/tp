@@ -1,10 +1,10 @@
 package com.homeboss.logic.commands.user;
 
+import static com.homeboss.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static com.homeboss.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,24 +12,25 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.logging.Logger;
 
-import com.homeboss.logic.Messages;
-import com.homeboss.logic.commands.CommandTestUtil;
-import com.homeboss.model.AddressBook;
-import com.homeboss.model.Model;
-import com.homeboss.model.ModelManager;
-import com.homeboss.model.UserPrefs;
-import com.homeboss.model.person.Customer;
-import com.homeboss.testutil.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import com.homeboss.logic.Messages;
+import com.homeboss.logic.commands.CommandTestUtil;
 import com.homeboss.logic.commands.customer.CustomerEditCommand;
 import com.homeboss.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
+import com.homeboss.model.AddressBook;
 import com.homeboss.model.DeliveryBook;
+import com.homeboss.model.Model;
+import com.homeboss.model.ModelManager;
+import com.homeboss.model.UserPrefs;
+import com.homeboss.model.person.Customer;
 import com.homeboss.model.user.User;
 import com.homeboss.testutil.CustomerBuilder;
 import com.homeboss.testutil.CustomerEditDescriptorBuilder;
+import com.homeboss.testutil.TypicalIndexes;
+import com.homeboss.testutil.TypicalPersons;
 import com.homeboss.testutil.UpdateUserDescriptorBuilder;
 import com.homeboss.testutil.UserBuilder;
 
@@ -38,7 +39,7 @@ public class UserUpdateCommandTest {
     @TempDir
     public Path tempDir;
     private Model model = new ModelManager(
-        TypicalPersons.getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
+            TypicalPersons.getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
     private final Logger logger = Logger.getLogger(UserUpdateCommandTest.class.getName());
 
     @BeforeEach
@@ -73,14 +74,14 @@ public class UserUpdateCommandTest {
                 new UserPrefs(model.getUserPrefs()), model.getUserLoginStatus());
         expectedModel.setLoggedInUser(updatedUser);
 
-        CommandTestUtil.assertCommandSuccess(updateCommand, model, expectedMessage, expectedModel, true);
+        assertCommandSuccess(updateCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
     public void execute_someFieldsSpecified_success() {
         User updatedUser = new UserBuilder().withUsername(CommandTestUtil.VALID_USERNAME_FOODBEAR)
                 .withSecretQuestion(CommandTestUtil.VALID_SECRET_QUESTION_FOODBEAR).withAnswer(
-                CommandTestUtil.VALID_ANSWER_FOODBEAR).build();
+                        CommandTestUtil.VALID_ANSWER_FOODBEAR).build();
         UserUpdateCommand.UserUpdateDescriptor descriptor = new UpdateUserDescriptorBuilder(updatedUser).build();
         UserUpdateCommand updateCommand = new UserUpdateCommand(descriptor);
 
@@ -91,7 +92,7 @@ public class UserUpdateCommandTest {
                 new UserPrefs(model.getUserPrefs()), model.getUserLoginStatus());
         expectedModel.setLoggedInUser(updatedUser);
 
-        CommandTestUtil.assertCommandSuccess(updateCommand, model, expectedMessage, expectedModel, true);
+        assertCommandSuccess(updateCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
@@ -108,7 +109,7 @@ public class UserUpdateCommandTest {
                 new UserPrefs(model.getUserPrefs()), model.getUserLoginStatus());
         expectedModel.setLoggedInUser(updatedUser);
 
-        CommandTestUtil.assertCommandSuccess(updateCommand, model, expectedMessage, expectedModel, true);
+        assertCommandSuccess(updateCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
@@ -140,7 +141,7 @@ public class UserUpdateCommandTest {
 
         // same values -> returns true
         UserUpdateCommand.UserUpdateDescriptor copyDescriptor = new UserUpdateCommand.UserUpdateDescriptor(
-            CommandTestUtil.DESC_AARON);
+                CommandTestUtil.DESC_AARON);
         UserUpdateCommand commandWithSameValues = new UserUpdateCommand(copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 

@@ -1,8 +1,8 @@
 package com.homeboss.logic.commands.user;
 
-import static java.util.Objects.requireNonNull;
 import static com.homeboss.model.Model.PREDICATE_SHOW_NO_CUSTOMERS;
 import static com.homeboss.model.Model.PREDICATE_SHOW_NO_DELIVERIES;
+import static java.util.Objects.requireNonNull;
 
 import com.homeboss.logic.commands.Command;
 import com.homeboss.logic.commands.CommandResult;

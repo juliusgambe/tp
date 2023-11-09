@@ -1,15 +1,15 @@
 package com.homeboss.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static com.homeboss.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import com.homeboss.commons.util.CollectionUtil;
 import com.homeboss.model.person.exceptions.DuplicatePersonException;
 import com.homeboss.model.person.exceptions.PersonNotFoundException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -65,7 +65,7 @@ public class UniquePersonList implements Iterable<Customer> {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
      */
     public void setPerson(Customer target, Customer editedCustomer) {
-        CollectionUtil.requireAllNonNull(target, editedCustomer);
+        requireAllNonNull(target, editedCustomer);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
@@ -100,7 +100,7 @@ public class UniquePersonList implements Iterable<Customer> {
      * {@code persons} must not contain duplicate persons.
      */
     public void setPersons(List<Customer> customers) {
-        CollectionUtil.requireAllNonNull(customers);
+        requireAllNonNull(customers);
         if (!personsAreUnique(customers)) {
             throw new DuplicatePersonException();
         }
@@ -110,11 +110,12 @@ public class UniquePersonList implements Iterable<Customer> {
 
     /**
      * Retrieves Customer by its id
+     *
      * @param id The id of the delivery to be retrieved
      * @return Optional containing the delivery if it exists
      */
     public Optional<Customer> getById(int id) {
-        for (Customer c: internalList) {
+        for (Customer c : internalList) {
             if (c.getCustomerId() == id) {
                 return Optional.of(c);
             }

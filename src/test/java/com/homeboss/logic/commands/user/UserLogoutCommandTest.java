@@ -6,9 +6,9 @@ import static com.homeboss.model.Model.PREDICATE_SHOW_NO_DELIVERIES;
 import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 import static com.homeboss.testutil.TypicalPersons.getTypicalAddressBook;
 
-import com.homeboss.logic.commands.CommandTestUtil;
 import org.junit.jupiter.api.Test;
 
+import com.homeboss.logic.commands.CommandTestUtil;
 import com.homeboss.model.Model;
 import com.homeboss.model.ModelManager;
 import com.homeboss.model.UserPrefs;
@@ -44,6 +44,7 @@ public class UserLogoutCommandTest {
         expectedModel.setUiListCustomer();
         expectedModel.setLogoutSuccess();
 
-        CommandTestUtil.assertCommandSuccess(userLogoutCommand, model, UserLogoutCommand.MESSAGE_SUCCESS, expectedModel, true);
+        assertCommandSuccess(userLogoutCommand, model, UserLogoutCommand.MESSAGE_SUCCESS, expectedModel,
+                true);
     }
 }

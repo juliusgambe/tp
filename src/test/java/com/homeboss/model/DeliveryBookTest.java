@@ -1,11 +1,11 @@
 package com.homeboss.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.homeboss.testutil.Assert.assertThrows;
 import static com.homeboss.testutil.TypicalDeliveries.GABRIELS_MILK;
 import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -13,15 +13,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import com.homeboss.logic.commands.CommandTestUtil;
-import com.homeboss.testutil.Assert;
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.homeboss.logic.commands.CommandTestUtil;
 import com.homeboss.model.delivery.Delivery;
 import com.homeboss.model.delivery.exceptions.DuplicateDeliveryException;
 import com.homeboss.testutil.DeliveryBuilder;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class DeliveryBookTest {
 
@@ -34,10 +34,11 @@ public class DeliveryBookTest {
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> deliveryBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> deliveryBook.resetData(null));
     }
 
-    @Test public void resetData_withValidReadOnlyDeliveryBook_replaceData() {
+    @Test
+    public void resetData_withValidReadOnlyDeliveryBook_replaceData() {
         DeliveryBook newData = getTypicalDeliveryBook();
         deliveryBook.resetData(newData);
         assertEquals(newData, deliveryBook);
@@ -45,16 +46,18 @@ public class DeliveryBookTest {
 
     @Test
     public void resetData_withDuplicateDeliveries_throwsDuplicateDeliveryException() {
-        Delivery editedGabriel = new DeliveryBuilder(GABRIELS_MILK).withName(CommandTestUtil.VALID_NAME_JAMES_MILK).build();
+        Delivery editedGabriel = new DeliveryBuilder(GABRIELS_MILK)
+                .withName(CommandTestUtil.VALID_NAME_JAMES_MILK)
+                .build();
         List<Delivery> newDeliveries = Arrays.asList(GABRIELS_MILK, editedGabriel);
         DeliveryBookStub newData = new DeliveryBookStub(newDeliveries);
 
-        Assert.assertThrows(DuplicateDeliveryException.class, () -> deliveryBook.resetData(newData));
+        assertThrows(DuplicateDeliveryException.class, () -> deliveryBook.resetData(newData));
     }
 
     @Test
     public void hasDelivery_nullDelivery_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> deliveryBook.hasDelivery(null));
+        assertThrows(NullPointerException.class, () -> deliveryBook.hasDelivery(null));
     }
 
     @Test
@@ -71,13 +74,14 @@ public class DeliveryBookTest {
     @Test
     public void hasDelivery_deliveryWithSameIdentityFieldsInDeliveryBook_returnsTrue() {
         deliveryBook.addDelivery(GABRIELS_MILK);
-        Delivery editedGabriel = new DeliveryBuilder(GABRIELS_MILK).withName(CommandTestUtil.VALID_NAME_JAMES_MILK).build();
+        Delivery editedGabriel = new DeliveryBuilder(GABRIELS_MILK).withName(CommandTestUtil.VALID_NAME_JAMES_MILK)
+                .build();
         assertTrue(deliveryBook.hasDelivery(editedGabriel));
     }
 
     @Test
     public void getDeliveryList_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> deliveryBook.getList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> deliveryBook.getList().remove(0));
     }
 
     @Test

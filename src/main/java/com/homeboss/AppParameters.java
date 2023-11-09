@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import com.homeboss.commons.core.LogsCenter;
 import com.homeboss.commons.util.FileUtil;
 import com.homeboss.commons.util.ToStringBuilder;
+
 import javafx.application.Application;
 
 /**
@@ -67,7 +68,7 @@ public class AppParameters {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("configPath", configPath)
-                .toString();
+            .add("configPath", configPath)
+            .toString();
     }
 }

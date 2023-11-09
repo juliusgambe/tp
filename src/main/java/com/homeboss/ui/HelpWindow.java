@@ -3,6 +3,7 @@ package com.homeboss.ui;
 import java.util.logging.Logger;
 
 import com.homeboss.commons.core.LogsCenter;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -46,21 +47,22 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Shows the help window.
-     * @throws IllegalStateException
-     *     <ul>
-     *         <li>
-     *             if this method is called on a thread other than the JavaFX Application Thread.
-     *         </li>
-     *         <li>
-     *             if this method is called during animation or layout processing.
-     *         </li>
-     *         <li>
-     *             if this method is called on the primary stage.
-     *         </li>
-     *         <li>
-     *             if {@code dialogStage} is already showing.
-     *         </li>
-     *     </ul>
+     *
+     * @throws IllegalStateException <ul>
+     *                                       <li>
+     *                                           if this method is called on a thread other than the JavaFX
+     *                                           Application Thread.
+     *                                       </li>
+     *                                       <li>
+     *                                           if this method is called during animation or layout processing.
+     *                                       </li>
+     *                                       <li>
+     *                                           if this method is called on the primary stage.
+     *                                       </li>
+     *                                       <li>
+     *                                           if {@code dialogStage} is already showing.
+     *                                       </li>
+     *                                   </ul>
      */
     public void show() {
         logger.fine("Showing help page about the application.");

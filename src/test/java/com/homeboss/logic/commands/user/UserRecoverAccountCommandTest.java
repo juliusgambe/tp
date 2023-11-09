@@ -1,22 +1,22 @@
 package com.homeboss.logic.commands.user;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.homeboss.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static com.homeboss.testutil.Assert.assertThrows;
 import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 import static com.homeboss.testutil.TypicalPersons.getTypicalAddressBook;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-import com.homeboss.logic.commands.CommandTestUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import com.homeboss.logic.commands.CommandResult;
+import com.homeboss.logic.commands.CommandTestUtil;
 import com.homeboss.logic.commands.exceptions.CommandException;
 import com.homeboss.model.Model;
 import com.homeboss.model.ModelManager;
@@ -103,7 +103,8 @@ public class UserRecoverAccountCommandTest {
         UserRecoverAccountCommand userRecoverAccountCommand =
                 new UserRecoverAccountCommand("wrong answer", newPassword);
 
-        CommandTestUtil.assertCommandFailure(userRecoverAccountCommand, model, UserRecoverAccountCommand.MESSAGE_WRONG_ANSWER);
+        CommandTestUtil.assertCommandFailure(userRecoverAccountCommand, model,
+                UserRecoverAccountCommand.MESSAGE_WRONG_ANSWER);
     }
 
     @Test
@@ -121,7 +122,7 @@ public class UserRecoverAccountCommandTest {
         desiredOutput += "\n\n" + "Please answer the question using the following command:\n"
                 + UserRecoverAccountCommand.MESSAGE_USAGE;
 
-        CommandTestUtil.assertCommandSuccess(userRecoverAccountCommand, model,
+        assertCommandSuccess(userRecoverAccountCommand, model,
                 desiredOutput, model, false);
     }
 

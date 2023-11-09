@@ -5,10 +5,10 @@ import static com.homeboss.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.homeboss.logic.parser.exceptions.ParseException;
 import com.homeboss.logic.commands.delivery.DeliveryViewCommand;
 import com.homeboss.logic.parser.Parser;
 import com.homeboss.logic.parser.ParserUtil;
+import com.homeboss.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new DeliveryViewCommand object

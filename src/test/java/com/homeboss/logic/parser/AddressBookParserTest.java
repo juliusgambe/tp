@@ -1,7 +1,5 @@
 package com.homeboss.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.homeboss.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static com.homeboss.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static com.homeboss.logic.parser.CliSyntax.PREFIX_ANSWER;
@@ -14,17 +12,17 @@ import static com.homeboss.logic.parser.CliSyntax.PREFIX_USER;
 import static com.homeboss.testutil.Assert.assertThrows;
 import static com.homeboss.testutil.TypicalDeliveries.GABRIELS_MILK;
 import static com.homeboss.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.homeboss.logic.commands.CommandTestUtil;
-import com.homeboss.model.person.Customer;
-import com.homeboss.testutil.CustomerEditDescriptorBuilder;
 import org.junit.jupiter.api.Test;
 
 import com.homeboss.logic.commands.ClearCommand;
+import com.homeboss.logic.commands.CommandTestUtil;
 import com.homeboss.logic.commands.ExitCommand;
 import com.homeboss.logic.commands.HelpCommand;
 import com.homeboss.logic.commands.customer.CustomerAddCommand;
@@ -55,9 +53,11 @@ import com.homeboss.model.delivery.Delivery;
 import com.homeboss.model.delivery.DeliveryNameContainsKeywordsPredicate;
 import com.homeboss.model.delivery.DeliveryStatus;
 import com.homeboss.model.delivery.Note;
+import com.homeboss.model.person.Customer;
 import com.homeboss.model.person.NameContainsKeywordsPredicate;
 import com.homeboss.model.user.User;
 import com.homeboss.testutil.CustomerBuilder;
+import com.homeboss.testutil.CustomerEditDescriptorBuilder;
 import com.homeboss.testutil.CustomerUtil;
 import com.homeboss.testutil.DeliveryAddDescriptorBuilder;
 import com.homeboss.testutil.DeliveryBuilder;
@@ -65,7 +65,6 @@ import com.homeboss.testutil.DeliveryEditDescriptorBuilder;
 import com.homeboss.testutil.DeliveryUtil;
 import com.homeboss.testutil.UpdateUserDescriptorBuilder;
 import com.homeboss.testutil.UserBuilder;
-
 
 
 public class AddressBookParserTest {
@@ -222,7 +221,7 @@ public class AddressBookParserTest {
         // Cannot wrap lines due to Separator Wrap not allowing lambda on newline
         assertThrows(
                 ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser
-                         .parseCommand("invalidPrefix list"));
+                        .parseCommand("invalidPrefix list"));
     }
 
     @Test

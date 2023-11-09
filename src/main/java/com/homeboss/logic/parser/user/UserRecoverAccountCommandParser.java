@@ -4,14 +4,14 @@ import static com.homeboss.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.stream.Stream;
 
-import com.homeboss.logic.parser.CliSyntax;
-import com.homeboss.logic.parser.ParserUtil;
-import com.homeboss.logic.parser.exceptions.ParseException;
 import com.homeboss.logic.commands.user.UserRecoverAccountCommand;
 import com.homeboss.logic.parser.ArgumentMultimap;
 import com.homeboss.logic.parser.ArgumentTokenizer;
+import com.homeboss.logic.parser.CliSyntax;
 import com.homeboss.logic.parser.Parser;
+import com.homeboss.logic.parser.ParserUtil;
 import com.homeboss.logic.parser.Prefix;
+import com.homeboss.logic.parser.exceptions.ParseException;
 import com.homeboss.model.user.Password;
 
 /**
@@ -27,24 +27,28 @@ public class UserRecoverAccountCommandParser implements Parser<UserRecoverAccoun
     public UserRecoverAccountCommand parse(String args) throws ParseException {
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_ANSWER, CliSyntax.PREFIX_PASSWORD, CliSyntax.PREFIX_PASSWORD_CONFIRM);
+            ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_ANSWER, CliSyntax.PREFIX_PASSWORD,
+                CliSyntax.PREFIX_PASSWORD_CONFIRM);
 
-        if (arePrefixesAbsent(argMultimap, CliSyntax.PREFIX_ANSWER, CliSyntax.PREFIX_PASSWORD, CliSyntax.PREFIX_PASSWORD_CONFIRM)) {
+        if (arePrefixesAbsent(argMultimap, CliSyntax.PREFIX_ANSWER, CliSyntax.PREFIX_PASSWORD,
+            CliSyntax.PREFIX_PASSWORD_CONFIRM)) {
             return new UserRecoverAccountCommand();
         }
 
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_ANSWER, CliSyntax.PREFIX_PASSWORD, CliSyntax.PREFIX_PASSWORD_CONFIRM)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_ANSWER, CliSyntax.PREFIX_PASSWORD,
+            CliSyntax.PREFIX_PASSWORD_CONFIRM)
+            || !argMultimap.getPreamble().isEmpty()) {
             // if not viewing secret question, then all prefixes must be present
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    UserRecoverAccountCommand.MESSAGE_USAGE));
+                UserRecoverAccountCommand.MESSAGE_USAGE));
         }
         // all prefixes present
         // check if password and password confirm are present and matches
         argMultimap.verifyNoDuplicatePrefixesFor(
             CliSyntax.PREFIX_ANSWER, CliSyntax.PREFIX_PASSWORD, CliSyntax.PREFIX_PASSWORD_CONFIRM);
         Password password = ParserUtil.parsePassword(argMultimap.getValue(CliSyntax.PREFIX_PASSWORD).get());
-        Password confirmPassword = ParserUtil.parsePassword(argMultimap.getValue(CliSyntax.PREFIX_PASSWORD_CONFIRM).get());
+        Password confirmPassword = ParserUtil.parsePassword(
+            argMultimap.getValue(CliSyntax.PREFIX_PASSWORD_CONFIRM).get());
         String answer = ParserUtil.parseAnswer(argMultimap.getValue(CliSyntax.PREFIX_ANSWER).get());
         if (!password.equals(confirmPassword)) {
             throw new ParseException(UserRecoverAccountCommand.MESSAGE_PASSWORD_MISMATCH);

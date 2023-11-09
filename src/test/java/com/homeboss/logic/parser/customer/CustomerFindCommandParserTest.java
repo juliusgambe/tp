@@ -4,10 +4,10 @@ import static com.homeboss.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
-import com.homeboss.logic.parser.CommandParserTestUtil;
 import org.junit.jupiter.api.Test;
 
 import com.homeboss.logic.commands.customer.CustomerFindCommand;
+import com.homeboss.logic.parser.CommandParserTestUtil;
 import com.homeboss.model.person.NameContainsKeywordsPredicate;
 
 public class CustomerFindCommandParserTest {

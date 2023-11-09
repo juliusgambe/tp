@@ -1,25 +1,26 @@
 package com.homeboss.logic.commands.delivery;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.homeboss.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static com.homeboss.testutil.TypicalDeliveries.getTypicalDeliveryBook;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
 
-import com.homeboss.logic.commands.CommandTestUtil;
-import com.homeboss.logic.commands.exceptions.CommandException;
-import com.homeboss.testutil.TypicalPersons;
 import org.junit.jupiter.api.Test;
 
 import com.homeboss.logic.Messages;
+import com.homeboss.logic.commands.CommandTestUtil;
+import com.homeboss.logic.commands.exceptions.CommandException;
 import com.homeboss.model.Model;
 import com.homeboss.model.ModelManager;
 import com.homeboss.model.UserPrefs;
 import com.homeboss.model.delivery.Delivery;
+import com.homeboss.testutil.TypicalPersons;
 
 class DeliveryViewCommandTest {
-    private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
+    private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), getTypicalDeliveryBook(),
+            new UserPrefs(), true);
 
     @Test
     public void execute_allFieldsValid_success() throws CommandException {
