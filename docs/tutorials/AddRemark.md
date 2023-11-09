@@ -32,7 +32,7 @@ a `CommandResult` with an accompanying message.
 ```java
 package seedu.address.logic.commands;
 
-import model.com.homeboss.Model;
+import com.homeboss.model.Model;
 
 /**
  * Changes the remark of an existing customer in the address book.
@@ -77,21 +77,21 @@ Following the convention in other commands, we add relevant messages as constant
 **`RemarkCommand.java`:**
 
 ```java
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the remark of the customer identified "
-            + "by the index number used in the last customer listing. "
-            + "Existing remark will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "r/ [REMARK]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + "r/ Likes to swim.";
+    public static final String MESSAGE_USAGE=COMMAND_WORD
+    +": Edits the remark of the customer identified "
+    +"by the index number used in the last customer listing. "
+    +"Existing remark will be overwritten by the input.\n"
+    +"Parameters: INDEX (must be a positive integer) "
+    +"r/ [REMARK]\n"
+    +"Example: "+COMMAND_WORD+" 1 "
+    +"r/ Likes to swim.";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET =
-            "Remark command not implemented yet";
+public static final String MESSAGE_NOT_IMPLEMENTED_YET=
+    "Remark command not implemented yet";
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
+@Override
+public CommandResult execute(Model model)throws CommandException{
+    throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
     }
 ```
 
@@ -106,7 +106,8 @@ change the error message to echo the values. While this is not a replacement for
 our code is functioning as intended.
 
 ```java
-import static util.commons.com.homeboss.CollectionUtil.requireAllNonNull;
+import static com.homeboss.commons.util.CollectionUtil.requireAllNonNull;
+
 //...
 public class RemarkCommand extends Command {
     //...
@@ -125,10 +126,11 @@ public class RemarkCommand extends Command {
         this.index = index;
         this.remark = remark;
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         throw new CommandException(
-                String.format(MESSAGE_ARGUMENTS, index.getOneBased(), remark));
+            String.format(MESSAGE_ARGUMENTS, index.getOneBased(), remark));
     }
 
     @Override
@@ -144,7 +146,7 @@ public class RemarkCommand extends Command {
 
         RemarkCommand e = (RemarkCommand) other;
         return index.equals(e.index)
-                && remark.equals(e.remark);
+            && remark.equals(e.remark);
     }
 }
 ```
@@ -176,7 +178,7 @@ provided for the function to understand what it does.
  * @param argsString Arguments string of the form:
  * {@code preamble <prefix>value <prefix>value ...}
  * @param prefixes   Prefixes to tokenize the arguments string with
- * @return           ArgumentMultimap object that maps prefixes to their
+ * @return ArgumentMultimap object that maps prefixes to their
  * arguments
  */
 ```
@@ -191,11 +193,11 @@ look through `ArgumentMultimap` :
 /**
  * Returns the last value of {@code prefix}.
  */
-public Optional<String> getValue(Prefix prefix) {
-    List<String> values = getAllValues(prefix);
-    return values.isEmpty() ? Optional.empty() :
-        Optional.of(values.get(values.size() - 1));
-}
+public Optional<String> getValue(Prefix prefix){
+    List<String> values=getAllValues(prefix);
+    return values.isEmpty()?Optional.empty():
+    Optional.of(values.get(values.size()-1));
+    }
 ```
 
 This appears to be what we need to get a String of the remark. But what about the Index? Let's take a quick peek at
@@ -204,8 +206,8 @@ existing `Command` that uses an index to see how it is done.
 **`DeleteCommandParser.java`:**
 
 ```java
-Index index = ParserUtil.parseIndex(args);
-return new DeleteCommand(index);
+Index index=ParserUtil.parseIndex(args);
+    return new DeleteCommand(index);
 ```
 
 There appears to be another utility class that obtains an `Index` from the input provided by the user.
@@ -216,23 +218,23 @@ create a new instance of `RemarkCommand`, as given below.
 **`RemarkCommandParser.java`:**
 
 ```java
-public RemarkCommand parse(String args) throws ParseException {
+public RemarkCommand parse(String args)throws ParseException{
     requireNonNull(args);
-    ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-        PREFIX_REMARK);
+    ArgumentMultimap argMultimap=ArgumentTokenizer.tokenize(args,
+    PREFIX_REMARK);
 
     Index index;
-    try {
-        index = ParserUtil.parseIndex(argMultimap.getPreamble());
-    } catch (IllegalValueException ive) {
-        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-            RemarkCommand.MESSAGE_USAGE), ive);
+    try{
+    index=ParserUtil.parseIndex(argMultimap.getPreamble());
+    }catch(IllegalValueException ive){
+    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+    RemarkCommand.MESSAGE_USAGE),ive);
     }
 
-    String remark = argMultimap.getValue(PREFIX_REMARK).orElse("");
+    String remark=argMultimap.getValue(PREFIX_REMARK).orElse("");
 
-    return new RemarkCommand(index, remark);
-}
+    return new RemarkCommand(index,remark);
+    }
 ```
 
 <box type="info" seamless>
@@ -350,10 +352,10 @@ add [this one line of code!](https://github.com/se-edu/addressbook-level3/commit
 **`PersonCard.java`:**
 
 ```java
-public PersonCard(Person customer, int displayedIndex) {
+public PersonCard(Person customer,int displayedIndex){
     //...
     remark.setText(customer.getRemark().value);
-}
+    }
 ```
 
 ![The remark label is bound properly!](../images/add-remark/RemarkBound.png)
@@ -374,36 +376,36 @@ save it with `Model#setPerson()`.
 
 ```java
 //...
-    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
-    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
+public static final String MESSAGE_ADD_REMARK_SUCCESS="Added remark to Person: %1$s";
+public static final String MESSAGE_DELETE_REMARK_SUCCESS="Removed remark from Person: %1$s";
 //...
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+@Override
+public CommandResult execute(Model model)throws CommandException{
+    List<Person> lastShownList=model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person customerToEdit = lastShownList.get(index.getZeroBased());
-        Person editedCustomer = new Person(
-                customerToEdit.getName(), customerToEdit.getPhone(), customerToEdit.getEmail(),
-                customerToEdit.getAddress(), remark, customerToEdit.getTags());
-
-        model.setPerson(customerToEdit, editedCustomer);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
-        return new CommandResult(generateSuccessMessage(editedCustomer));
+    if(index.getZeroBased()>=lastShownList.size()){
+    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    /**
-     * Generates a command execution success message based on whether
-     * the remark is added to or removed from
-     * {@code customerToEdit}.
-     */
-    private String generateSuccessMessage(Person customerToEdit) {
-        String message = !remark.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
-        return String.format(message, customerToEdit);
+    Person customerToEdit=lastShownList.get(index.getZeroBased());
+    Person editedCustomer=new Person(
+    customerToEdit.getName(),customerToEdit.getPhone(),customerToEdit.getEmail(),
+    customerToEdit.getAddress(),remark,customerToEdit.getTags());
+
+    model.setPerson(customerToEdit,editedCustomer);
+    model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+    return new CommandResult(generateSuccessMessage(editedCustomer));
+    }
+
+/**
+ * Generates a command execution success message based on whether
+ * the remark is added to or removed from
+ * {@code customerToEdit}.
+ */
+private String generateSuccessMessage(Person customerToEdit){
+    String message=!remark.value.isEmpty()?MESSAGE_ADD_REMARK_SUCCESS:MESSAGE_DELETE_REMARK_SUCCESS;
+    return String.format(message,customerToEdit);
     }
 ```
 
