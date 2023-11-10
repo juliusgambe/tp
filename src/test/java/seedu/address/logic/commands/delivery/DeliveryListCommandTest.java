@@ -28,123 +28,133 @@ public class DeliveryListCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandListSuccess(new DeliveryListCommand(null, null, null, null), model,
-                DeliveryListCommand.MESSAGE_SUCCESS, model);
+            DeliveryListCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.CREATED, null, null, null), model,
-                DeliveryListCommand.MESSAGE_SUCCESS, model);
+            DeliveryListCommand.MESSAGE_SUCCESS, model);
         assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.SHIPPED, null, null, null), model,
-                DeliveryListCommand.MESSAGE_SUCCESS, model);
+            DeliveryListCommand.MESSAGE_SUCCESS, model);
         assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.COMPLETED, null, null, null), model,
-                DeliveryListCommand.MESSAGE_SUCCESS,
-                model);
+            DeliveryListCommand.MESSAGE_SUCCESS,
+            model);
         assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.CANCELLED, null, null, null), model,
-                DeliveryListCommand.MESSAGE_SUCCESS, model);
+            DeliveryListCommand.MESSAGE_SUCCESS, model);
         // customer id
         assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.COMPLETED, 2, null, null), model,
-                DeliveryListCommand.MESSAGE_SUCCESS, model);
+            DeliveryListCommand.MESSAGE_SUCCESS, model);
         assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.COMPLETED, 2, null, null), model,
-                DeliveryListCommand.MESSAGE_SUCCESS, model);
+            DeliveryListCommand.MESSAGE_SUCCESS, model);
 
         // expected delivery date
         assertCommandListSuccess(
-                new DeliveryListCommand(DeliveryStatus.COMPLETED, null, new DeliveryDate(VALID_DELIVERY_DATE_3), null),
-                model,
-                DeliveryListCommand.MESSAGE_SUCCESS, model);
+            new DeliveryListCommand(DeliveryStatus.COMPLETED, null, new DeliveryDate(VALID_DELIVERY_DATE_3), null),
+            model,
+            DeliveryListCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
     public void execute_listIsFiltered_empty() {
         assertCommandListSuccess(
-                new DeliveryListCommand(DeliveryStatus.CREATED, 1, new DeliveryDate("2001-12-12"), null), model,
-                DeliveryListCommand.MESSAGE_EMPTY, model);
+            new DeliveryListCommand(DeliveryStatus.CREATED, 1, new DeliveryDate("2001-12-12"), null), model,
+            DeliveryListCommand.MESSAGE_EMPTY, model);
         assertCommandListSuccess(
-                new DeliveryListCommand(DeliveryStatus.SHIPPED, 1, new DeliveryDate("2001-12-12"), null), model,
-                DeliveryListCommand.MESSAGE_EMPTY, model);
+            new DeliveryListCommand(DeliveryStatus.SHIPPED, 1, new DeliveryDate("2001-12-12"), null), model,
+            DeliveryListCommand.MESSAGE_EMPTY, model);
         assertCommandListSuccess(
-                new DeliveryListCommand(DeliveryStatus.COMPLETED, 1, new DeliveryDate("2001-12-12"), null), model,
-                DeliveryListCommand.MESSAGE_EMPTY, model);
+            new DeliveryListCommand(DeliveryStatus.COMPLETED, 1, new DeliveryDate("2001-12-12"), null), model,
+            DeliveryListCommand.MESSAGE_EMPTY, model);
         assertCommandListSuccess(
-                new DeliveryListCommand(DeliveryStatus.CANCELLED, 1, new DeliveryDate("2001-12-12"), null), model,
-                DeliveryListCommand.MESSAGE_EMPTY, model);
+            new DeliveryListCommand(DeliveryStatus.CANCELLED, 1, new DeliveryDate("2001-12-12"), null), model,
+            DeliveryListCommand.MESSAGE_EMPTY, model);
     }
 
     @Test
     public void execute_listIsFilteredAndSortedAscending_showsSameList() {
         assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.CREATED, null, null, Sort.ASC), model,
-                DeliveryListCommand.MESSAGE_SUCCESS, model);
+            DeliveryListCommand.MESSAGE_SUCCESS, model);
         assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.SHIPPED, 2, null, Sort.ASC), model,
-                DeliveryListCommand.MESSAGE_SUCCESS, model);
+            DeliveryListCommand.MESSAGE_SUCCESS, model);
         assertCommandListSuccess(
-                new DeliveryListCommand(DeliveryStatus.COMPLETED, 2, new DeliveryDate(VALID_DELIVERY_DATE_3), Sort.ASC),
-                model,
-                DeliveryListCommand.MESSAGE_SUCCESS,
-                model);
+            new DeliveryListCommand(DeliveryStatus.COMPLETED, 2, new DeliveryDate(VALID_DELIVERY_DATE_3), Sort.ASC),
+            model,
+            DeliveryListCommand.MESSAGE_SUCCESS,
+            model);
         assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.CANCELLED, null, null, Sort.ASC), model,
-                DeliveryListCommand.MESSAGE_SUCCESS, model);
+            DeliveryListCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
     public void execute_listIsSortedAscending_showsSameList() {
         assertCommandListSuccess(new DeliveryListCommand(null, null, null, Sort.ASC), model,
-                DeliveryListCommand.MESSAGE_SUCCESS,
-                model);
+            DeliveryListCommand.MESSAGE_SUCCESS,
+            model);
     }
 
     @Test
     public void execute_listIsSortedDescending_showsSameList() {
         assertCommandListSuccess(new DeliveryListCommand(null, null, null, Sort.DESC), model,
-                DeliveryListCommand.MESSAGE_SUCCESS,
-                model);
+            DeliveryListCommand.MESSAGE_SUCCESS,
+            model);
     }
 
     @Test
     public void execute_listIsNotFilteredLoggedOut_throwsCommandException() {
         model.setLogoutSuccess();
         assertCommandFailure(new DeliveryListCommand(null, null, null, null), model,
-                Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+            Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
     @Test
     public void execute_listIsFilteredLoggedOut_throwsCommandException() {
         model.setLogoutSuccess();
         assertCommandFailure(new DeliveryListCommand(DeliveryStatus.CREATED, null, null, null), model,
-                Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+            Messages.MESSAGE_USER_NOT_AUTHENTICATED);
         assertCommandFailure(new DeliveryListCommand(DeliveryStatus.SHIPPED, null, null, null), model,
-                Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+            Messages.MESSAGE_USER_NOT_AUTHENTICATED);
         assertCommandFailure(new DeliveryListCommand(DeliveryStatus.COMPLETED, null, null, null), model,
-                Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+            Messages.MESSAGE_USER_NOT_AUTHENTICATED);
         assertCommandFailure(new DeliveryListCommand(DeliveryStatus.CANCELLED, null, null, null), model,
-                Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+            Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
     @Test
     public void execute_listIsFilteredAndSortedAscendingLoggedOut_throwsCommandException() {
         model.setLogoutSuccess();
         assertCommandFailure(new DeliveryListCommand(DeliveryStatus.CREATED, null, null, Sort.ASC), model,
-                Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+            Messages.MESSAGE_USER_NOT_AUTHENTICATED);
         assertCommandFailure(new DeliveryListCommand(DeliveryStatus.SHIPPED, null, null, Sort.ASC), model,
-                Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+            Messages.MESSAGE_USER_NOT_AUTHENTICATED);
         assertCommandFailure(new DeliveryListCommand(DeliveryStatus.COMPLETED, null, null, Sort.ASC), model,
-                Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+            Messages.MESSAGE_USER_NOT_AUTHENTICATED);
         assertCommandFailure(new DeliveryListCommand(DeliveryStatus.CANCELLED, null, null, Sort.ASC), model,
-                Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+            Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
     @Test
     public void execute_listIsSortedAscendingLoggedOut_throwsCommandException() {
         model.setLogoutSuccess();
         assertCommandFailure(new DeliveryListCommand(null, null, null, Sort.ASC), model,
-                Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+            Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+    }
+
+    @Test
+    public void execute_listIsFilteredInvaldiCustomerId_throwsCommandException() {
+        assertCommandFailure(new DeliveryListCommand(DeliveryStatus.COMPLETED, 10, null, null), model,
+            Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        assertCommandFailure(new DeliveryListCommand(DeliveryStatus.COMPLETED, -1, null, null), model,
+            Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        assertCommandFailure(new DeliveryListCommand(DeliveryStatus.COMPLETED, 0, null, null), model,
+            Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_listIsSortedDescendingLoggedOut_throwsCommandException() {
         model.setLogoutSuccess();
         assertCommandFailure(new DeliveryListCommand(null, null, null, Sort.DESC), model,
-                Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+            Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
 
@@ -153,21 +163,21 @@ public class DeliveryListCommandTest {
         DeliveryListCommand deliveryListCommand = new DeliveryListCommand(null, null, null, null);
         DeliveryListCommand deliveryListCommand1 = new DeliveryListCommand(DeliveryStatus.CREATED, null, null, null);
         DeliveryListCommand deliveryListCommand2 = new DeliveryListCommand(DeliveryStatus.CREATED, null, null,
-                Sort.ASC);
+            Sort.ASC);
         DeliveryListCommand deliveryListCommand3 = new DeliveryListCommand(DeliveryStatus.CREATED, null, null,
-                Sort.DESC);
+            Sort.DESC);
         DeliveryListCommand deliveryListCommand4 = new DeliveryListCommand(DeliveryStatus.COMPLETED, null, null,
-                Sort.ASC);
+            Sort.ASC);
         DeliveryListCommand deliveryListCommand5 = new DeliveryListCommand(DeliveryStatus.COMPLETED, 1, null,
-                Sort.ASC);
+            Sort.ASC);
         DeliveryListCommand deliveryListCommand6 = new DeliveryListCommand(DeliveryStatus.COMPLETED, 2, null,
-                Sort.ASC);
+            Sort.ASC);
         DeliveryListCommand deliveryListCommand7 = new DeliveryListCommand(DeliveryStatus.COMPLETED, 1,
-                new DeliveryDate(VALID_DELIVERY_DATE_1),
-                Sort.ASC);
+            new DeliveryDate(VALID_DELIVERY_DATE_1),
+            Sort.ASC);
         DeliveryListCommand deliveryListCommand8 = new DeliveryListCommand(DeliveryStatus.COMPLETED, 1,
-                new DeliveryDate(VALID_DELIVERY_DATE_2),
-                Sort.ASC);
+            new DeliveryDate(VALID_DELIVERY_DATE_2),
+            Sort.ASC);
         // same object -> returns true
         assertTrue(deliveryListCommand.equals(deliveryListCommand));
 

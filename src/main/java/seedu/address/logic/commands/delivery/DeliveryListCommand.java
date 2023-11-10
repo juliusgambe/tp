@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -10,6 +11,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import seedu.address.logic.Sort;
@@ -68,25 +70,11 @@ public class DeliveryListCommand extends DeliveryCommand {
         if (!model.getUserLoginStatus()) {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
+        Optional<DeliveryStatus> status = Optional.ofNullable(this.status);
+        Optional<Integer> customerId = Optional.ofNullable(this.customerId);
+        Optional<Date> deliveryDate = Optional.ofNullable(this.deliveryDate);
 
-
-        Predicate<Delivery> filters = PREDICATE_SHOW_ALL_DELIVERIES;
-
-
-        if (status != null) {
-            // filter by status
-            filters = filters.and(delivery -> delivery.getStatus().equals(status));
-        }
-
-        if (customerId != null) {
-            // filter by customer id
-            filters = filters.and(delivery -> delivery.getCustomer().getCustomerId() == customerId);
-        }
-
-        if (deliveryDate != null) {
-            // filter by expected delivery date
-            filters = filters.and(delivery -> delivery.getDeliveryDate().equals(deliveryDate));
-        }
+        Predicate<Delivery> filters = this.applyFilters(model, status, customerId, deliveryDate);
 
         model.updateFilteredDeliveryList(filters);
 
@@ -95,13 +83,63 @@ public class DeliveryListCommand extends DeliveryCommand {
         }
 
         // sort by expected delivery date
-        model.sortFilteredDeliveryList(
-            sortType.equals(Sort.ASC) ? Comparator.comparing(Delivery::getDeliveryDate) : Comparator.comparing(
-                    Delivery::getDeliveryDate)
-                .reversed());
+        this.sortDeliveryList(model);
 
-        //TODO: UI
         return new CommandResult(MESSAGE_SUCCESS, true);
+    }
+
+
+    /**
+     * Applies the filters to the delivery list.
+     *
+     * @param model        model to apply filters to.
+     * @param status       status to filter by.
+     * @param customerId   customer id to filter by.
+     * @param deliveryDate delivery date to filter by.
+     * @return predicate with filters applied.
+     * @throws CommandException if customer id is invalid.
+     */
+    private Predicate<Delivery> applyFilters(Model model,
+                                             Optional<DeliveryStatus> status,
+                                             Optional<Integer> customerId,
+                                             Optional<Date> deliveryDate) throws CommandException {
+        Predicate<Delivery> filters = PREDICATE_SHOW_ALL_DELIVERIES;
+
+        if (status.isPresent()) {
+            // filter by status
+            filters = filters.and(delivery -> delivery.getStatus().equals(status.get()));
+        }
+
+        if (customerId.isPresent()) {
+
+            // check if customer exists
+            if (model.getCustomer(customerId.get()).isEmpty()) {
+                throw new CommandException(MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+            }
+
+            // filter by customer id
+            filters = filters.and(delivery -> delivery.getCustomer().getCustomerId() == customerId.get());
+        }
+
+        if (deliveryDate.isPresent()) {
+            // filter by expected delivery date
+            filters = filters.and(delivery -> delivery.getDeliveryDate().equals(deliveryDate.get()));
+        }
+
+        return filters;
+    }
+
+    /**
+     * Sorts the delivery list by expected delivery date.
+     *
+     * @param model model to sort.
+     */
+    private void sortDeliveryList(Model model) {
+        Comparator<Delivery> sortAscending = Comparator.comparing(Delivery::getDeliveryDate);
+        Comparator<Delivery> sortDescending = Comparator.comparing(Delivery::getDeliveryDate).reversed();
+        boolean isAscending = sortType.equals(Sort.ASC);
+
+        model.sortFilteredDeliveryList(isAscending ? sortAscending : sortDescending);
     }
 
     @Override
