@@ -59,11 +59,8 @@
         "delivery-add-command": "Delivery Add Command",
         "delivery-view-command": "Delivery View Command",
         "delivery-list-command": "Delivery List Command",
-        "overview-8": "Overview",
-        "feature-details-8": "Feature Details",
         "delivery-status-command": "Delivery Status Command",
         "delivery-note-command": "Delivery Note Command",
-        "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
         "appendix-requirements": "Appendix: Requirements",
         "product-scope": "Product scope",
@@ -219,7 +216,9 @@
     {
       "src": "team/gabriel4357.md",
       "title": "Gabriel Seethor's Project Portfolio Page",
-      "headings": {},
+      "headings": {
+        "project-homeboss": "Project: HomeBoss"
+      },
       "headingKeywords": {}
     },
     {
